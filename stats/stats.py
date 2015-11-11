@@ -56,12 +56,12 @@ def recommended_from_search(request=None):
     for word in common_words:
         search_terms = SearchTerm.objects.filter(q__icontains=word)
         for term in search_terms:
-            if len(recommended) == PRODUCTS_PER_ROW:
+            if len(recommended) >= PRODUCTS_PER_ROW:
                 break
-            products = term.found_products.all()
+            products = term.found_products.all().filter(is_active=True)
             recommended = recommended.union(products)
     # print('rec',recommended)
-    return recommended
+    return list(recommended)[:3]
 
 
 def log_product_view(request, product):
@@ -88,7 +88,8 @@ def __get_recently_viewed(request):
     t_id = __tracking_id(request)
     views = ProductView.objects.filter(tracking_id=t_id).values('product_id').order_by('-date')[0:PRODUCTS_PER_ROW]
     product_ids = [v['product_id'] for v in views]
-    return Product.active.filter(id__in=product_ids)
+    p = Product.active.filter(id__in=product_ids)
+    return p
 
 
 def recommended_from_views(request):
@@ -111,6 +112,17 @@ def recommended_from_views(request):
                 if other_viewed:
                     recommended = Product.active.filter(productview__in=other_viewed).distinct()[:3]
     return recommended if len(recommended) >= 3 else []
+
+
+def customers_who_bought_this_item_also_bought(product):
+    # hallar todos los OrderItem donde aparezca ese prod
+    order_items = OrderItem.objects.filter(product=product)
+    # hallar las Order de esos OrderItem
+    orders = Order.objects.filter(orderitem__in=order_items)
+    # nos quedamos con las Order cuya cant de items sea >=3
+    orders = [order for order in orders if order.orderitem_set.count() >= 3]
+    # tomar una al azar
+    return orders[randint(0, len(orders) - 1)] if len(orders) else None
 
 
 def inspired_by_user_shopping_trends(request):
@@ -206,11 +218,13 @@ class Get3Product:
         """
         obtener 3 productos al azar que esten en rebajas
         """
+        print('sales')
         # rebajas por debajo del 45%
         sales = [product for product in self.__products if product.sale_price() and not product.great_sales()]
         try:
-            rand_list = take_three_pos(len(sales) - 1)
-            return [sales[rand_list[0]], sales[rand_list[1]], sales[rand_list[2]]]
+            if len(sales) >= 3:
+                rand_list = take_three_pos(len(sales) - 1)
+                return [sales[rand_list[0]], sales[rand_list[1]], sales[rand_list[2]]]
         except ValueError:
             return []
 
@@ -223,7 +237,7 @@ class Get3Product:
         return None
 
     def __get_3_bestseller(self):
-        # print('stats.py - get_3_bestseller')
+        print('stats.py - get_3_bestseller')
         bestsellers = self.__products.filter(is_bestseller=True)
         if len(bestsellers) >= 3:
             rand_list = take_three_pos(len(bestsellers) - 1)
@@ -236,15 +250,15 @@ class Get3Product:
         return polemics[:3] if len(polemics) >= 3 else None
 
     def __get_3_desired(self):
-        # print('stats.py - get_3_desired')
+        print('stats.py - get_3_desired')
         desired = self.__products.annotate(num_desired=Count('userprofile__wish_list')).filter(
             num_desired__gt=2).order_by('-num_desired')
         return desired[:3] if len(desired) >= 3 else None
 
     def recommended(self):
         # pos = take_three_pos(len(self.__random_labels) - 1)
-        pos = [5, 7, 2]
-        print('stats.py - pos', pos)
+        pos = [6,7,0]
+        print('stats.py - pos-', pos)
         recommended_1 = {self.__random_labels[pos[0]]: self.__function_dict[self.__random_labels[pos[0]]]()}
         recommended_2 = {self.__random_labels[pos[1]]: self.__function_dict[self.__random_labels[pos[1]]]()}
         if self.__num_recommend == 2:
@@ -276,5 +290,6 @@ class RecommendedForUsers:
         return inspired_by_user_shopping_trends(self.__request)
 
     def recommended(self):
-        pos = randint(0, len(self.__random_labels) - 1)
+        # pos = randint(0, len(self.__random_labels) - 1)
+        pos = 1
         return {self.__random_labels[pos]: self.__function_dict[self.__random_labels[pos]]()}

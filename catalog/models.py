@@ -43,7 +43,7 @@ class Category(models.Model):
     slug = models.SlugField(max_length=50, unique=True)
 
     # groups = models.ManyToManyField(CategoryGroup, null=True)
-    group = models.ForeignKey(CategoryGroup, null=True)
+    group = models.ForeignKey(CategoryGroup, null=True, blank=True)
     common = models.ForeignKey(CommonCategory, null=True, blank=True)
     is_active = models.BooleanField(default=True)
     # filter_name = models.ManyToManyField(Filter, blank=True)

@@ -24,6 +24,7 @@ import json
 from utils import get_product_row
 # import utils
 import datetime
+import utils
 
 
 def index(request):
@@ -37,6 +38,22 @@ def index(request):
             if len(recommendations_for_user.values()[0]) < 3:
                 recommendations_for_user_active = False
     recommended_1, recommended_2, recommended_3 = random_recommendations()
+    # --> {u'Deseados': [<Product: prod14>, <Product: pro11>, <Product: prod12>]}
+    # buscar hasta q encontremos productos que hayan sido comprado juntos
+    random_list = []
+    while True:
+        all_products = Product.active.all()
+        pos = randint(0, len(all_products) - 1)
+        if pos not in random_list:
+            random_list.append(pos)
+            take_random_product = all_products[pos]
+            products_bought_together = utils.products_bought_together(take_random_product)
+            if products_bought_together:
+                break
+            else:
+                continue
+        else:
+            continue
     return render_to_response("home.html", locals(), context_instance=RequestContext(request))
 
 
@@ -45,7 +62,7 @@ def show_category(request, category_slug=None, common_name=None):
     if category_slug:
         # para una categoria en especifico
         c = get_object_or_404(Category, slug=category_slug)
-        products = c.product_set.all()
+        products = c.product_set.all().filter(is_active=True)
         title_head = c.name
     elif common_name:
         # para una categoria q es comun a otras categorias (almacena categorias)
@@ -59,6 +76,7 @@ def show_category(request, category_slug=None, common_name=None):
         products = Product.active.all()[0:20]
     # random_products = products
     recommended_1, recommended_2, recommended_3 = random_recommendations(products, 2)
+
     products, order_by_form = order_products(request, products)
 
     num_x_pag, product_per_pag_form = get_num_x_pag(request)
@@ -114,12 +132,15 @@ def show_product(request, product_slug):
         # set the test cookie on our first GET request
         request.session.set_test_cookie()
     stats.log_product_view(request, p)
+
+    customers_who_bought_this_p_also_bought = utils.products_bought_together(p)
+
     product_reviews = ProductReview.approved.filter(product=p).order_by('-date')
     review_form = ProductReviewForm()
     review_rating = ProductRatingForm()
     # rating promedio
     avg_rating = p.avg_rating()
-
+    cant_rating = p.productrating_set.count()
     desired_by_user = False
     user_already_voted = 0
     if request.user.is_authenticated():
@@ -160,13 +181,13 @@ def add_review(request):
     content = request.POST.get('content')
     template = "catalog/product_review.html"
     if content.strip() != "":
-        review=ProductReview.objects.create(
+        review = ProductReview.objects.create(
             product=product,
             user=request.user,
             content=content
         )
         review.save()
-        html = render_to_string(template, {'review':review})
+        html = render_to_string(template, {'review': review})
         response = json.dumps({'success': 'True', 'html': html})
     else:
         response = json.dumps({'success': 'False', 'html': ""})
@@ -212,7 +233,8 @@ def add_vote(request):
             product=product
         )
         comment_about_user_voted = u"Gracias por tu voto favorable, déjanos tu opinión en los comentarios!" \
-            if int(rating) > 3 else u"Sentimos que no te agrade tanto este producto, déjanos tu opinión en los comentarios"
+            if int(
+            rating) > 3 else u"Sentimos que no te agrade tanto este producto, déjanos tu opinión en los comentarios"
     avg_rating = product.avg_rating()
     response = json.dumps(
         {'avg_rating': avg_rating, 'rating': rating, 'comment_about_user_voted': comment_about_user_voted})

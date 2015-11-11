@@ -27,6 +27,9 @@ def order_products(request, products):
         # obtenemos la cadena de busqueda de la session donde se guardo
         # buscamos en la db para esa cadena, q resultados(productos) arrojo.
         # si arroja la excep es pq el usuario entro una cadena de len 1 y eso no lo almacenamos en la db
+        # No puede haber ninguna categoria vacia, si esto ocurre, al entrar en una url por ej category/categ3/
+        # y categ3 esta vacia (sin productos) entonces entramos a este if, pero no queremos este comportamiento
+        # y se lanza un excep KeyError pq no se va a encontrar la cookie de busqueda
         search_key = request.session['search_key']
         try:
             found_products = SearchTerm.objects.filter(q=search_key).order_by('-search_date')[0].found_products.all()

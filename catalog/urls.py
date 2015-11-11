@@ -3,9 +3,10 @@ from catalog import views
 
 urlpatterns = patterns('catalog.views',
                        url(r'^$', 'index', name='catalog_home'),
+                       # url(r'^category/(?P<group_name>[-\w]+)/$', 'show_category', name='group_name'),
+                       url(r'^category/common/(?P<common_name>[-\w]+)/$', 'show_category',
+                           name='catalog_common_category'),
                        url(r'^category/(?P<category_slug>[-\w]+)/$', 'show_category', name='catalog_category'),
-                       url(r'^category/(?P<group_name>[-\w]+)/$', 'show_category', name='group_name'),
-                       url(r'^category/common/(?P<common_name>[-\w]+)/$', 'show_category', name='catalog_common_category'),
                        url(r'^product/(?P<product_slug>[-\w]+)/$', 'show_product', name='catalog_product'),
                        url(r'^currency/$', 'currency', name='currency'),
                        url(r'^tag/(?P<tag_>[-\w]+)/$', 'tag', name='tag'),

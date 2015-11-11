@@ -123,7 +123,7 @@
 
         <p class="m_5">{{ p.price|currency:request }}{% if p.sale_price %}
             <span class="reducedfrom">{{ p.old_price|currency:request }}</span>{% endif %}
-            <a href="#">click for offer</a>
+            <a href="#">click para oferta</a>
         </p>
 
         <div class="btn_form">
@@ -148,6 +148,24 @@
         </span>
 
         <p class="m_text2">{{ p.description }} </p>
+        <p>XL X S L</p>
+    </div>
+    <div class="clear"></div>
+
+    <div class="product_group btn_form">
+        {% if customers_who_bought_this_p_also_bought %}
+            <form action="{% url 'add_to_cart_product_list' %}" method="post">
+                {% csrf_token %}
+                <p class="cart">Este producto se ha comprado junto con estos otros frecuentemente</p>
+                <ul class="bought_together_list">
+                    {% for p in customers_who_bought_this_p_also_bought %}
+                        <li><img src="{{ p.image.url }}" alt="{{ p.name }}" width="90" height="90"/></li>
+                        <input type="hidden" value="{{ p.slug }}" name="product_slug"/>
+                    {% endfor %}
+                </ul>
+                <input type="submit" value="Añadir conjunto al carrito"/>
+            </form>
+        {% endif %}
     </div>
     <div class="clear"></div>
     {# productos relacionados #}
@@ -156,8 +174,10 @@
         <ul id="flexiselDemo3">
             {% for related_product in p.cross_tags %}
                 <li>
-                    <img src="{{ related_product.image.url }}"/><a
-                        href="{{ related_product.get_absolute_url }}">{{ related_product.name }}</a>
+                    <a href="{{ related_product.get_absolute_url }}" style="font-size: 12px">
+                        <img src="{{ related_product.image.url }}"/>
+                        {{ related_product.name }}
+                    </a>
 
                     <p>{{ related_product.price|currency:request }}</p>
                 </li>
@@ -287,5 +307,7 @@
             text-align: center;
             z-index: 100;
         }
+
+
     </style>
 {% endblock %}

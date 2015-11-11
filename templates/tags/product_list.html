@@ -65,25 +65,28 @@
             <div class="clear"></div>
         </div>
     {% endfor %}
-
-    {% for title, products in recommended_1.iteritems %}
-        <h2 class="head">{{ title|capfirst }}</h2>
-        <div class="top-box1">
-            {% for p in products %}
-                {% include 'tags/product_thumbnail.html' %}
-            {% endfor %}
-            <div class="clear"></div>
-        </div>
-    {% endfor %}
-    {% for title, products in recommended_2.iteritems %}
-        <h2 class="head">{{ title|capfirst }}</h2>
-        <div class="top-box1">
-            {% for p in products %}
-                {% include 'tags/product_thumbnail.html' %}
-            {% endfor %}
-            <div class="clear"></div>
-        </div>
-    {% endfor %}
+    {% if recommended_1 %}
+        {% for title, products in recommended_1.iteritems %}
+            <h2 class="head">{{ title|capfirst }}</h2>
+            <div class="top-box1">
+                {% for p in products %}
+                    {% include 'tags/product_thumbnail.html' %}
+                {% endfor %}
+                <div class="clear"></div>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% if recommended_2 %}
+        {% for title, products in recommended_2.iteritems %}
+            <h2 class="head">{{ title|capfirst }}</h2>
+            <div class="top-box1">
+                {% for p in products %}
+                    {% include 'tags/product_thumbnail.html' %}
+                {% endfor %}
+                <div class="clear"></div>
+            </div>
+        {% endfor %}
+    {% endif %}
 
     <script src="{% static 'shop_template/js/jquery.easydropdown.js' %}"></script>
 

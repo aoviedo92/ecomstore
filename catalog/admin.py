@@ -20,10 +20,10 @@ class ProductAdmin(admin.ModelAdmin):
 
 class CategoryAdmin(admin.ModelAdmin):
     # sets up values for how admin site lists categories
-    list_display = ('name', 'slug',)
+    list_display = ('name', 'group', 'common', 'slug',)
     list_display_links = ('name',)
     list_per_page = 20
-    ordering = ['name']
+    ordering = ['group']
     search_fields = ['name', 'description', 'meta_keywords', 'meta_description']
     # sets up slug to be generated from category name
     prepopulated_fields = {'slug': ('name',)}

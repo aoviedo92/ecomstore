@@ -201,32 +201,40 @@
                             {% endfor %}
                         {% endif %}
                     {% endif %}
+
                     {% for title, products in recommended_1.iteritems %}
-                        <h2 class="head">{{ title|capfirst }}</h2>
-                        <div class="top-box1">
-                            {% for p in products %}
-                                {% include 'tags/product_thumbnail.html' %}
-                            {% endfor %}
-                            <div class="clear"></div>
-                        </div>
+                        {% if products %}
+                            <h2 class="head">{{ title|capfirst }}</h2>
+                            <div class="top-box1">
+                                {% for p in products %}
+                                    {% include 'tags/product_thumbnail.html' %}
+                                {% endfor %}
+                                <div class="clear"></div>
+                            </div>
+                        {% endif %}
                     {% endfor %}
+
                     {% for title, products in recommended_2.iteritems %}
-                        <h2 class="head">{{ title|capfirst }}</h2>
-                        <div class="top-box1">
-                            {% for p in products %}
-                                {% include 'tags/product_thumbnail.html' %}
-                            {% endfor %}
-                            <div class="clear"></div>
-                        </div>
+                        {% if products %}
+                            <h2 class="head">{{ title|capfirst }}</h2>
+                            <div class="top-box1">
+                                {% for p in products %}
+                                    {% include 'tags/product_thumbnail.html' %}
+                                {% endfor %}
+                                <div class="clear"></div>
+                            </div>
+                        {% endif %}
                     {% endfor %}
                     {% for title, products in recommended_3.iteritems %}
-                        <h2 class="head">{{ title|capfirst }}</h2>
-                        <div class="top-box1">
-                            {% for p in products %}
-                                {% include 'tags/product_thumbnail.html' %}
-                            {% endfor %}
-                            <div class="clear"></div>
-                        </div>
+                        {% if products %}
+                            <h2 class="head">{{ title|capfirst }}</h2>
+                            <div class="top-box1">
+                                {% for p in products %}
+                                    {% include 'tags/product_thumbnail.html' %}
+                                {% endfor %}
+                                <div class="clear"></div>
+                            </div>
+                        {% endif %}
                     {% endfor %}
 
 
@@ -244,14 +252,24 @@
                                 $('#slider').nivoSlider();
                             });
                         </script>
-                        <div class="slider-wrapper theme-default">
-                            <div id="slider" class="nivoSlider">
-                                <img src="{% static 'shop_template/images/t-img1.jpg' %}" alt=""/>
-                                <img src="{% static 'shop_template/images/t-img2.jpg' %}" alt=""/>
-                                <img src="{% static 'shop_template/images/t-img3.jpg' %}" alt=""/>
+                        <form action="{% url 'add_to_cart_product_list' %}" method="post" id="products_bought_together">
+                            {% csrf_token %}
+                            {% for product in products_bought_together %}
+                                <input type="hidden" value="{{ product.slug }}" name="product_slug"/>
+                            {% endfor %}
+                            <div class="slider-wrapper theme-default" style="min-height: 200px">
+                                <div id="slider" class="nivoSlider">
+                                    {% for product in products_bought_together %}
+                                        <img src="{{ product.image.url }}" alt="{{ product.slug }}"/>
+                                    {% endfor %}
+                                </div>
                             </div>
-                        </div>
-                        <div class="btn"><a href="single.html">Check it Out</a></div>
+                            <p class="cart">Comprados juntos con frecuencia</p>
+
+                            <div class="btn"><a href="#"
+                                                onclick="$('#products_bought_together').submit()">Compralos!</a></div>
+                            {#                            <input type="submit" value="Compralos ahora!"/>#}
+                        </form>
                     </div>
                     <div class="top-border"></div>
                     <div class="sidebar-bottom">

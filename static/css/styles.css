@@ -88,6 +88,21 @@ table#shopping_cart .right {
 }
 
 /*PRODUCT*/
+/*conjuntos comprados*/
+ul.bought_together_list {
+    display: block;
+    padding: 0;
+}
+
+ul.bought_together_list li {
+    display: block;
+    padding: 0;
+    width: 90px;
+    height: 90px;
+    margin: 3px;
+    float: left;
+}
+
 /*reviews*/
 #add_review {
     cursor: pointer;

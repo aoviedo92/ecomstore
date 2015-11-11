@@ -38,30 +38,35 @@ def get_cart_items(request):
     return CartItem.objects.filter(cart_id=_cart_id(request))
 
 
-def add_to_cart(request):
+def add_to_cart(request, product=None):
     """
     function that takes a POST request and adds a product instance to the current customer's shopping cart
     """
     post_data = request.POST.copy()
-    product_slug = post_data.get('product_slug', '')  # get product slug from post data, return blank if empty
     # quantity = post_data.get('quantity', 1)  # get quantity added, return 1 if empty
     quantity = 1
-    p = get_object_or_404(Product, slug=product_slug)  # fetch the product or return a missing page error
+    if not product:
+        product_slug = post_data.get('product_slug', '')  # get product slug from post data, return blank if empty
+        product = get_object_or_404(Product, slug=product_slug)  # fetch the product or return a missing page error
     cart_products = get_cart_items(request)  # get products in cart
     product_in_cart = False
     # check to see if item is already in cart
     for cart_item in cart_products:
-        if cart_item.product.id == p.id:
+        if cart_item.product.id == product.id:
             cart_item.augment_quantity(quantity)  # update the quantity if found
             product_in_cart = True
             break
     if not product_in_cart:
         ci = CartItem()  # create and save a new cart item
-        ci.product = p
+        ci.product = product
         ci.quantity = quantity
         ci.cart_id = _cart_id(request)
         ci.save()
 
+def add_to_cart_list_products(request, product_slug_list):
+    for product_slug in product_slug_list:
+        product = get_object_or_404(Product, slug=product_slug)
+        add_to_cart(request, product)
 
 def cart_distinct_item_count(request):
     """
