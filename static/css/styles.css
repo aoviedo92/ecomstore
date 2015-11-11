@@ -1,0 +1,206 @@
+/*tabla de show cart*/
+tr td h4, td label {
+    color: #7D97A3;
+    line-height: 1.8em;
+    text-transform: capitalize;
+    margin-bottom: 4%;
+}
+
+tbody tr {
+    border-bottom: 1px solid #ECECEC;
+}
+
+input[type="number"] {
+    width: 50px;
+}
+
+tr td h4.total {
+    color: #399FB8;
+}
+
+table {
+    width: 80%;
+}
+
+th:first-child, td:first-child {
+    padding-left: 10px;
+}
+
+th:last-child, td:last-child {
+    padding-right: 10px;
+}
+
+thead tr th {
+    text-align: left;
+    color: #555;
+    font-size: 0.95em;
+    line-height: 1.8em;
+}
+
+thead {
+    padding: 5px;
+    background-color: #f4f4f4;
+}
+
+table#shopping_cart .right {
+    text-align: right;
+}
+
+.total_cart {
+    color: #555;
+    font-size: 1.4em;
+    line-height: 1.2;
+    font-weight: normal;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    padding: 10px;
+}
+
+/*botones de show_cart*/
+.cart_btns {
+    margin: 10px;
+    margin-bottom: 0;
+    /*padding-top: 10px;*/
+
+}
+
+/*login*/
+.errorlist {
+    font-size: 0.85em;
+    line-height: 1.8em;
+    color: crimson;
+}
+
+/*register*/
+.account_advantages {
+    float: left;
+    width: 49.2%;
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+
+/*my account*/
+.my_account_link {
+    font-size: 1.0em;
+    line-height: 2.0em;
+    text-decoration: none;
+    color: #318295;
+}
+
+/*PRODUCT*/
+/*reviews*/
+#add_review {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+.new_review {
+    background-color: Pink;
+}
+
+.review {
+    border-left: 2px solid #3CB371;
+    background-color: rgba(155, 255, 155, 0.27);
+    /*padding: 15px;*/
+    margin-left: 10px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    color: #3CB371;
+    margin-top: 20px;
+}
+
+.review .review_head {
+    font-size: 12px;
+    padding: 5px;
+}
+
+.review .review_content {
+    color: #008080;
+    padding: 15px;
+}
+
+textarea#id_content {
+    width: 100%;
+    height: 150px;
+    border: 1px solid #ccc;
+    font-family: Calibri, Arial, sans-serif;
+    color: #555;
+    padding: 10px;
+}
+
+.btn_submit {
+    padding: 10px;
+    overflow: hidden;
+    border-width: 0;
+    outline: none;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+    background-color: rgba(155, 255, 155, 0.27);
+    color: #27ae60;
+    transition: background-color .3s;
+}
+
+.btn_submit:hover, .btn_submit:focus {
+    background-color: #27ae60;
+    color: #f4f4f4;
+}
+
+.btn_cancel {
+    padding: 5px;
+    overflow: hidden;
+    border-width: 0;
+    outline: none;
+    border-radius: 2px;
+    color: #6b4c10;
+    transition: background-color .3s;
+    background-color: rgba(255, 185, 35, 0.37);
+}
+
+.btn_cancel:hover, .btn_cancel:focus {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+    background-color: #efae21;
+}
+
+#add_review {
+    font-size: 18px;
+    color: #555555;
+}
+
+#add_review:hover {
+    text-decoration: underline;
+    color: #999999;
+}
+
+#id_tag {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .2);
+    padding: 10px;
+    color: #555;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+#tags a {
+    color: DarkOrange;
+}
+
+/*cart list EMERGENTE*/
+/*CODIGO EN cart_items.html debido a que este css no lo cargan todas las pag*/
+
+/*add y remove WISHLIST links*/
+p.wishlist {
+    color: #555;
+    font-size: 0.85em;
+    text-transform: uppercase;
+}
+
+p.wishlist:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}

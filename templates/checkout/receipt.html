@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% load catalog_filters %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
+{% endblock %}
+{% block content %}
+    <h4 class="title">Tu orden ha sido enviada</h4>
+    <p class="cart">Numero de registro: {{ order.id }}</p>
+    <table id="shopping_cart">
+        <thead>
+        <tr>
+            <th scope="col">Producto</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Cantidad</th>
+            <th class="right" scope="col">Total</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <td colspan="4" class="right">
+                <h4 class="total_cart">Total: {{ order.total|currency:request }}</h4>
+            </td>
+        </tr>
+        </tfoot>
+        <tbody>
+        {% for item in order_items %}
+            <tr>
+                <td><h4>{{ item.name }}</h4></td>
+                <td><h4>{{ item.price|currency:request }}</h4></td>
+                <td><h4>{{ item.quantity }}</h4></td>
+                <td class="right"><h4 class="total">{{ item.total|currency:request }}</h4></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    Continuar comprando...
+{% endblock %}

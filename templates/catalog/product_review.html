@@ -1,0 +1,7 @@
+{% if review.content %}
+    <div class="review">
+        <p class="review_head">
+            {% if rating_instance %}{{ rating_instance.rating }} para{% endif %} {{ review.user.username }}</p>
+        <p class="review_content">{{ review.content }}</p>
+    </div>
+{% endif %}

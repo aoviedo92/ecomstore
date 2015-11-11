@@ -1,0 +1,93 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load pagination_tags %}
+
+{% block content %}
+    {% if common %}
+        {#  cuando sea una categoria comun, listar todas sus categorias hijas, como links, en la parte derecha      #}
+        <h4 class="head">
+            <div class="cssmenu">
+                <ul>
+                    {% for category in common_categories %}
+                        <li><a style="color: #4CB1CA" class="color4"
+                               href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+                        {% if not forloop.last %}
+                            |
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </h4>
+
+    {% else %}
+        <h2 class="head">
+            {{ title_head|capfirst }}
+        </h2>
+    {% endif %}
+
+    <div class="mens-toolbar">
+        <div class="sort">
+            <div class="sort-by">
+                <form action="." method="POST">
+                    {% csrf_token %}
+                    {{ order_by_form }}
+                    <input type="image" value="up" name="submit_up"
+                           src="{% static 'shop_template/images/arrow2.gif' %}"/>
+                    <input type="image" value="down" name="submit_down"
+                           src="{% static 'shop_template/images/arrow2-down.png' %}"/>
+                </form>
+            </div>
+        </div>
+        <div class="pager">
+            <div class="limiter visible-desktop">
+                <form action="." method="get" id="id_product_per_pag_form">
+                    {{ product_per_pag_form }}
+                </form>
+                <script>
+                    $(document).ready(function () {
+                        $("#id_products_per_page").change(function () {
+                            $("#id_product_per_pag_form").submit()
+                        })
+                    })
+                </script>
+            </div>
+            {% pagination_links request paginator %}
+        </div>
+        <div class="clear"></div>
+    </div>
+    {#  LISTAR PRODUCTOS DE 3 EN 3    #}
+    {% for row_ in product_row %}
+        <div class="top-box">
+            {% for p in row_ %}
+                {% include 'tags/product_thumbnail.html' %}
+            {% endfor %}
+            <div class="clear"></div>
+        </div>
+    {% endfor %}
+
+    {% for title, products in recommended_1.iteritems %}
+        <h2 class="head">{{ title|capfirst }}</h2>
+        <div class="top-box1">
+            {% for p in products %}
+                {% include 'tags/product_thumbnail.html' %}
+            {% endfor %}
+            <div class="clear"></div>
+        </div>
+    {% endfor %}
+    {% for title, products in recommended_2.iteritems %}
+        <h2 class="head">{{ title|capfirst }}</h2>
+        <div class="top-box1">
+            {% for p in products %}
+                {% include 'tags/product_thumbnail.html' %}
+            {% endfor %}
+            <div class="clear"></div>
+        </div>
+    {% endfor %}
+
+    <script src="{% static 'shop_template/js/jquery.easydropdown.js' %}"></script>
+
+{% endblock %}
+{% block filter_products %}
+    {% include 'tags/filter_products.html' %}
+{% endblock %}

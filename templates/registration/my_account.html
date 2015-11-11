@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
+{% endblock %}
+{% block content %}
+    <h2 class="head">Mi cuenta <span style="color: #999;font-size: 11px">Bienvenido, {{ name|capfirst }}!</span></h2>
+
+    <br/><br/>
+    <fieldset class="my_account">
+        <p class="cart">Historial de pedidos</p>
+        {% for order in orders %}
+            <a href="{{ order.get_absolute_url }}" class="my_account_link">
+                Orden #{{ order.id }} - {{ order.date|date }} (ver)
+            </a>
+            <br/>
+        {% empty %}
+            Nunca has ordenado nada en nuestra tienda.
+        {% endfor %}
+    </fieldset>
+    <br/>
+
+    <p class="cart">Configuracion de tu cuenta</p>
+{#    <div class="recent-tweet-info">#}
+        <p><a href="{% url "django.contrib.auth.views.password_change" %}" class="my_account_link">Cambiar Password</a></p>
+        <p><a href="{% url "order_info" %}" class="my_account_link">Editar informacion de envio</a></p>
+
+{#    </div>#}
+{% endblock %}

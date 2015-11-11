@@ -1,0 +1,29 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>
+        {% block title %}
+            {% if page_title %}
+                {{ page_title }} -
+            {% endif %}
+            {{ site_name }}
+        {% endblock %}
+    </title>
+    <meta name= "keywords" content= "{{ meta_keywords }} " />
+    <meta name= "description" content="{{ meta_description }} " />
+    <link rel="stylesheet" href="{% static 'css/preview.css' %}"/>
+    <link rel="stylesheet" href="{% static 'hover_effect/css/demo.css' %}"/>
+    <link rel="stylesheet" href="{% static 'hover_effect/css/style_common.css' %}"/>
+    <link rel="stylesheet" href="{% static 'hover_effect/css/style2.css' %}"/>
+    {% block styles %}
+    {% endblock %}
+</head>
+<body>
+    {% block site_wrapper %}
+
+    {% endblock %}
+</body>
+</html>

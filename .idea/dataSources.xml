@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="3101915007">
+    <data-source source="LOCAL" name="SQLite -" uuid="2bbac9ac-637d-4a0b-9aaa-6baa7ab6f3b1">
+      <driver-ref>sqlite.zentus</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:D:\adri\work\PycharmProjects\ecomstore\db.sqlite3</jdbc-url>
+      <libraries>
+        <library>
+          <url>file://D:/tools/Development/jetbrains/Plugins/sqlite-jdbc-3.7.6.3-20110609.081603-3.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="SQLite - [2]" uuid="fc493eb4-ac66-4c3b-996d-f496884975bd">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:D:\adri\work\PycharmProjects\ecomstore\db.sqlite3</jdbc-url>
+      <libraries>
+        <library>
+          <url>file://D:/tools/Development/jetbrains/Plugins/sqlite-jdbc-3.7.6.3-20110609.081603-3.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+  </component>
+</project>

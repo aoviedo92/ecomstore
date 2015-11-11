@@ -1,0 +1,47 @@
+{#<tr>#}
+{#    <th>#}
+{#        {% if form_field.field.required %}*{% endif %}#}
+{#        {{ form_field.label_tag }}#}
+{#    </th>#}
+{#    <td>#}
+{#        {% if form_field.errors %}#}
+{#            <ul class="errorlist">#}
+{#                {% for error in form_field.errors %}#}
+{#                    <li>{{ form_field.label }}: {{ error }}</li>#}
+{#                {% endfor %}#}
+{#            </ul>#}
+{#        {% endif %}#}
+{#        {{ form_field }}#}
+{#    </td>#}
+{#</tr>#}
+<style>
+    .form-label label{
+        color: #777;
+        font-size: 1em;
+        line-height: 1.8em;
+    }
+    .form-fila{
+        width: 90%;
+    }
+    .form-label{
+        text-align: right;
+        float: left;
+        width: 30%;
+        margin-right: 30px;
+        padding-top: 15px;
+    }
+    .form-input{
+        width: 60%;
+        float: left;
+    }
+</style>
+<div class="form-fila ">
+    <div class="form-label">
+        {% if form_field.field.required %}*{% endif %}
+        {{ form_field.label_tag }}
+    </div>
+    <div class="form-input">
+        {{ form_field }}{{ form_field.errors }}
+    </div>
+    <div class="clear"></div>
+</div>

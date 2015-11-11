@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load checkout_tags %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
+{% endblock %}
+{% block content %}
+    {% if not request.user.is_authenticated %}
+        <div class="fr">
+            <a href="{% url "login" %}?next={{ request.path }}">
+                Tienes cuenta?<br/>Entra ya!
+            </a>
+        </div>
+    {% endif %}
+    <h1>Checkout</h1>{% if error_message %}
+    <ul class="errorlist">
+        <li>{{ error_message }}</li>
+    </ul>
+{% endif %}
+    <div class="register_account">
+
+        <form action="." method="post">
+            {% csrf_token %}
+            <p class="cart">Informacion de contacto</p>
+            {% form_table_row form.email %}
+            {% form_table_row form.phone %}
+            <p class="cart">Informacion de envio</p>
+            {% form_table_row form.shipping_name %}
+            {% form_table_row form.shipping_address_1 %}
+            {% form_table_row form.shipping_address_2 %}
+            {% form_table_row form.shipping_city %}
+            <p class="cart">Informacion de credito</p>
+            {% form_table_row form.credit_card_number %}
+            {% form_table_row form.credit_card_type %}
+            {% form_table_row form.credit_card_expire_month %}
+            {% form_table_row form.credit_card_expire_year %}
+            {% form_table_row form.credit_card_cvv %}
+            <button class="grey" type="submit">Enviar orden</button>
+
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load catalog_filters %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
+{% endblock %}
+{% block content %}
+
+    <h4 class="title">Detalles del carrito de compras</h4>
+    <p class="cart">Cantidad de productos: {{ cart_item_count }}</p>
+    <table id="shopping_cart">
+        <thead>
+        <!-- header info here -->
+        <tr>
+            <th scope="col">Producto</th>
+            <th scope="col">Precio</th>
+            <th></th>
+            <th></th>
+            {#            <th></th>#}
+            <th class="right">Total</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <th colspan="4" class="right">
+                <p class="cart">Total en el carrito</p>
+            </th>
+            <th class="right">
+                <h4 class="total_cart">{{ cart_subtotal|currency:request }}</h4>
+            </th>
+        </tr>
+        {% if cart_items %}
+            <tr class="right">
+                <th colspan="6">
+                    <div class="btn_form">
+                        <form method="GET" action="{% url 'checkout' %}">
+{#                            {% csrf_token %}#}
+                            <input type="hidden" name="submit" value="Checkout"/>
+                            <input type="submit" value="Checkout now"/>
+                        </form>
+                    </div>
+                </th>
+            </tr>
+        {% endif %}
+        </tfoot>
+        <tbody>
+        {% if cart_items %}
+            {% for item in cart_items %}
+                <tr>
+                    <td>
+                        <a class="color4" href="{{ item.get_absolute_url }}"><h4>{{ item.name }}</h4></a>
+                    </td>
+                    <td><h4>{{ item.price|currency:request }}</h4></td>
+                    <td class="right">
+                        <form method="post" action="." class="cart">
+                            {% csrf_token %}
+                            <label for="quantity">Cantidad</label>
+                            <input type="number" name="quantity" value="{{ item.quantity }}" id="quantity"
+                                   class="quantity" maxlength="5"/>
+                            <input type="hidden" name="item_id" value="{{ item.id }}"/>
+                            <input type="image" name="submit_update" value="Update" src="{% static 'shop_template/images/update_item_2.png' %}" width="25" height="25" class="cart_btns"/>
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" action="." class="cart">
+                            {% csrf_token %}
+                            <input type="hidden" name="item_id" value="{{ item.id }}"/>
+                            <input type="image" name="submit_remove" value="Remove" src="{% static 'shop_template/images/remove_item_cart.jpg' %}" width="25" height="25" class="cart_btns"/>
+                        </form>
+                    </td>
+                    <td class="right"><h4 class="total">{{ item.total|currency:request }}</h4></td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="6" style="height:30px;">
+                    <p class="cart">Your cart is empty.</p>
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+
+{% endblock %}

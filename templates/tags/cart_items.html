@@ -1,0 +1,36 @@
+{% load catalog_filters %}
+<ul class="sub-icon1 list">
+    {% for item in cart_items_ %}
+        <li><p>{{ item.product.name|capfirst }} <span class="money">{{ item.product.price|currency:request }}</span></p>
+        </li>
+    {% empty %}
+        <li><h3>Sin Productos</h3><a href=""></a></li>
+    {% endfor %}
+    <li><p id="total">Total: <span class="money money_total">{{ cart_subtotal|currency:request }}</span></p></li>
+</ul>
+<style>
+    p#total {
+        font-size: 12px;
+    }
+
+    .money {
+        color: #bd8a1c;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .money_total {
+        color: #6b4c10;
+        font-size: 12px;
+    }
+
+    ul.sub-icon1.list li:last-child {
+        border-top: 1px solid #f4f4f4;
+        padding: 10px;
+        background-color: #FFB929;
+    }
+
+    ul.sub-icon1.list li {
+        color: #906916;
+    }
+</style>

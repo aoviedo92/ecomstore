@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
+{% endblock %}
+{% block site_wrapper %}
+
+    <div class="register_account">
+        <div class="wrap">
+            <h4 class="title">Crea una cuenta</h4>
+
+            <form action="." method="post">
+                {% csrf_token %}
+                <div class="col_1_of_2 span_1_of_2">
+                    <div>{{ form.username }}{{ form.username.errors }}</div>
+                    <div>{{ form.password1 }}{{ form.password1.errors }}</div>
+                    <div>{{ form.password2 }}{{ form.password2.errors }}</div>
+                </div>
+                <div class="account_advantages span_1_of_2 ">
+                    <p class="cart">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Dolor magnam neque qui quod sequi similique veniam.
+                        A autem eos eum magni pariatur.
+                        Aperiam at dignissimos et facere, hic rem voluptatum?</p>
+                </div>
+                <button class="grey" type="submit">Crear cuenta</button>
+                <p class="terms">Haciendo clic en 'Crear cuenta' estás aceptando los <a href="#">Términos &amp;
+                    Condiciones</a>.
+                </p>
+
+                <div class="clear"></div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

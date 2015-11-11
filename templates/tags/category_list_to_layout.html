@@ -1,0 +1,10 @@
+<h5 class="m_1">Categorias</h5>
+<ul class="kids">
+    {% for common_category in common %}
+        <li><a href="{{ common_category.get_absolute_url }}">{{ common_category.common_name|capfirst }}</a></li>
+    {% endfor %}
+    {% for category in active_categories_not_common %}
+        <li><a href="{{ category.get_absolute_url }}">{{ category.name|capfirst }}</a></li>
+    {% endfor %}
+
+</ul>

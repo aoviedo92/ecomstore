@@ -1,0 +1,372 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+{% load catalog_tags %}
+{% load search_tags %}
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>
+        {% block title %}
+            {% if page_title %}
+                {{ page_title }} -
+            {% endif %}
+            {{ site_name }}
+        {% endblock %}
+    </title>
+    <meta name="keywords" content="{{ meta_keywords }} "/>
+    <meta name="description" content="{{ meta_description }} "/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="{% static 'shop_template/css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <link href="{% static 'shop_template/css/form.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <script type="text/javascript" src="{% static 'shop_template/js/jquery1.min.js' %}"></script>
+    <!-- start menu -->
+    <link href="{% static 'shop_template/css/megamenu.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <script type="text/javascript" src="{% static 'shop_template/js/megamenu.js' %}"></script>
+    <script>$(document).ready(function () {
+        $(".megamenu").megamenu();
+    });</script>
+    <!--start slider -->
+    <link rel="stylesheet" href="{% static 'shop_template/css/fwslider.css' %}" media="all">
+    <script src="{% static 'shop_template/js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'shop_template/js/css3-mediaqueries.js' %}"></script>
+    <script src="{% static 'shop_template/js/fwslider.js' %}"></script>
+    <!--end slider -->
+    <script src="{% static 'shop_template/js/jquery.easydropdown.js' %}"></script>
+    {#  TOOLTIPSTER PLUGIN  #}
+    <link rel="stylesheet" href="{% static 'tooltipster/css/tooltipster.css' %}"/>
+    <link rel="stylesheet" href="{% static 'tooltipster/css/themes/tooltipster-shadow.css' %}"/>
+    <script src="{% static 'tooltipster/js/jquery.tooltipster.min.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.tooltip').tooltipster({
+                maxWidth: 250,
+                contentAsHTML: true,
+                theme: 'tooltipster-shadow'
+            });
+        });
+    </script>
+    {% block styles %}
+    {% endblock %}
+    {% block scripts %}
+    {% endblock %}
+</head>
+<body>
+<div class="header-top">
+    <div class="wrap">
+        <div class="header-top-left">
+            <div class="box">
+                {% if user.is_authenticated %}
+                    <div class="cssmenu">
+                        <ul>
+                            <li><a href="" class="">Bienvenido, {{ user.username }}!</a></li>
+                        </ul>
+                    </div>
+                    {#                        <a href="" class="cssmenu">Bienvenido, {{ user.full_name }}!</a>#}
+                {% endif %}
+                {#                </select>#}
+            </div>
+            {% currency_tag request %}
+            {#        CURRENCY#}
+            {#            <form action="" id="id_currency_form" method="post">#}
+            {#                <div class="box1">#}
+            {#                    <select tabindex="4" class="dropdown" id="id_currency_select">#}
+            {#                        <option value="" class="label" value="">Moneda :</option>#}
+            {#                        <option value="cuc">CUC</option>#}
+            {#                        <option value="cup">CUP</option>#}
+            {#                    </select>#}
+            {#                    <input type="hidden" value="{{ request.path }}"/>#}
+            {#                </div>#}
+            {#                <div class="clear"></div>#}
+            {#            </form>#}
+            <script>
+                $(document).ready(function () {
+                    $("#id_currency_select").change(function () {
+                        $("#id_currency_form").submit()
+                        {#                        alert($("#id_currency_select").val())#}
+                    })
+                })
+            </script>
+        </div>
+        <div class="cssmenu">
+            <ul>
+                <li><a href="checkout.html">Checkout</a></li>
+                |
+                {% if user.is_authenticated %}
+                    <li class="active"><a href="{% url 'my_account' %}">Mi cuenta</a></li>|
+                    <li><a href="{% url 'wishlist' %}">Lista de deseos</a></li>|
+                    <li><a href="{% url "logout" %}">Cerrar sesión</a></li>
+                    {#                    <li><a href="{% url "django.contrib.auth.views.logout" %}">Cerrar sesión</a></li>#}
+                {% else %}
+
+                    <li><a href="{% url "django.contrib.auth.views.login" %}">Inicia sesión</a></li>|
+                    <li><a href="{% url "register" %}">Regístrate gratis</a></li>
+                {% endif %}
+
+
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="header-bottom">
+    <div class="wrap">
+        <div class="header-bottom-left">
+            <div class="logo">
+                <a href="{% url 'catalog_home' %}"><img src="{% static 'shop_template/images/logo.png' %}" alt=""/></a>
+            </div>
+
+            <div class="menu">
+                {% category_list request.path %}
+            </div>
+        </div>
+
+        <div class="header-bottom-right">
+            {% search_box request %}
+
+            <div class="tag-list">
+                <ul class="icon1 sub-icon1 profile_img">
+                    <li>
+                        <a class="active-icon c1" href="#"></a>
+                        <ul class="sub-icon1 list">
+                            {% tag_cloud %}
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="icon1 sub-icon1 profile_img">
+                    <li>
+                        <a class="active-icon c2" href="{% url "show_cart" %}"> </a>
+                        {% cart_items request %}
+                    </li>
+                </ul>
+                <ul class="last">
+                    <li><a href="{% url "show_cart" %}">carrito({% cart_num_items request %})</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+{% block site_wrapper %}{% endblock %}
+
+<div class="footer">
+    <div class="footer-top">
+        <div class="wrap">
+            <div class="section group example">
+                <div class="col_1_of_2 span_1_of_2">
+                    <ul class="f-list">
+                        <li><img src="{% static 'shop_template/images/2.png' %}"><span class="f-text">Free Shipping on orders over $ 100</span>
+
+                            <div class="clear"></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col_1_of_2 span_1_of_2">
+                    <ul class="f-list">
+                        <li><img src="{% static 'shop_template/images/3.png' %}"><span class="f-text">Call us! toll free-222-555-6666 </span>
+
+                            <div class="clear"></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-middle">
+        <div class="wrap">
+            <!-- <div class="section group">
+                 <div class="f_10">
+                   <div class="col_1_of_4 span_1_of_4">
+                       <h3>Facebook</h3>
+                       <script>(function(d, s, id) {
+                         var js, fjs = d.getElementsByTagName(s)[0];
+                         if (d.getElementById(id)) return;
+                         js = d.createElement(s); js.id = id;
+                         js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+                         fjs.parentNode.insertBefore(js, fjs);
+                       }(document, 'script', 'facebook-jssdk'));</script>
+                       <div class="like_box">
+                           <div class="fb-like-box" data-href="http://www.facebook.com/w3layouts" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
+                       </div>
+                   </div>
+                   <div class="col_1_of_4 span_1_of_4">
+                       <h3>From Twitter</h3>
+                       <div class="recent-tweet">
+                           <div class="recent-tweet-icon">
+                               <span> </span>
+                           </div>
+                           <div class="recent-tweet-info">
+                               <p>Ds which don't look even slightly believable. If you are <a href="#">going to use nibh euismod</a> tincidunt ut laoreet adipisicing</p>
+                           </div>
+                           <div class="clear"> </div>
+                       </div>
+                       <div class="recent-tweet">
+                           <div class="recent-tweet-icon">
+                               <span> </span>
+                           </div>
+                           <div class="recent-tweet-info">
+                               <p>Ds which don't look even slightly believable. If you are <a href="#">going to use nibh euismod</a> tincidunt ut laoreet adipisicing</p>
+                           </div>
+                           <div class="clear"> </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="f_10">
+                   <div class="col_1_of_4 span_1_of_4">
+                       <h3>Information</h3>
+                       <ul class="f-list1">
+                           <li><a href="#">Duis autem vel eum iriure </a></li>
+                           <li><a href="#">anteposuerit litterarum formas </a></li>
+                           <li><a href="#">Tduis dolore te feugait nulla</a></li>
+                            <li><a href="#">Duis autem vel eum iriure </a></li>
+                           <li><a href="#">anteposuerit litterarum formas </a></li>
+                           <li><a href="#">Tduis dolore te feugait nulla</a></li>
+                        </ul>
+                   </div>
+                   <div class="col_1_of_4 span_1_of_4">
+                       <h3>Contact us</h3>
+                       <div class="company_address">
+                                   <p>500 Lorem Ipsum Dolor Sit,</p>
+                                      <p>22-56-2-9 Sit Amet, Lorem,</p>
+                                      <p>USA</p>
+                              <p>Phone:(00) 222 666 444</p>
+                              <p>Fax: (000) 000 00 00 0</p>
+                             <p>Email: <span>mail[at]leoshop.com</span></p>
+
+                      </div>
+                      <div class="social-media">
+                            <ul>
+                               <li> <span class="simptip-position-bottom simptip-movable" data-tooltip="Google"><a href="#" target="_blank"> </a></span></li>
+                               <li><span class="simptip-position-bottom simptip-movable" data-tooltip="Linked in"><a href="#" target="_blank"> </a> </span></li>
+                               <li><span class="simptip-position-bottom simptip-movable" data-tooltip="Rss"><a href="#" target="_blank"> </a></span></li>
+                               <li><span class="simptip-position-bottom simptip-movable" data-tooltip="Facebook"><a href="#" target="_blank"> </a></span></li>
+                           </ul>
+                      </div>
+                   </div>
+               <div class="clear"></div>
+           </div>
+           <div class="clear"></div>
+         </div>-->
+
+
+            <div class="section group example">
+                <div class="col_1_of_f_1 span_1_of_f_1">
+                    <div class="section group example">
+                        <div class="col_1_of_f_2 span_1_of_f_2">
+                            <h3>Facebook</h3>
+                            {#                            <script>(function (d, s, id) {#}
+                            {#                                var js, fjs = d.getElementsByTagName(s)[0];#}
+                            {#                                if (d.getElementById(id)) return;#}
+                            {#                                js = d.createElement(s);#}
+                            {#                                js.id = id;#}
+                            {#                                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";#}
+                            {#                                fjs.parentNode.insertBefore(js, fjs);#}
+                            {#                            }(document, 'script', 'facebook-jssdk'));</script>#}
+                            {#                            <div class="like_box">#}
+                            {#                                <div class="fb-like-box" data-href="http://www.facebook.com/w3layouts"#}
+                            {#                                     data-colorscheme="light" data-show-faces="true" data-header="true"#}
+                            {#                                     data-stream="false" data-show-border="true"></div>#}
+                            {#                            </div>#}
+                        </div>
+                        <div class="col_1_of_f_2 span_1_of_f_2">
+                            <h3>From Twitter</h3>
+
+                            <div class="recent-tweet">
+                                <div class="recent-tweet-icon">
+                                    <span> </span>
+                                </div>
+                                <div class="recent-tweet-info">
+                                    <p>Ds which don't look even slightly believable. If you are <a href="#">going to use
+                                        nibh euismod</a> tincidunt ut laoreet adipisicing</p>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="recent-tweet">
+                                <div class="recent-tweet-icon">
+                                    <span> </span>
+                                </div>
+                                <div class="recent-tweet-info">
+                                    <p>Ds which don't look even slightly believable. If you are <a href="#">going to use
+                                        nibh euismod</a> tincidunt ut laoreet adipisicing</p>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="col_1_of_f_1 span_1_of_f_1">
+                    <div class="section group example">
+                        <div class="col_1_of_f_2 span_1_of_f_2">
+                            <h3>Information</h3>
+                            <ul class="f-list1">
+                                <li><a href="#">Duis autem vel eum iriure </a></li>
+                                <li><a href="#">anteposuerit litterarum formas </a></li>
+                                <li><a href="#">Tduis dolore te feugait nulla</a></li>
+                                <li><a href="#">Duis autem vel eum iriure </a></li>
+                                <li><a href="#">anteposuerit litterarum formas </a></li>
+                                <li><a href="#">Tduis dolore te feugait nulla</a></li>
+                            </ul>
+                        </div>
+                        <div class="col_1_of_f_2 span_1_of_f_2">
+                            <h3>Contact us</h3>
+
+                            <div class="company_address">
+                                <p>500 Lorem Ipsum Dolor Sit,</p>
+
+                                <p>22-56-2-9 Sit Amet, Lorem,</p>
+
+                                <p>USA</p>
+
+                                <p>Phone:(00) 222 666 444</p>
+
+                                <p>Fax: (000) 000 00 00 0</p>
+
+                                <p>Email: <span>mail[at]leoshop.com</span></p>
+
+                            </div>
+                            <div class="social-media">
+                                <ul>
+                                    <li><span class="simptip-position-bottom simptip-movable" data-tooltip="Google"><a
+                                            href="#" target="_blank"> </a></span></li>
+                                    <li><span class="simptip-position-bottom simptip-movable"
+                                              data-tooltip="Linked in"><a href="#" target="_blank"> </a> </span></li>
+                                    <li><span class="simptip-position-bottom simptip-movable" data-tooltip="Rss"><a
+                                            href="#" target="_blank"> </a></span></li>
+                                    <li><span class="simptip-position-bottom simptip-movable" data-tooltip="Facebook"><a
+                                            href="#" target="_blank"> </a></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="wrap">
+            <div class="copy">
+                <p>© 2014 Template by <a href="http://w3layouts.com" target="_blank">w3layouts</a></p>
+            </div>
+            <div class="f-list2">
+                <ul>
+                    <li class="active"><a href="about.html">About Us</a></li>
+                    |
+                    <li><a href="delivery.html">Delivery & Returns</a></li>
+                    |
+                    <li><a href="delivery.html">Terms & Conditions</a></li>
+                    |
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,291 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load catalog_filters %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'shop_template/css/etalage.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'raty/jquery.raty.css' %}"/>
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'shop_template/js/jquery.jscrollpane.min.js' %}"></script>
+    <script type="text/javascript" id="sourcecode">
+        $(function () {
+            $('.scroll-pane').jScrollPane();
+        });
+    </script>
+    <script src="{% static 'shop_template/js/slides.min.jquery.js' %}"></script>
+    <script>
+        $(function () {
+            $('#products').slides({
+                preload: true,
+                preloadImage: 'img/loading.gif',
+                effect: 'slide, fade',
+                crossfade: true,
+                slideSpeed: 350,
+                fadeSpeed: 500,
+                generateNextPrev: true,
+                generatePagination: false
+            });
+        });
+    </script>
+    <script src="{% static 'shop_template/js/jquery.etalage.min.js' %}"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+
+            $('#etalage').etalage({
+                thumb_image_width: 360,
+                thumb_image_height: 360,
+                source_image_width: 900,
+                source_image_height: 900,
+                show_hint: true,
+                click_callback: function (image_anchor, instance_id) {
+                    alert('Callback example:\nYou clicked on an image with the anchor: "' + image_anchor + '"\n(in Etalage instance: "' + instance_id + '")');
+                }
+            });
+
+        });
+    </script>
+    <script type="text/javascript">
+        $(window).load(function () {
+            $("#flexiselDemo1").flexisel();
+            $("#flexiselDemo2").flexisel({
+                enableResponsiveBreakpoints: true,
+                responsiveBreakpoints: {
+                    portrait: {
+                        changePoint: 480,
+                        visibleItems: 1
+                    },
+                    landscape: {
+                        changePoint: 640,
+                        visibleItems: 2
+                    },
+                    tablet: {
+                        changePoint: 768,
+                        visibleItems: 3
+                    }
+                }
+            });
+
+            $("#flexiselDemo3").flexisel({
+                visibleItems: 5,
+                animationSpeed: 1000,
+                autoPlay: false,
+                autoPlaySpeed: 3000,
+                pauseOnHover: true,
+                enableResponsiveBreakpoints: true,
+                responsiveBreakpoints: {
+                    portrait: {
+                        changePoint: 480,
+                        visibleItems: 1
+                    },
+                    landscape: {
+                        changePoint: 640,
+                        visibleItems: 2
+                    },
+                    tablet: {
+                        changePoint: 768,
+                        visibleItems: 3
+                    }
+                }
+            });
+
+        });
+    </script>
+    <script type="text/javascript" src="{% static 'shop_template/js/jquery.flexisel.js' %}"></script>
+    <script src="{% static 'js/django_ajax_post.js' %}"></script>
+    <script src="{% static 'js/product.js' %}"></script>
+    <script src="{% static 'raty/jquery.raty.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    {# carrusel de miniaturas bajo la imagen principal #}
+    <div class="grid images_3_of_2">
+        <ul id="etalage">
+            <li>
+                <a href="#">
+                    <img class="etalage_thumb_image img-responsive" src="{{ p.image.url }}"/>
+                    {#  imagen que se muestra por la lupa  #}
+                    <img class="etalage_source_image img-responsive" src="{{ p.image.url }}"/>
+                </a>
+            </li>
+            {% for img_obj in p.second_images.all %}
+                <li>
+                    <img class="etalage_thumb_image img-responsive" src="{{ img_obj.image.url }}"/>
+                    <img class="etalage_source_image img-responsive" src="{{ img_obj.image.url }}"/>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    {#  PRODUCT  #}
+    <div class="desc1 span_3_of_2">
+        <h3 class="m_3">{{ p.name }}</h3>
+
+        <p class="m_5">{{ p.price|currency:request }}{% if p.sale_price %}
+            <span class="reducedfrom">{{ p.old_price|currency:request }}</span>{% endif %}
+            <a href="#">click for offer</a>
+        </p>
+
+        <div class="btn_form">
+            <form method="post" action=".">
+                {% csrf_token %}
+                {{ product_add_to_cart_form }}
+                <input type="submit" value="Añadir al carrito" title="">
+            </form>
+        </div>
+        {#  lista de deseos  #}
+        <span class="m_link" id="wishlist">
+            {% if user.is_authenticated %}
+                {% if desired_by_user %}
+                    <p id="remove_wishlist" class="wishlist">-quitar de tu lista de deseos</p>
+                {% else %}
+                    <p id="add_wishlist" class="wishlist">+añadir a tu lista de deseos</p>
+                {% endif %}
+            {% else %}
+                <a href="{% url 'login' %}?next={{ request.path }}">login para añadir a tu Lista de
+                    Deseos</a>
+            {% endif %}
+        </span>
+
+        <p class="m_text2">{{ p.description }} </p>
+    </div>
+    <div class="clear"></div>
+    {# productos relacionados #}
+    <div class="clients">
+        <h3 class="m_3">Productos relacionados</h3>
+        <ul id="flexiselDemo3">
+            {% for related_product in p.cross_tags %}
+                <li>
+                    <img src="{{ related_product.image.url }}"/><a
+                        href="{{ related_product.get_absolute_url }}">{{ related_product.name }}</a>
+
+                    <p>{{ related_product.price|currency:request }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+    <div class="toogle">
+        <div id="wrapper_raty">
+            {% if not avg_rating %}
+                <p class="cart comment-about-user-voted-avg">El producto no ha sido valorado... se el primero en
+                    votar!</p>
+            {% else %}
+                <p class="cart comment-about-user-voted-avg">Los usuarios han votado por este producto</p>
+            {% endif %}
+            <div id="raty_avg"></div>
+            {% if user_already_voted %}
+                <p class="cart comment-about-user-voted">Actualiza tu votación si lo deseas!</p>
+            {% else %}
+                <p class="cart comment-about-user-voted">Vota por primera vez este producto!</p>
+            {% endif %}
+            <div id="raty"></div>
+        </div>
+        {#  TAGS  #}
+        <div id="wrapper_tags">
+            <p class="cart">Etiquetado con:</p>
+
+            <div id="tags">
+                {% for tag in p.tags %}
+                    {% include 'catalog/tag_link.html' %}
+                {% endfor %}
+            </div>
+            {% if request.user.is_authenticated %}
+                <input id="id_tag" type="text" title="Etiquetar este producto (al menos tres caracteres)"/>
+                <input type="submit" value="Etiquetar" id="add_tag" class="btn_submit"/>
+            {% else %}
+                <a href="{% url 'login' %}?next={{ request.path }}">
+                    Login para etiquetar este producto.
+                </a>
+            {% endif %}
+        </div>
+        {#  PRODUCT REVIEW  #}
+        <div id="wrapper_reviews">
+            {% if request.user.is_authenticated %}
+                <a id="add_review">Déjanos tu revisión</a>
+                <div id="review_form">
+                    <div id="review_errors"></div>
+                    <textarea id="id_content" placeholder="Deja tu opinión aquí si quieres"></textarea>
+                    <table>
+                        <tr>
+                            <td colspan="2">
+                                <input type="hidden" id="id_slug" value="{{ p.slug }}"/>
+                                <input type="hidden" id="id_rating"/>
+                                <input type="submit" id="submit_review" value="Comenta!" class="btn_submit"/>
+                                <input type="submit" id="cancel_review" value="Cancelar" class="btn_cancel"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            {% else %}
+                <a href="{% url 'login' %}?next={{ request.path }}">
+                    Login para escribir tu propia revisión.
+                </a>
+            {% endif %}
+            <div id="reviews">
+                {% for review in product_reviews %}
+                    {% include 'catalog/product_review.html' %}
+                {% empty %}
+                    <div id="no_reviews">
+                        Ninguna revisión para este producto.
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {#    configuracion del plugin raty   #}
+    <script>
+        // rating para el promedio de votaciones
+        raty('div#raty_avg', {{ avg_rating }});
+        //rating para que el user vote
+        raty('div#raty', {{ user_already_voted }}, function (score, evt) {
+            addProductVote(score);
+        });
+        function raty(elem, score, func) {
+            var readOnly = false;
+            if (func == null) {
+                func = function (score, evt) {
+                    return false;
+                };
+                readOnly = true
+            }
+
+            $(elem).raty({
+                path: '{% static "raty/images" %}',
+                starOff: 'star-off.png',
+                starOn: 'star-on.png',
+                readOnly: readOnly,
+                score: score,
+                click: func
+            });
+        }
+    </script>
+    {#  configuracion plugin tooltipster  #}
+    <script>
+        $(document).ready(function () {
+            $('#id_tag').tooltipster({
+                maxWidth: 250,
+                delay: 1,
+                contentAsHTML: true,
+                theme: 'tooltipster-shadow'
+            });
+        });
+    </script>
+    <style>
+        #loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 45%;
+            background-color: Pink;
+            width: 200px;
+            font-size: medium;
+            color: Black;
+            font-weight: bold;
+            padding: 2px;
+            border: solid 1px Red;
+            text-align: center;
+            z-index: 100;
+        }
+    </style>
+{% endblock %}

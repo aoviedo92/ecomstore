@@ -1,0 +1,37 @@
+{% load catalog_filters %}
+<div class="col_1_of_3 span_1_of_3">
+    <a href="{{ p.get_absolute_url }}">
+        <div class="inner_content clearfix">
+            <div class="product_image">
+                <img style="border: 0" src="{{ p.image.url }}" alt="" height="300" width="300"/>
+            </div>
+            {% if p.new_product %}
+                <div class="sale-box"><span class="on_sale title_shop">Nuevo</span></div>
+            {% elif p.sale_price %}
+{#            {% if p.sale_price %}#}
+                <div class="sale-box1"><span class="on_sale title_shop">Rebaja</span></div>
+            {% endif %} 
+            <div class="price">
+                <div class="cart-left">
+                    <p class="title">{{ p.name }}</p>
+
+                    <div class="price1">
+                        {% if  p.sale_price %}
+                            <span class="reducedfrom">{{ p.old_price|currency:request }}</span>
+                        {% endif %}
+                        <span class="actual">{{ p.price|currency:request }}</span>
+                    </div>
+                </div>
+                <div class="cart-right tooltip"
+                     id="add_to_cart"
+                     style="z-index: 5"
+                     title="{{ p.tooltip }}"
+                        >
+                </div>
+    <input type="hidden" id="tooltip_rating" value="{{ p.avg_rating }}"/>
+    <input type="hidden" id="tooltip_desc" value="{{ p.description|truncatewords:10 }}"/>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </a>
+</div>

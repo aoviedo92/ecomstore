@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load catalog_tags %}
+{% block site_wrapper %}
+    <div class="mens">
+        <div class="main">
+            <div class="wrap">
+                <div class="cont span_2_of_3">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="rsidebar span_1_of_left">
+        {% category_list_to_layout reques.path %}
+        {% block filter_products %}{% endblock %}
+        {% tag_cloud %}
+    </div>
+    <div class="clear"></div>
+    <script src="{% static 'shop_template/js/jquery.easydropdown.js' %}"></script>
+
+{% endblock %}

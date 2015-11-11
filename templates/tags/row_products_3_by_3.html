@@ -1,0 +1,8 @@
+{% for row_ in product_row %}
+    <div class="top-box">
+        {% for p in row_ %}
+            {% include 'tags/product_thumbnail.html' %}
+        {% endfor %}
+        <div class="clear"></div>
+    </div>
+{% endfor %}
