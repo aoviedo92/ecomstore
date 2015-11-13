@@ -54,6 +54,7 @@ def index(request):
                 continue
         else:
             continue
+    promotion = utils.promotions()
     return render_to_response("home.html", locals(), context_instance=RequestContext(request))
 
 
@@ -78,11 +79,9 @@ def show_category(request, category_slug=None, common_name=None):
     recommended_1, recommended_2, recommended_3 = random_recommendations(products, 2)
 
     products, order_by_form = order_products(request, products)
-
     num_x_pag, product_per_pag_form = get_num_x_pag(request)
-
+    products, order_by_brand_form = filter_products(request, products)
     paginator, products_per_pag = get_paginator(request, products, num_x_pag)
-
     product_row = get_product_row(products_per_pag)
 
     return render_to_response("tags/product_list.html", locals(), context_instance=RequestContext(request))
@@ -93,13 +92,32 @@ def tag(request, tag_):
     products = TaggedItem.objects.get_by_model(Product.active, tag_)
 
     products, order_by_form = order_products(request, products)
-
     num_x_pag, product_per_pag_form = get_num_x_pag(request)
-
+    products, order_by_brand_form = filter_products(request, products)
     paginator, products_per_pag = get_paginator(request, products, num_x_pag)
-
     product_row = get_product_row(products_per_pag)
+
     return render_to_response("tags/product_list.html", locals(), context_instance=RequestContext(request))
+
+
+def quick_access(request, quick_access_slug):
+    quick_access_ = stats.QuickAccess()
+    switch_dict = {'new_products': quick_access_.new_products,
+                   'discounts': quick_access_.discount,
+                   'top_sellers': quick_access_.top_sellers,
+                   'polemical': quick_access_.polemical,
+                   'top_searches': quick_access_.top_searches,
+                   'desired': quick_access_.desired,
+                   'bestseller': quick_access_.bestseller,
+                   'voted': quick_access_.voted,
+                   'featured': quick_access_.featured,
+                   'super_discount': quick_access_.great_sales
+                   }
+    products = switch_dict[quick_access_slug]()
+    product_row = get_product_row(products)
+    product_row.reverse()
+    return render_to_response("tags/product_list_quick_access.html", locals(), context_instance=RequestContext(request))
+
 
 
 def show_product(request, product_slug):

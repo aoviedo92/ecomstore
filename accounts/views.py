@@ -1,6 +1,6 @@
 # coding=utf-8
 from django.contrib.auth.views import logout
-from catalog.product_list import order_products, get_num_x_pag, get_paginator
+from catalog.product_list import order_products, get_num_x_pag, get_paginator, filter_products
 from models import UserProfile
 import profile
 from django.contrib.auth.decorators import login_required
@@ -48,6 +48,9 @@ def order_details(request, order_id):
     order = get_object_or_404(Order, id=order_id, user=request.user)
     page_title = 'Order Details for Order #' + order_id
     order_items = OrderItem.objects.filter(order=order)
+    status_dict = {1: u'Su petición ha sido enviada', 2: 'La orden ha sido procesada',
+                   3: 'La orden ha sido enviada al cliente', 4: 'La orden ha sido cancelada'}
+    status = status_dict[order.status]
     return render_to_response("registration/order_details.html", locals(), context_instance=RequestContext(request))
 
 
@@ -84,11 +87,9 @@ def wish_list(request):
     title_head = "Tu lista de deseos"
 
     products, order_by_form = order_products(request, products)
-
     num_x_pag, product_per_pag_form = get_num_x_pag(request)
-
+    products, order_by_brand_form = filter_products(request, products)
     paginator, products_per_pag = get_paginator(request, products, num_x_pag)
-
     product_row = get_product_row(products_per_pag)
 
     return render_to_response("tags/product_list.html", locals(), context_instance=RequestContext(request))

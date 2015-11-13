@@ -82,7 +82,6 @@ class Product(models.Model):
     sku = models.CharField(max_length=50, default="sku")
     price = models.DecimalField(max_digits=9, decimal_places=2, default=200)
     old_price = models.DecimalField(max_digits=9, decimal_places=2, blank=True, default=0.00)
-    # filter_name = models.ManyToManyField(Filter, blank=True)
     image = models.ImageField(upload_to='images/products/main')
     second_images = models.ManyToManyField(Images, null=True, blank=True)
 
@@ -258,3 +257,20 @@ class ProductRating(Review):
 
     def __unicode__(self):
         return "%s - %s " % (str(self.product), str(self.rating))
+
+
+class Promo2(models.Model):
+    """
+    Si compras 2+ de esta <categ> llevate gratis este <prod>
+    <categ> es la categ con menos venta
+    <prod> es un prod definido por el admin
+    """
+    product = models.ForeignKey(Product)
+    category = models.ForeignKey(Category, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        from stats import stats
+
+        category = stats.category_less_sold()
+        self.category = category
+        super(Promo2, self).save(*args, **kwargs)

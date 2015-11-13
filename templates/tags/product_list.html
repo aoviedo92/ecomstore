@@ -32,13 +32,49 @@
                 <form action="." method="POST">
                     {% csrf_token %}
                     {{ order_by_form }}
-                    <input type="image" value="up" name="submit_up"
-                           src="{% static 'shop_template/images/arrow2.gif' %}"/>
-                    <input type="image" value="down" name="submit_down"
-                           src="{% static 'shop_template/images/arrow2-down.png' %}"/>
+                    <input type="image" value="up" name="submit_up" src="{% static 'shop_template/images/arrow2.gif' %}"/>
+                    <input type="image" value="down" name="submit_down" src="{% static 'shop_template/images/arrow2-down.png' %}"/>
                 </form>
             </div>
         </div>
+
+        <div class="sort">
+            <div class="sort-by">
+                <form action="." method="get" id="id_order_by_brand_form">
+                    {% csrf_token %}
+                    {{ order_by_brand_form }}
+                </form>
+            </div>
+        </div>
+
+        <div class="sort price-filter">
+            <div class="sort-by">
+                <form action="." method="post">
+                    {% csrf_token %}
+                    <input type="text" placeholder="min" name="min_price" id="min_price"/>
+                    <input type="text" placeholder="max" name="max_price" id="max_price"/>
+                    <input type="submit" value="filtrar"/>
+                </form>
+            </div>
+        </div>
+
+        <style>
+            .price-filter input{
+                width: 30%;
+                padding-left: 2px;
+            }
+            .price-filter input[type="submit"]{
+                width: 25%;
+                border: 0;
+                cursor: pointer;
+                background-color: transparent;
+                color: #777;
+            }
+            .price-filter input[type="submit"]:hover{
+                color: #333333;
+            }
+
+        </style>
         <div class="pager">
             <div class="limiter visible-desktop">
                 <form action="." method="get" id="id_product_per_pag_form">
@@ -48,6 +84,9 @@
                     $(document).ready(function () {
                         $("#id_products_per_page").change(function () {
                             $("#id_product_per_pag_form").submit()
+                        });
+                        $("#id_order_by_brand").change(function () {
+                            $("#id_order_by_brand_form").submit()
                         })
                     })
                 </script>
@@ -92,5 +131,5 @@
 
 {% endblock %}
 {% block filter_products %}
-    {% include 'tags/filter_products.html' %}
+    {% include 'tags/quick_access.html' %}
 {% endblock %}

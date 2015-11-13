@@ -1,5 +1,6 @@
+# coding=utf-8
 from random import randint
-from catalog.models import Product
+from catalog.models import Product, Promo2
 from ecomstore import settings
 # import stats.stats
 
@@ -39,6 +40,7 @@ def take_three_pos(length):
                 break
     return rand_list
 
+
 def products_bought_together(product):
     from stats import stats
     # buscar que productos se han vendido junto con este, mediante la Order lo buscamos
@@ -49,3 +51,24 @@ def products_bought_together(product):
         ids = [prod_id['product'] for prod_id in ids]  # --> [13, 14, 15]
         return Product.active.filter(id__in=ids)
     return False
+
+
+def promotions():
+    # calculos para la promo2
+    category, product = promo2()
+    product_link = "<a href='%s'>%s</a>" % (product.get_absolute_url(), product)
+    category_link = "<a href='%s'>%s</a>" % (category.get_absolute_url(), category)
+
+    labels = [u"Si compras +5 artículos obtienes un descuento del 10%",
+              u"Llévate gratis este producto: %s, si compras dos productos de esta categoría: %s" % (
+              product_link, category_link)]
+    pos = 1
+    return labels[pos]
+
+
+def promo2():
+    promo = Promo2.objects.first()
+    category = promo.category
+    product = promo.product
+    print('promo',category,product)
+    return category, product

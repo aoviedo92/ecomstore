@@ -2,7 +2,7 @@ import os
 import base64
 from random import randint
 from django.db.models import Count, Avg
-from catalog.models import Product
+from catalog.models import Product, Category
 from checkout.models import Order, OrderItem
 from ecomstore import settings
 from search.models import SearchTerm
@@ -174,6 +174,11 @@ def inspired_by_user_shopping_trends(request):
     return recommended if len(recommended) == 3 else []
 
 
+def category_less_sold():
+    return Category.active.annotate(sold=Count('product__orderitem'), cant_prod=Count('product')).filter(
+        cant_prod__gt=3).order_by('sold').first()
+
+
 class Get3Product:
     def __init__(self, products=None, num_recommend=3):
         self.__products = products if products else Product.active.all()
@@ -186,6 +191,7 @@ class Get3Product:
                                 u"Rebajas",
                                 u"los mas votados",
                                 u"grandes rebajas",
+                                u"mas vendidos",
                                 ]
         self.__function_dict = {
             self.__random_labels[0]: self.__get_3_new,
@@ -196,7 +202,12 @@ class Get3Product:
             self.__random_labels[5]: self.__get_3_sales,
             self.__random_labels[6]: self.__get_3_voted,
             self.__random_labels[7]: self.__get_3_great_sales,
+            self.__random_labels[8]: self.__get_3_top_sellers,
         }
+
+    def __get_3_top_sellers(self):
+        products = self.__products.annotate(cont=Count('orderitem')).order_by('-cont')
+        return products[:3] if len(products) >= 3 else None
 
     def __get_3_great_sales(self):
         sales = [product for product in self.__products if product.great_sales()]
@@ -256,8 +267,8 @@ class Get3Product:
         return desired[:3] if len(desired) >= 3 else None
 
     def recommended(self):
-        # pos = take_three_pos(len(self.__random_labels) - 1)
-        pos = [6,7,0]
+        pos = take_three_pos(len(self.__random_labels) - 1)
+        # pos = [8,7,0]
         print('stats.py - pos-', pos)
         recommended_1 = {self.__random_labels[pos[0]]: self.__function_dict[self.__random_labels[pos[0]]]()}
         recommended_2 = {self.__random_labels[pos[1]]: self.__function_dict[self.__random_labels[pos[1]]]()}
@@ -290,6 +301,50 @@ class RecommendedForUsers:
         return inspired_by_user_shopping_trends(self.__request)
 
     def recommended(self):
-        # pos = randint(0, len(self.__random_labels) - 1)
-        pos = 1
+        pos = randint(0, len(self.__random_labels) - 1)
+        # pos = 2
         return {self.__random_labels[pos]: self.__function_dict[self.__random_labels[pos]]()}
+
+
+# QUICK ACCESS
+class QuickAccess:
+    def __init__(self):
+        self.__products = Product.active.all()
+
+    def top_sellers(self):
+        return self.__products.annotate(cont=Count('orderitem')).order_by('-cont')[:9]
+
+    def great_sales(self):
+        sales = [product for product in self.__products if product.great_sales()]
+        return sales[:9]
+
+    def voted(self):
+        voted = self.__products.annotate(avg=Avg('productrating__rating')).filter(avg__gt=3).order_by('-avg')
+        voted = voted.annotate(cant=Count('productrating')).order_by('-cant')
+        return voted[:9]
+
+    def discount(self):
+        sales = [product for product in self.__products if product.sale_price() and not product.great_sales()]
+        return sales[:9]
+
+    def new_products(self):
+        new = [product for product in self.__products if product.new_product()]
+        return new[:9]
+
+    def bestseller(self):
+        return self.__products.filter(is_bestseller=True)[:9]
+
+    def polemical(self):
+        polemics = self.__products.annotate(num_rev=Count('productreview')).filter(num_rev__gt=2).order_by('-num_rev')
+        return polemics[:9]
+
+    def desired(self):
+        desired_ = self.__products.annotate(num_desired=Count('userprofile__wish_list')).filter(
+            num_desired__gt=2).order_by('-num_desired')
+        return desired_[:9]
+
+    def top_searches(self):
+        return recommended_from_search()
+
+    def featured(self):
+        return self.__products.filter(is_featured=True)[:9]

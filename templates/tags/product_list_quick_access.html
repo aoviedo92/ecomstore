@@ -1,0 +1,44 @@
+﻿{% extends 'layout.html' %}
+{% load static %}
+{% load pagination_tags %}
+
+{% block content %}
+    {% if common %}
+        {#  cuando sea una categoria comun, listar todas sus categorias hijas, como links, en la parte derecha      #}
+        <h4 class="head">
+            <div class="cssmenu">
+                <ul>
+                    {% for category in common_categories %}
+                        <li><a style="color: #4CB1CA" class="color4"
+                               href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+                        {% if not forloop.last %}
+                            |
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </h4>
+
+    {% else %}
+        <h2 class="head">
+            {{ title_head|capfirst }}
+        </h2>
+    {% endif %}
+
+    {#  LISTAR PRODUCTOS DE 3 EN 3    #}
+    {% for row_ in product_row %}
+        <div class="top-box">
+            {% for p in row_ %}
+                {% include 'tags/product_thumbnail.html' %}
+            {% endfor %}
+            <div class="clear"></div>
+        </div>
+    {% endfor %}
+
+{#    <script src="{% static 'shop_template/js/jquery.easydropdown.js' %}"></script>#}
+
+{% endblock %}
+{% block filter_products %}
+    {% include 'tags/quick_access.html' %}
+{% endblock %}

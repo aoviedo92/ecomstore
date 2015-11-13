@@ -1,7 +1,7 @@
 from random import randint
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.db.models.query import QuerySet
-from catalog.forms import OrderByForm, ProductsPerPageForm
+from catalog.forms import OrderByForm, ProductsPerPageForm, OrderByBrandForm
 from ecomstore import settings
 from search import search
 from search.models import SearchTerm
@@ -14,6 +14,10 @@ def __get_num_x_pag_session(request):
     esto se almacena en una session. si no existe el valor usamos el valor por defecto del settings.py
     """
     return request.session.get('num_x_pag', settings.PRODUCTS_PER_PAGE)
+
+
+def __get_selected_brand_session(request):
+    return request.session.get('selected_brand', "0")
 
 
 def order_products(request, products):
@@ -40,7 +44,7 @@ def order_products(request, products):
     if request.method == "POST":
         # ordenar
         order_by_form = OrderByForm(request.POST, label_suffix=" ")
-        option = request.POST.get('order_by')
+        option = request.POST.get('order_by', 'created_at')
         order_by = order_dict[option]
         if 'submit_up.x' in request.POST:
             # si se quiere ordenar ascendente
@@ -49,6 +53,7 @@ def order_products(request, products):
     else:
         products = products.order_by('created_at')
         order_by_form = OrderByForm(label_suffix=" ")
+
     return products, order_by_form
 
 
@@ -69,6 +74,34 @@ def get_num_x_pag(request):
     product_per_pag_form = ProductsPerPageForm({u'products_per_page': unicode(num_x_pag)})
     request.session['num_x_pag'] = num_x_pag
     return num_x_pag, product_per_pag_form
+
+
+def filter_products(request, products):
+    selected_brand_session = __get_selected_brand_session(request)
+    # filtrar por marca
+    if request.method == "GET":
+        selected_brand = request.GET.get("order_by_brand", selected_brand_session)
+        if selected_brand != "0":
+            # print('filtrar',selected_brand)
+            # print(products)
+            products = products.filter(brand=selected_brand)
+            # print(products)
+    else:
+        selected_brand = selected_brand_session
+    # filtrar por precio
+    if request.method == "POST":
+        min_price = request.POST.get("min_price")
+        max_price = request.POST.get("max_price")
+        if not min_price:
+            min_price = "0"
+        if not max_price:
+            max_price = "100000"
+        products = products.filter(price__gt=min_price, price__lt=max_price)
+
+    order_by_brand_form = OrderByBrandForm({u"order_by_brand": unicode(selected_brand)}, label_suffix=" ")
+    request.session['selected_brand'] = selected_brand
+    print('brand',selected_brand)
+    return products, order_by_brand_form
 
 
 def get_paginator(request, products, num_x_pag):

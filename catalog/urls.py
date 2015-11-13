@@ -9,6 +9,7 @@ urlpatterns = patterns('catalog.views',
                        url(r'^category/(?P<category_slug>[-\w]+)/$', 'show_category', name='catalog_category'),
                        url(r'^product/(?P<product_slug>[-\w]+)/$', 'show_product', name='catalog_product'),
                        url(r'^currency/$', 'currency', name='currency'),
+                       url(r'^catalog/quick-access/(?P<quick_access_slug>[-\w]+)/$', 'quick_access', name='quick_access'),
                        url(r'^tag/(?P<tag_>[-\w]+)/$', 'tag', name='tag'),
                        # ajax call
                        url(r'^review/product/add/$', 'add_review'),

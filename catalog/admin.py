@@ -2,13 +2,14 @@ from django.contrib import admin
 
 # Register your models here.
 from django.contrib import admin
-from catalog.models import Product, Category, CategoryGroup, Images, CommonCategory, ProductReview, ProductRating
+from catalog.models import Product, Category, CategoryGroup, Images, CommonCategory, ProductReview, ProductRating, \
+    Promo2
 from catalog.forms import ProductAdminForm
 
 
 class ProductAdmin(admin.ModelAdmin):
     form = ProductAdminForm
-    list_display = ('name', 'price', 'old_price', 'created_at', 'slug',)
+    list_display = ('name', 'price', 'old_price', 'quantity', 'is_active', 'created_at', 'slug',)
     list_display_links = ('name',)
     list_per_page = 50
     ordering = ['-created_at']
@@ -47,6 +48,7 @@ class ProductRatingAdmin(admin.ModelAdmin):
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(CategoryGroup)
+admin.site.register(Promo2)
 admin.site.register(CommonCategory)
 admin.site.register(Images)
 admin.site.register(ProductReview, ProductReviewAdmin)

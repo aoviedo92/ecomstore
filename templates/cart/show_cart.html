@@ -26,7 +26,31 @@
                 <p class="cart">Total en el carrito</p>
             </th>
             <th class="right">
-                <h4 class="total_cart">{{ cart_subtotal|currency:request }}</h4>
+                <p class="cart">{{ cart_subtotal|currency:request }}</p>
+            </th>
+        </tr>
+        <tr>
+            <th colspan="4" class="right">
+                <p class="cart">Descuento</p>
+            </th>
+            <th class="right">
+                <p class="cart">-{{ discount|currency:request }}</p>
+            </th>
+        </tr>
+        <tr>
+            <th colspan="4" class="right">
+                <p class="cart">Impuesto de envio</p>
+            </th>
+            <th class="right">
+                <p class="cart">+{{ shipping_tax|currency:request }}</p>
+            </th>
+        </tr>
+        <tr>
+            <th colspan="4" class="right">
+                <p class="cart">TOTAL</p>
+            </th>
+            <th class="right">
+                <h4 class="total_cart">{{total|currency:request }}</h4>
             </th>
         </tr>
         {% if cart_items %}

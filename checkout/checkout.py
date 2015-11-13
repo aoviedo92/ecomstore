@@ -3,6 +3,15 @@ from forms import CheckoutForm
 from models import Order, OrderItem
 
 
+def do_auth_capture(amount="0.00", card_num=None, exp_date=None, card_cvv=None):
+    """
+    procesar los datos consumiendo algun servicio.
+    """
+    response_code = '1'
+    transaction_id = 'trans_ID'
+    return [response_code, 0, 0, 0, 0, 0, transaction_id]
+
+
 def process(request):
     # Transaction results
     APPROVED = '1'
@@ -17,7 +26,10 @@ def process(request):
     cvv = postdata.get('credit_card_cvv', '')
     amount = cart.cart_subtotal(request)
     results = {}
-    response = ['1', 0, 0, 0, 0, 0, 'trans_ID']
+    response = do_auth_capture(amount=amount,
+                               card_num=card_num,
+                               exp_date=exp_date,
+                               card_cvv=cvv)
     if response[0] == APPROVED:
         transaction_id = response[6]
         order = create_order(request, transaction_id)
@@ -40,11 +52,11 @@ def create_order(request, transaction_id):
     if request.user.is_authenticated():
         order.user = request.user
         from accounts import profile
+
         user_profile = profile.get_profile(request)
         # verificar si campos requeridos estan vacios, si lo estan crear un user_profile para este usuario desde
         # aqui, asi no tendria q escribirlo en el form UserProfileForm
         if not user_profile.email or not user_profile.shipping_name or user_profile.shipping_city == 0:
-            print('create-order-establ-profile')
             profile.set_profile(request)
     order.save()
     # if the order save succeeded
@@ -57,6 +69,9 @@ def create_order(request, transaction_id):
             oi.quantity = ci.quantity
             oi.price = ci.price()  # now using @property
             oi.product = ci.product
+            # disminuir del almacen la cant disponible para este prod
+            ci.product.quantity -= ci.quantity
+            ci.product.save()
             oi.save()
             # all set, empty cart
         cart.empty_cart(request)

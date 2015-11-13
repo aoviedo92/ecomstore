@@ -148,7 +148,15 @@
         </span>
 
         <p class="m_text2">{{ p.description }} </p>
-        <p>XL X S L</p>
+{#        <p>XL X S L</p>#}
+
+        <div id="product_size">
+            <div class="size-label left">Talla:</div>
+            <div class="size left">XL</div>
+            <div class="size left">X</div>
+            <div class="size size-active left">S</div>
+            <div class="size left">L</div>
+        </div>
     </div>
     <div class="clear"></div>
 
@@ -289,6 +297,12 @@
                 contentAsHTML: true,
                 theme: 'tooltipster-shadow'
             });
+            $('.size').click(function () {
+                $('.size').removeClass('size-active');
+                $(this).addClass('size-active');
+                var size = $(this).text();
+                $('input#id_size').val(size)
+            })
         });
     </script>
     <style>
@@ -307,7 +321,42 @@
             text-align: center;
             z-index: 100;
         }
+        div#product_size{
+{#            border: 1px solid gray;#}
+            padding: 5px;
+            font-family: sans-serif;
+            color: #5b4210;
+{#            font-size: 12px;#}
+{#            height: 100px;#}
+{#            width: 200px;#}
+        }
+        div#product_size .left{
+            float: left;
+        }
+        .size-label{
+            padding: 20px 5px 5px;
+        }
+        .size{
+            padding-top: 15px;
+            margin: 5px;
+            width: 25px;
+            height: 25px;
+            text-align: center;
+            border: 1px solid #FFB929;
+            border-radius: 50px;
 
+            cursor: pointer;
+        }
+        .size-active{
+            border: 2px solid #BD8A1C;
+            background-color: #FFB929;
 
+        }
+        .size:hover{
+            background-color: #FFB929;
+        }
     </style>
+{% endblock %}
+{% block filter_products %}
+    {% include 'tags/quick_access.html' %}
 {% endblock %}

@@ -24,6 +24,7 @@ class ProductAddToCartForm(forms.Form):
     #     min_value=1
     # )
     product_slug = forms.CharField(widget=forms.HiddenInput())
+    size = forms.CharField(widget=forms.HiddenInput(attrs={'value': 'S'}))
 
     # override the default __init__ so we can set the request
     def __init__(self, request=None, *args, **kwargs):
@@ -40,7 +41,12 @@ class ProductAddToCartForm(forms.Form):
 
 class OrderByForm(forms.Form):
     OPTIONS = (("created_at", "Fecha"), ("name", "Nombre"), ("price", "Precio"), ("brand", "Marca"),)
-    order_by = forms.ChoiceField(choices=OPTIONS, label="Ordenar por")
+    order_by = forms.ChoiceField(choices=OPTIONS, label="Ordenar por", required=False)
+
+class OrderByBrandForm(forms.Form):
+    OPTIONS = (("0", "filtra por la marca"),("brand", "brand"), ("brand2", "brand2"), ("brand3", "brand3"), ("brand4", "brand4"),)
+    order_by_brand = forms.ChoiceField(choices=OPTIONS, label="")
+
 
 
 class ProductsPerPageForm(forms.Form):
@@ -66,8 +72,9 @@ class ProductReviewForm(forms.ModelForm):
         model = ProductReview
         exclude = ('user', 'product', 'is_approved', 'rating')
 
-    content = forms.CharField(widget=forms.Textarea(attrs={"placeholder": u"Deja tu opinión si quieres", "class": "leave_msg"}), label="",
-                              required=False)
+    content = forms.CharField(
+        widget=forms.Textarea(attrs={"placeholder": u"Deja tu opinión si quieres", "class": "leave_msg"}), label="",
+        required=False)
 
 
 class ProductRatingForm(forms.ModelForm):
