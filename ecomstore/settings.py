@@ -120,7 +120,7 @@ TEMPLATE_DIRS = (
 
 DATE_FORMAT = "d/M/Y"
 
-SITE_NAME = 'Street Fashion'
+SITE_NAME = 'Leoshop'
 META_KEYWORDS = 'Music, instruments, music accessories, musician supplies'
 META_DESCRIPTION = 'Modern Musician is an online supplier of instruments, sheet music, ' \
                    'and other accessories for musicians'
@@ -128,6 +128,7 @@ ENABLE_SSL = False
 LOGIN_REDIRECT_URL = '/accounts/my_account/'
 LOGOUT_REDIRECT_URL = ''
 AUTH_PROFILE_MODULE = 'accounts.userprofile'
+
 PRODUCTS_PER_PAGE = 6
 PRODUCTS_PER_ROW = 3
 

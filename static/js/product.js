@@ -1,11 +1,4 @@
-function ajax(url, data, func) {
-    jQuery.post(
-        url,
-        data,
-        func,
-        "json"
-    );
-}
+
 function addProductVote(score) {
     var slug = jQuery("#id_slug").val();
     $("#id_rating").val(score);

@@ -63,7 +63,7 @@ class Category(models.Model):
         return reverse('catalog_category', kwargs={'category_slug': self.slug})
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        # self.slug = slugify(self.name)
         super(Category, self).save(*args, **kwargs)
 
 

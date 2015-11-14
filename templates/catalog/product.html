@@ -123,7 +123,7 @@
 
         <p class="m_5">{{ p.price|currency:request }}{% if p.sale_price %}
             <span class="reducedfrom">{{ p.old_price|currency:request }}</span>{% endif %}
-            <a href="#">click para oferta</a>
+            {% if p.quantity <= 5 %}<a href="#">Este producto está a punto de agotarse</a>{% endif %}
         </p>
 
         <div class="btn_form">
@@ -330,31 +330,7 @@
 {#            height: 100px;#}
 {#            width: 200px;#}
         }
-        div#product_size .left{
-            float: left;
-        }
-        .size-label{
-            padding: 20px 5px 5px;
-        }
-        .size{
-            padding-top: 15px;
-            margin: 5px;
-            width: 25px;
-            height: 25px;
-            text-align: center;
-            border: 1px solid #FFB929;
-            border-radius: 50px;
 
-            cursor: pointer;
-        }
-        .size-active{
-            border: 2px solid #BD8A1C;
-            background-color: #FFB929;
-
-        }
-        .size:hover{
-            background-color: #FFB929;
-        }
     </style>
 {% endblock %}
 {% block filter_products %}

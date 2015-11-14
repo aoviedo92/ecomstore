@@ -1,0 +1,16 @@
+.tooltipster-discount {
+	border-radius: 5px;
+	background: #d1ffbe;
+    padding: 10px;
+	box-shadow: 0 0 14px #426f42;
+	color: #008080;
+	/*text-decoration: underline;*/
+	/*font-weight: bold;*/
+}
+.tooltipster-discount .tooltipster-content {
+	/*color: crimson;*/
+	font-family: 'Arial', sans-serif;
+	font-size: 14px;
+	line-height: 16px;
+	padding: 8px 10px;
+}

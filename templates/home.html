@@ -257,10 +257,10 @@
                             {% for product in products_bought_together %}
                                 <input type="hidden" value="{{ product.slug }}" name="product_slug"/>
                             {% endfor %}
-                            <div class="slider-wrapper theme-default" style="min-height: 200px">
-                                <div id="slider" class="nivoSlider">
+                            <div class="slider-wrapper theme-default" style="max-height: 320px; height: 320px">
+                                <div id="slider" class="nivoSlider" style="max-height: 300px; height: 300px">
                                     {% for product in products_bought_together %}
-                                        <img src="{{ product.image.url }}" alt="{{ product.slug }}"/>
+                                        <img src="{{ product.image.url }}" alt="{{ product.slug }}" height="300"/>
                                     {% endfor %}
                                 </div>
                             </div>
@@ -273,14 +273,14 @@
                     </div>
                     <div class="top-border"></div>
                     <div class="sidebar-bottom">
-                        <h2 class="m_1">Newsletters<br> Signup</h2>
+                        <h2 class="m_1">Newsletters<br> Suscríbete</h2>
 
-                        <p class="m_text">Lorem ipsum dolor sit amet, consectetuer</p>
+                        <p class="m_text">Recibe nuestros boletines para que te enteres de novedades, promociones y más sorpresas.</p>
 
                         <div class="subscribe">
                             <form>
                                 <input name="userName" type="text" class="textbox">
-                                <input type="submit" value="Subscribe">
+                                <input type="submit" value="Suscríbete">
                             </form>
                         </div>
                     </div>

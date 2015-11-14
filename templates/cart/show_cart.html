@@ -3,11 +3,107 @@
 {% load catalog_filters %}
 {% block styles %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
+    <link rel="stylesheet" href="{% static 'tooltipster/css/themes/tooltipster-discount.css' %}"/>
+    <style>
+        .promotions p.discount {
+            color:{% if promotions %} #88ca25; cursor: pointer; background-color: #e0ffd5{% endif %};
+        }
+
+        .promotions p.tax {
+            color: {% if shipping_tax > 0 %}crimson{% else %}#88ca25; cursor: pointer;
+                background-color: #e0ffd5{% endif %};
+        }
+
+        .code-error {
+            border: 1px solid crimson;
+            color: crimson;
+        }
+
+        .code-success {
+            border: 1px solid #7CFC00;
+            color: #7CFC00;
+        }
+        .discount-yes{
+            color: #88ca25;
+            cursor: pointer;
+            background-color: #e0ffd5;
+        }
+
+        .tax-yes {
+            color: crimson;
+        }
+
+        .tax-no {
+            background-color: #e0ffd5;
+            color : #88ca25;
+            cursor: pointer;
+        }
+
+    </style>
+{% endblock %}
+{% block scripts %}
+    <script src="{% static 'js/django_ajax_post.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            function tooltip(elem, content) {
+                $(elem).tooltipster({
+                    maxWidth: 300,
+                    contentAsHTML: true,
+                    theme: 'tooltipster-discount',
+                    arrow: false,
+                    content: content
+                });
+            }
+            tooltip('.tooltip-discount', null);
+
+            $("#discount_code").keypress(function (event) {
+                var code = $(this).val();
+                if (event.keyCode == 13) {
+                    var url = "/cart/process-discount-code/";
+                    var data = {code: code};
+                    var func = function (response) {
+                        var css_class;
+                        if (response.success == "True") {
+                            css_class = 'code-success'
+                        } else {
+                            css_class = 'code-error'
+                        }
+                        $('#cart-subtotal').text(response.cart_subtotal);
+                        $('#cart-discount').text(response.discount);
+                        $('#cart-tax').text(response.shipping_tax);
+
+                        $('#cart-total').text(response.total);
+                        $("#discount_code").removeClass().addClass(css_class);
+                        if (response.shipping_tax == "0"){
+                            $('#cart-tax').removeClass().addClass('tax-no');
+                            tooltip('.tooltip-discount', null)
+                        }
+                        else
+                            $('#cart-tax').removeClass().addClass('tax-yes');
+
+                        if(response.promotions){
+                            $('#cart-discount').removeClass().addClass('tooltip-discount discount-yes');
+                            tooltip('.tooltip-discount', response.promotions)
+                        }
+                        else{
+                            $('#cart-discount').removeClass().addClass('cart');
+                        }
+                    };
+                    ajax(url, data, func);
+                    event.preventDefault();
+                }
+            });
+
+        });
+    </script>
 {% endblock %}
 {% block content %}
 
     <h4 class="title">Detalles del carrito de compras</h4>
-    <p class="cart">Cantidad de productos: {{ cart_item_count }}</p>
+    <div>
+        <p class="cart">Cantidad de productos: {{ cart_item_count }}</p>
+        <input id="discount_code" type="text" placeholder="codigo de descuento" style="float: right"/>
+    </div>
     <table id="shopping_cart">
         <thead>
         <!-- header info here -->
@@ -26,23 +122,29 @@
                 <p class="cart">Total en el carrito</p>
             </th>
             <th class="right">
-                <p class="cart">{{ cart_subtotal|currency:request }}</p>
+                <p class="cart" id="cart-subtotal">{{ cart_subtotal|currency:request }}</p>
             </th>
         </tr>
-        <tr>
+        <tr class="promotions">
             <th colspan="4" class="right">
                 <p class="cart">Descuento</p>
             </th>
             <th class="right">
-                <p class="cart">-{{ discount|currency:request }}</p>
+                <p id="cart-discount" class="cart discount {% if promotions %}tooltip-discount{% endif %}"
+                   title="{{ promotions }}">
+                    {% if promotions %}-{% endif %}{{ discount|currency:request }}</p>
             </th>
         </tr>
-        <tr>
+
+
+        <tr class="promotions">
             <th colspan="4" class="right">
-                <p class="cart">Impuesto de envio</p>
+                <p class="cart">Impuesto de envío</p>
             </th>
             <th class="right">
-                <p class="cart">+{{ shipping_tax|currency:request }}</p>
+                <p id="cart-tax" class="cart tax {% if shipping_tax == 0 %}tooltip-discount{% endif %}"
+                   title="{{ shipping_tax_promotions }}">{% if shipping_tax %}
+                    +{% endif %}{{ shipping_tax|currency:request }}</p>
             </th>
         </tr>
         <tr>
@@ -50,7 +152,7 @@
                 <p class="cart">TOTAL</p>
             </th>
             <th class="right">
-                <h4 class="total_cart">{{total|currency:request }}</h4>
+                <h4 id="cart-total" class="total_cart">{{ total|currency:request }}</h4>
             </th>
         </tr>
         {% if cart_items %}
@@ -58,7 +160,7 @@
                 <th colspan="6">
                     <div class="btn_form">
                         <form method="GET" action="{% url 'checkout' %}">
-{#                            {% csrf_token %}#}
+                            {#                            {% csrf_token %}#}
                             <input type="hidden" name="submit" value="Checkout"/>
                             <input type="submit" value="Checkout now"/>
                         </form>
@@ -82,14 +184,18 @@
                             <input type="number" name="quantity" value="{{ item.quantity }}" id="quantity"
                                    class="quantity" maxlength="5"/>
                             <input type="hidden" name="item_id" value="{{ item.id }}"/>
-                            <input type="image" name="submit_update" value="Update" src="{% static 'shop_template/images/update_item_2.png' %}" width="25" height="25" class="cart_btns"/>
+                            <input type="image" name="submit_update" value="Update"
+                                   src="{% static 'shop_template/images/update_item_2.png' %}" width="25" height="25"
+                                   class="cart_btns"/>
                         </form>
                     </td>
                     <td>
                         <form method="post" action="." class="cart">
                             {% csrf_token %}
                             <input type="hidden" name="item_id" value="{{ item.id }}"/>
-                            <input type="image" name="submit_remove" value="Remove" src="{% static 'shop_template/images/remove_item_cart.jpg' %}" width="25" height="25" class="cart_btns"/>
+                            <input type="image" name="submit_remove" value="Remove"
+                                   src="{% static 'shop_template/images/remove_item_cart.jpg' %}" width="25" height="25"
+                                   class="cart_btns"/>
                         </form>
                     </td>
                     <td class="right"><h4 class="total">{{ item.total|currency:request }}</h4></td>
@@ -98,11 +204,12 @@
         {% else %}
             <tr>
                 <td colspan="6" style="height:30px;">
-                    <p class="cart">Your cart is empty.</p>
+                    <p class="cart">Tu carrito está vacío</p>
                 </td>
             </tr>
         {% endif %}
         </tbody>
     </table>
+
 
 {% endblock %}

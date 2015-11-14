@@ -25,8 +25,10 @@
             {{ title_head|capfirst }}
         </h2>
     {% endif %}
+    {#  TOOLBAR  #}
+    {% if show_toolbar %}
+        <div class="mens-toolbar">
 
-    <div class="mens-toolbar">
         <div class="sort">
             <div class="sort-by">
                 <form action="." method="POST">
@@ -58,7 +60,7 @@
             </div>
         </div>
 
-        <style>
+        <style scoped>
             .price-filter input{
                 width: 30%;
                 padding-left: 2px;
@@ -95,6 +97,9 @@
         </div>
         <div class="clear"></div>
     </div>
+    {% else %}
+        <p class="cart">Sin productos...</p>
+    {% endif %}
     {#  LISTAR PRODUCTOS DE 3 EN 3    #}
     {% for row_ in product_row %}
         <div class="top-box">

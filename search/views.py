@@ -16,17 +16,19 @@ def results(request):
     if q:
         request.session['search_key'] = q
 
-    # num_x_pag_session = get_num_x_pag_session(request)
-
-    products, order_by_form = order_products(request, matching)
-
-    num_x_pag, product_per_pag_form = get_num_x_pag(request)
-    products, order_by_brand_form = filter_products(request, products)
-    paginator, products_per_pag = get_paginator(request, products, num_x_pag)
+    if matching:
+        products, order_by_form = order_products(request, matching)
+        num_x_pag, product_per_pag_form = get_num_x_pag(request)
+        products, order_by_brand_form = filter_products(request, products)
+        paginator, products_per_pag = get_paginator(request, products, num_x_pag)
+        show_toolbar = True
+    else:
+        show_toolbar = False
+        paginator, products_per_pag = get_paginator(request, [], 1)
 
     product_row = get_product_row(products_per_pag)
 
     search.store(request, q, matching)
-    print("s",request.session['search_key'])
     page_title = 'Search Results for: ' + q
+    title_head = "Resultados"
     return render_to_response("tags/product_list.html", locals(), context_instance=RequestContext(request))

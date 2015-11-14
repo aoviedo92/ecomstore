@@ -64,3 +64,11 @@ $(function () {
 
 
 
+function ajax(url, data, func) {
+    jQuery.post(
+        url,
+        data,
+        func,
+        "json"
+    );
+}

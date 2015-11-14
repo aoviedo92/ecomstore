@@ -83,6 +83,7 @@ def show_category(request, category_slug=None, common_name=None):
     products, order_by_brand_form = filter_products(request, products)
     paginator, products_per_pag = get_paginator(request, products, num_x_pag)
     product_row = get_product_row(products_per_pag)
+    show_toolbar = True
 
     return render_to_response("tags/product_list.html", locals(), context_instance=RequestContext(request))
 
@@ -209,22 +210,6 @@ def add_review(request):
         response = json.dumps({'success': 'True', 'html': html})
     else:
         response = json.dumps({'success': 'False', 'html': ""})
-    # review_form = ProductReviewForm({"content": content})
-    # context_dict = {}
-    # if review_form.is_valid():
-    #     review = review_form.save(commit=False)
-    #     review.user = request.user
-    #     review.product = product
-    #     review.save()
-    #     errors = False
-    #     context_dict['review'] = review
-    # if not errors:
-    #     template = "catalog/product_review.html"
-    #     html = render_to_string(template, context_dict)
-    #     response = json.dumps({'success': 'True', 'html': html})
-    # else:
-    #     html = review_form.errors.as_ul()
-    #     response = json.dumps({'success': 'False', 'html': html})
     return HttpResponse(response, content_type='application/javascript; charset=utf-8')
 
 

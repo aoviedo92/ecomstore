@@ -85,11 +85,16 @@ def wish_list(request):
     user_profile = profile.get_profile(request)
     products = user_profile.wish_list.all()
     title_head = "Tu lista de deseos"
-
-    products, order_by_form = order_products(request, products)
-    num_x_pag, product_per_pag_form = get_num_x_pag(request)
-    products, order_by_brand_form = filter_products(request, products)
-    paginator, products_per_pag = get_paginator(request, products, num_x_pag)
+    if products:
+        products, order_by_form = order_products(request, products)
+        num_x_pag, product_per_pag_form = get_num_x_pag(request)
+        products, order_by_brand_form = filter_products(request, products)
+        paginator, products_per_pag = get_paginator(request, products, num_x_pag)
+        show_toolbar = True
+    else:
+        show_toolbar = False
+        paginator, products_per_pag = get_paginator(request, [], 1)
     product_row = get_product_row(products_per_pag)
+
 
     return render_to_response("tags/product_list.html", locals(), context_instance=RequestContext(request))

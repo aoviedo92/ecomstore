@@ -1,4 +1,4 @@
-/*tabla de show cart*/
+/*show cart*/
 tr td h4, td label {
     color: #7D97A3;
     line-height: 1.8em;
@@ -56,6 +56,7 @@ table#shopping_cart .right {
     padding: 10px;
 }
 
+
 /*botones de show_cart*/
 .cart_btns {
     margin: 10px;
@@ -88,6 +89,38 @@ table#shopping_cart .right {
 }
 
 /*PRODUCT*/
+
+/*sizes*/
+div#product_size .left {
+    float: left;
+}
+
+.size-label {
+    padding: 20px 5px 5px;
+}
+
+.size {
+    padding-top: 15px;
+    margin: 5px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    border: 1px solid #FFB929;
+    border-radius: 50px;
+
+    cursor: pointer;
+}
+
+.size-active {
+    border: 2px solid #BD8A1C;
+    background-color: #FFB929;
+
+}
+
+.size:hover {
+    background-color: #FFB929;
+}
+
 /*conjuntos comprados*/
 ul.bought_together_list {
     display: block;
