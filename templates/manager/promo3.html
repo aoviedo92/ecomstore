@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="{% static 'shop_template/js/jquery1.min.js' %}"></script>
+    <script src="{% static 'js/django_ajax_post.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $("#find").click(function () {
+                var url = "/manager/promo3_find_users/";
+                var find_user = $("#find_user").val();
+                var data = {find_user: find_user};
+                var func = function (response) {
+                    $("#users").prepend(response.html).slideDown();
+                };
+                ajax(url, data, func)
+            });
+            $("#random").click(function () {
+                var url = "/manager/promo3_random_users/";
+                var data = {};
+                var func = function (response) {
+                    $("#users").prepend(response.html).slideDown();
+                };
+                ajax(url, data, func)
+            })
+        })
+    </script>
+</head>
+<body>
+<form action="." method="post">
+    {% csrf_token %}
+    <input type="text" name="find_user" placeholder="buscar usuarios" id="find_user"/>
+    <input type="text" name="discount" placeholder="descuento en %" id="discount"/>
+    <p id="find">buscar</p>
+    <p id="random">azar</p>
+
+    <div id="users"></div>
+
+
+    <input type="submit"/>
+</form>
+</body>
+</html>

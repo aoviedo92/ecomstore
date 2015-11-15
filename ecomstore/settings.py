@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'search',
     'stats',
     'tagging',
+    'manager',
 )
 
 MIDDLEWARE_CLASSES = (

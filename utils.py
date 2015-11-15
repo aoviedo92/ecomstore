@@ -1,5 +1,5 @@
 # coding=utf-8
-from random import randint
+from random import randint, random
 from catalog.models import Product, Promo2
 from ecomstore import settings
 # import stats.stats
@@ -72,3 +72,10 @@ def promo2():
     product = promo.product
     print('promo',category,product)
     return category, product
+
+def generate_random_id(id_length=6):
+    _id = ''
+    characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()'
+    for y in range(id_length):
+        _id += characters[randint(0, len(characters) - 1)]
+    return _id

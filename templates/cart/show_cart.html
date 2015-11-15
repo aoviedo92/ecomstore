@@ -55,6 +55,7 @@
                 });
             }
             tooltip('.tooltip-discount', null);
+            tooltip('.tooltip-tax', null);
 
             $("#discount_code").keypress(function (event) {
                 var code = $(this).val();
@@ -63,30 +64,35 @@
                     var data = {code: code};
                     var func = function (response) {
                         var css_class;
+                        var cart_discount = $('#cart-discount');
+                        var cart_tax = $('#cart-tax');
                         if (response.success == "True") {
                             css_class = 'code-success'
                         } else {
                             css_class = 'code-error'
                         }
                         $('#cart-subtotal').text(response.cart_subtotal);
-                        $('#cart-discount').text(response.discount);
-                        $('#cart-tax').text(response.shipping_tax);
+                        cart_discount.text(response.discount);
+                        cart_tax.text(response.shipping_tax);
 
                         $('#cart-total').text(response.total);
                         $("#discount_code").removeClass().addClass(css_class);
                         if (response.shipping_tax == "0"){
-                            $('#cart-tax').removeClass().addClass('tax-no');
-                            tooltip('.tooltip-discount', null)
+                            cart_tax.removeClass().addClass('tax-no');
+                            tooltip('.tooltip-tax', null)
                         }
-                        else
-                            $('#cart-tax').removeClass().addClass('tax-yes');
+                        else{
+                            cart_tax.removeClass().addClass('tax-yes');
+                            $('.tooltip-tax').tooltipster('hide');
+                        }
 
                         if(response.promotions){
-                            $('#cart-discount').removeClass().addClass('tooltip-discount discount-yes');
+                            cart_discount.removeClass().addClass('tooltip-discount discount-yes');
                             tooltip('.tooltip-discount', response.promotions)
                         }
                         else{
-                            $('#cart-discount').removeClass().addClass('cart');
+                            cart_discount.removeClass().addClass('cart');
+                            $('.tooltip-discount').tooltipster('hide');
                         }
                     };
                     ajax(url, data, func);
@@ -142,7 +148,7 @@
                 <p class="cart">Impuesto de envío</p>
             </th>
             <th class="right">
-                <p id="cart-tax" class="cart tax {% if shipping_tax == 0 %}tooltip-discount{% endif %}"
+                <p id="cart-tax" class="cart tax {% if shipping_tax == 0 %}tooltip-tax{% endif %}"
                    title="{{ shipping_tax_promotions }}">{% if shipping_tax %}
                     +{% endif %}{{ shipping_tax|currency:request }}</p>
             </th>
