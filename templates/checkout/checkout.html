@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
 {% endblock %}
 {% block content %}
+{% include 'tags/include_code_discount.html' %}
     {% if not request.user.is_authenticated %}
         <div class="fr">
             <a href="{% url "login" %}?next={{ request.path }}">
