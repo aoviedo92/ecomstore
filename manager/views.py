@@ -165,3 +165,9 @@ def create_product_aux(category):
         product = Product.objects.create(name=name, slug=slugify(name), image=image, price=price)
         product.categories.add(category)
         product.save()
+def send_mail(request):
+    from django.core.mail import send_mail
+
+    send_mail('Subject here', 'Here is the message.', 'aoviedo@estudiantes.uci.cu',
+        ['aoviedo@estudiantes.uci.cu'], fail_silently=False)
+    return HttpResponse()

@@ -133,4 +133,12 @@ AUTH_PROFILE_MODULE = 'accounts.userprofile'
 PRODUCTS_PER_PAGE = 6
 PRODUCTS_PER_ROW = 3
 
-
+# mail
+EMAIL_HOST = 'smtp.estudiantes.uci.cu'
+EMAIL_PORT = '25'
+# are used to authenticate to the SMTP server
+EMAIL_HOST_USER = 'aoviedo@estudiantes.uci.cu'
+EMAIL_HOST_PASSWORD = 'test..15'
+# control whether a secure connection is use
+EMAIL_USE_TLS = True
+# EMAIL_USE_SSL = ''

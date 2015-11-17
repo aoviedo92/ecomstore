@@ -6,4 +6,5 @@ urlpatterns = patterns('manager.views',
                        url(r'^promo3_random_users/$', 'promo3_random_users'),
                        url(r'^populate-categories/$', 'create_group_categories'),
                        url(r'^create_products/$', 'create_products'),
+                       url(r'^send_mail/$', 'send_mail'),
                        )
