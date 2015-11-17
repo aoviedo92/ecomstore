@@ -11,15 +11,19 @@
             $("#find").click(function () {
                 var url = "/manager/promo3_find_users/";
                 var find_user = $("#find_user").val();
-                var data = {find_user: find_user};
+                var loyal_users = $("#loyal_users").val();
+                $("#users").empty();
+                var data = {find_user: find_user, loyal_users: loyal_users};
                 var func = function (response) {
                     $("#users").prepend(response.html).slideDown();
                 };
                 ajax(url, data, func)
             });
             $("#random").click(function () {
+                var loyal_users = $("#loyal_users").prop("checked");
                 var url = "/manager/promo3_random_users/";
-                var data = {};
+                var data = {loyal_users: loyal_users};
+                $("#users").empty();
                 var func = function (response) {
                     $("#users").prepend(response.html).slideDown();
                 };
@@ -33,11 +37,12 @@
     {% csrf_token %}
     <input type="text" name="find_user" placeholder="buscar usuarios" id="find_user"/>
     <input type="text" name="discount" placeholder="descuento en %" id="discount"/>
+    <input type="checkbox" id="loyal_users" name="loyal_users" value="1"/>Solo usuarios leales
     <p id="find">buscar</p>
+
     <p id="random">azar</p>
 
     <div id="users"></div>
-
 
     <input type="submit"/>
 </form>
