@@ -1,12 +1,6 @@
 <form action="{% url 'currency' %}" id="id_currency_form" method="post">
-{#<form action="." id="id_currency_form" method="post">#}
     {% csrf_token %}
     <div class="box1">
-{#        <select tabindex="4" class="dropdown" id="id_currency_select">#}
-{#            <option value="" class="label" value="">Moneda :</option>#}
-{#            <option value="cuc">CUC</option>#}
-{#            <option value="cup">CUP</option>#}
-{#        </select>#}
         {{ form }}
         <input type="hidden" value="{{ request_path }}" name="current_url"/>
     </div>
