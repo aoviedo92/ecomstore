@@ -67,19 +67,8 @@
                 {% endif %}
                 {#                </select>#}
             </div>
+            {#CURRENCY#}
             {% currency_tag request %}
-            {#        CURRENCY#}
-            {#            <form action="" id="id_currency_form" method="post">#}
-            {#                <div class="box1">#}
-            {#                    <select tabindex="4" class="dropdown" id="id_currency_select">#}
-            {#                        <option value="" class="label" value="">Moneda :</option>#}
-            {#                        <option value="cuc">CUC</option>#}
-            {#                        <option value="cup">CUP</option>#}
-            {#                    </select>#}
-            {#                    <input type="hidden" value="{{ request.path }}"/>#}
-            {#                </div>#}
-            {#                <div class="clear"></div>#}
-            {#            </form>#}
             <script>
                 $(document).ready(function () {
                     $("#id_currency_select").change(function () {
@@ -89,6 +78,7 @@
                 })
             </script>
         </div>
+
         <div class="cssmenu">
             <ul>
                 <li><a href="checkout.html">Checkout</a></li>
@@ -157,7 +147,8 @@
             <div class="section group example">
                 <div class="col_1_of_2 span_1_of_2">
                     <ul class="f-list">
-                        <li><img src="{% static 'shop_template/images/2.png' %}"><span class="f-text" style="font-size: 20px">Envío libre para compras de más de 75cuc</span>
+                        <li><img src="{% static 'shop_template/images/2.png' %}"><span class="f-text"
+                                                                                       style="font-size: 20px">Envío libre para compras de más de 75cuc</span>
 
                             <div class="clear"></div>
                         </li>
@@ -323,7 +314,7 @@
 
                                 <p>Teléfono:(00) 835 8301</p>
 
-{#                                <p>Fax: (000) 000 00 00 0</p>#}
+                                {#                                <p>Fax: (000) 000 00 00 0</p>#}
 
                                 <p>Email: <span>mail@leoshop.com</span></p>
 
