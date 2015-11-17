@@ -73,7 +73,6 @@
                 $(document).ready(function () {
                     $("#id_currency_select").change(function () {
                         $("#id_currency_form").submit()
-                        {#                        alert($("#id_currency_select").val())#}
                     })
                 })
             </script>
@@ -81,13 +80,12 @@
 
         <div class="cssmenu">
             <ul>
-                <li><a href="checkout.html">Checkout</a></li>
+                <li><a href="{% url 'checkout' %}">Checkout</a></li>
                 |
                 {% if user.is_authenticated %}
                     <li class="active"><a href="{% url 'my_account' %}">Mi cuenta</a></li>|
                     <li><a href="{% url 'wishlist' %}">Lista de deseos</a></li>|
                     <li><a href="{% url "logout" %}">Cerrar sesión</a></li>
-                    {#                    <li><a href="{% url "django.contrib.auth.views.logout" %}">Cerrar sesión</a></li>#}
                 {% else %}
 
                     <li><a href="{% url "django.contrib.auth.views.login" %}">Inicia sesión</a></li>|

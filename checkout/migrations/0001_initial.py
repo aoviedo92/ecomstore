@@ -19,16 +19,15 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('email', models.EmailField(max_length=50)),
                 ('phone', models.CharField(max_length=20)),
-                ('shipping_name', models.CharField(max_length=50)),
+                ('shipping_name', models.CharField(max_length=50, verbose_name=b'Envio a nombre de')),
                 ('shipping_address_1', models.CharField(max_length=50)),
                 ('shipping_address_2', models.CharField(max_length=50, blank=True)),
-                ('shipping_city', models.CharField(default=0, max_length=50, choices=[(0, b'Seleccione municipio'), (1, b'playa'), (2, b'cerro'), (3, b'lisa'), (4, b'boyeros'), (5, b'plaza'), (6, b'arroyo naranjo'), (7, b'cotorro'), (8, b'marianao'), (9, b'regla'), (10, b'centro habana'), (11, b'habana vieja'), (12, b'habana del este'), (13, b'10 de octubre'), (14, b'guanabacoa'), (15, b'san miguel')])),
+                ('shipping_city', models.IntegerField(default=0, max_length=50, choices=[(0, b'Seleccione municipio'), (1, b'playa'), (2, b'cerro'), (3, b'lisa'), (4, b'boyeros'), (5, b'plaza'), (6, b'arroyo naranjo'), (7, b'cotorro'), (8, b'marianao'), (9, b'regla'), (10, b'centro habana'), (11, b'habana vieja'), (12, b'habana del este'), (13, b'10 de octubre'), (14, b'guanabacoa'), (15, b'san miguel')])),
                 ('date', models.DateTimeField(auto_now_add=True)),
                 ('status', models.IntegerField(default=1, choices=[(1, b'Submitted'), (2, b'Processed'), (3, b'Shipped'), (4, b'Cancelled')])),
                 ('ip_address', models.IPAddressField()),
                 ('last_updated', models.DateTimeField(auto_now=True)),
                 ('transaction_id', models.CharField(max_length=20)),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL, null=True)),
             ],
             options={
                 'abstract': False,
@@ -47,5 +46,29 @@ class Migration(migrations.Migration):
             options={
             },
             bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='OrderTotal',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('shipping_tax', models.DecimalField(default=3.0, max_digits=9, decimal_places=2)),
+                ('discount', models.DecimalField(default=0.0, max_digits=9, decimal_places=2)),
+                ('cart_subtotal', models.DecimalField(max_digits=9, decimal_places=2)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.AddField(
+            model_name='order',
+            name='order_total',
+            field=models.OneToOneField(to='checkout.OrderTotal'),
+            preserve_default=True,
+        ),
+        migrations.AddField(
+            model_name='order',
+            name='user',
+            field=models.ForeignKey(to=settings.AUTH_USER_MODEL, null=True),
+            preserve_default=True,
         ),
     ]

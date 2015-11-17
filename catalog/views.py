@@ -1,5 +1,6 @@
 # coding=utf-8
 from profile import Profile
+from random import shuffle
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.core import urlresolvers
@@ -37,9 +38,12 @@ def index(request):
             recommendations_for_user = recommendations_for_user_login(request)
             if len(recommendations_for_user.values()[0]) < 3:
                 recommendations_for_user_active = False
+    print(1)
     recommended_1, recommended_2, recommended_3 = random_recommendations()
     # --> {u'Deseados': [<Product: prod14>, <Product: pro11>, <Product: prod12>]}
     # buscar hasta q encontremos productos que hayan sido comprado juntos
+    promotion = utils.promotions()
+    print(2)
     random_list = []
     while True:
         all_products = Product.active.all()
@@ -54,7 +58,12 @@ def index(request):
                 continue
         else:
             continue
-    promotion = utils.promotions()
+    print(3)
+    featured_list = Product.active.filter(is_featured=True)
+    featured_list = list(featured_list)
+    shuffle(featured_list)
+    featured1 = featured_list[:3]
+    featured2 = featured_list[3:6]
     return render_to_response("home.html", locals(), context_instance=RequestContext(request))
 
 
@@ -84,7 +93,6 @@ def show_category(request, category_slug=None, common_name=None):
     paginator, products_per_pag = get_paginator(request, products, num_x_pag)
     product_row = get_product_row(products_per_pag)
     show_toolbar = True
-
     return render_to_response("tags/product_list.html", locals(), context_instance=RequestContext(request))
 
 
@@ -126,7 +134,6 @@ def show_product(request, product_slug):
     new product view, with POST vs GET detection
     """
     p = get_object_or_404(Product, slug=product_slug)
-    # categories = p.categories.all()
     page_title = p.name
     meta_keywords = p.meta_keywords
     meta_description = p.meta_description

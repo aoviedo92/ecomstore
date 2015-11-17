@@ -1,5 +1,4 @@
 import random
-# from cart.models import CartItem
 import decimal
 from models import CartItem
 from catalog.models import Product
@@ -63,10 +62,12 @@ def add_to_cart(request, product=None):
         ci.cart_id = _cart_id(request)
         ci.save()
 
+
 def add_to_cart_list_products(request, product_slug_list):
     for product_slug in product_slug_list:
         product = get_object_or_404(Product, slug=product_slug)
         add_to_cart(request, product)
+
 
 def cart_distinct_item_count(request):
     """

@@ -62,7 +62,7 @@ class CheckoutForm(forms.ModelForm):
 
     class Meta:
         model = Order
-        exclude = ('status', 'ip_address', 'user', 'transaction_id',)
+        exclude = ('status', 'ip_address', 'user', 'transaction_id', 'order_total')
 
     credit_card_number = forms.CharField()
     credit_card_type = forms.CharField(widget=forms.Select(choices=CARD_TYPES))

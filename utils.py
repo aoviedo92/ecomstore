@@ -3,6 +3,7 @@ from random import randint, random
 from catalog.models import Product, Promo2
 from ecomstore import settings
 # import stats.stats
+from manager.models import Promo3
 
 
 def get_product_row(products_per_pag):
@@ -55,23 +56,29 @@ def products_bought_together(product):
 
 def promotions():
     # calculos para la promo2
+    promo2_label = []
     category, product = promo2()
-    product_link = "<a href='%s'>%s</a>" % (product.get_absolute_url(), product)
-    category_link = "<a href='%s'>%s</a>" % (category.get_absolute_url(), category)
-
+    if category and product:
+        product_link = u"<a href='%s'>%s</a>" % (product.get_absolute_url(), product)
+        category_link = u"<a href='%s'>%s</a>" % (category.get_absolute_url(), category)
+        promo2_label = [u"Llévate gratis este producto: %s, si compras dos productos de esta categoría: %s" % (
+                  product_link, category_link)]
     labels = [u"Si compras +5 artículos obtienes un descuento del 10%",
-              u"Llévate gratis este producto: %s, si compras dos productos de esta categoría: %s" % (
-              product_link, category_link)]
+              ]
+    if promo2_label:
+        labels += promo2_label
     pos = 1
     return labels[pos]
 
 
 def promo2():
-    promo = Promo2.objects.first()
-    category = promo.category
-    product = promo.product
-    print('promo',category,product)
-    return category, product
+    try:
+        promo = Promo2.objects.first()
+        category = promo.category
+        product = promo.product
+        return category, product
+    except:
+        return None, None
 
 def generate_random_id(id_length=6):
     _id = ''
@@ -79,3 +86,13 @@ def generate_random_id(id_length=6):
     for y in range(id_length):
         _id += characters[randint(0, len(characters) - 1)]
     return _id
+
+def get_discount_code(request):
+    try:
+        promo = Promo3.objects.get(user=request.user)
+        code = promo.code
+        discount = promo.discount
+    except Promo3.DoesNotExist:
+        code = False
+        discount = False
+    return code, discount

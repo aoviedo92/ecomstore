@@ -56,7 +56,6 @@ table#shopping_cart .right {
     padding: 10px;
 }
 
-
 /*botones de show_cart*/
 .cart_btns {
     margin: 10px;
@@ -251,4 +250,21 @@ p.wishlist {
 p.wishlist:hover {
     text-decoration: underline;
     cursor: pointer;
+}
+
+/*code discount*/
+#code {
+    float: right;
+    padding: 10px;
+    background-color: #FFB929;
+    color: #bd8a1c;
+}
+
+#code span#label {
+    font-size: 12px;
+}
+
+#code span#label-code {
+    font-size: 24px;
+    color: #6b4c10;
 }

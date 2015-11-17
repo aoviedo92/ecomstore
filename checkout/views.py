@@ -1,3 +1,4 @@
+from decimal import Decimal
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.core import urlresolvers
@@ -5,8 +6,8 @@ from django.http import HttpResponseRedirect
 from accounts import profile
 from accounts.models import UserProfile
 from forms import CheckoutForm
-from models import Order, OrderItem
-# from checkout import checkout
+from manager.models import Promo3
+from models import Order, OrderItem, OrderTotal
 import checkout
 from cart import cart
 
@@ -15,6 +16,7 @@ def show_checkout(request):
     if cart.is_empty(request):
         cart_url = urlresolvers.reverse('show_cart')
         return HttpResponseRedirect(cart_url)
+
     if request.method == 'POST':
         post_data = request.POST.copy()
         form = CheckoutForm(post_data)
@@ -36,6 +38,8 @@ def show_checkout(request):
         else:
             form = CheckoutForm(label_suffix="")
     page_title = 'Checkout'
+    small_text = u"Total en el carrito"
+    big_text = OrderTotal.objects.get(id=request.session['ordertotalid']).total
     return render_to_response('checkout/checkout.html', locals(), context_instance=RequestContext(request))
 
 

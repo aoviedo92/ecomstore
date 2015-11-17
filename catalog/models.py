@@ -80,7 +80,7 @@ class Product(models.Model):
 
     brand = models.CharField(max_length=50, default="brand")
     sku = models.CharField(max_length=50, default="sku")
-    price = models.DecimalField(max_digits=9, decimal_places=2, default=200)
+    price = models.DecimalField(max_digits=9, decimal_places=2, default=15)
     old_price = models.DecimalField(max_digits=9, decimal_places=2, blank=True, default=0.00)
     image = models.ImageField(upload_to='images/products/main')
     second_images = models.ManyToManyField(Images, null=True, blank=True)
@@ -182,6 +182,7 @@ class Product(models.Model):
                     if self_categories_count < categories.count() / 2:
                         continue
                 products_cross_tags.append(product)
+        # products_cross_tags = list(set(products_cross_tags))
         return products_cross_tags
 
     def discounts(self):
@@ -271,6 +272,6 @@ class Promo2(models.Model):
     def save(self, *args, **kwargs):
         from stats import stats
 
-        category = stats.category_less_sold()
-        self.category = category
+        if not self.category:
+            self.category = stats.category_less_sold()
         super(Promo2, self).save(*args, **kwargs)

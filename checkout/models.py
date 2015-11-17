@@ -11,7 +11,8 @@ class BaseOrderInfo(models.Model):
     class Meta:
         abstract = True
 
-    CITIES = [(0, "Seleccione municipio"), (1, "playa"), (2, "cerro"), (3, "lisa"), (4, "boyeros"), (5, "plaza"), (6, "arroyo naranjo"),
+    CITIES = [(0, "Seleccione municipio"), (1, "playa"), (2, "cerro"), (3, "lisa"), (4, "boyeros"), (5, "plaza"),
+              (6, "arroyo naranjo"),
               (7, "cotorro"), (8, "marianao"), (9, "regla"), (10, "centro habana"), (11, "habana vieja"),
               (12, "habana del este"), (13, "10 de octubre"), (14, "guanabacoa"), (15, "san miguel")]
 
@@ -24,18 +25,20 @@ class BaseOrderInfo(models.Model):
     shipping_address_1 = models.CharField(max_length=50)
     shipping_address_2 = models.CharField(max_length=50, blank=True)
     shipping_city = models.IntegerField(choices=CITIES, max_length=50, default=0)
-    # shipping_state = models.CharField(max_length=2)
-    # shipping_country = models.CharField(max_length=50)
-    # shipping_zip = models.CharField(max_length=10)
-    # billing information
-    # billing_name = models.CharField(max_length=50)
-    # billing_address_1 = models.CharField(max_length=50)
-    # billing_address_2 = models.CharField(max_length=50, blank=True)
-    # billing_city = models.CharField(max_length=50)
-    # billing_state = models.CharField(max_length=2)
-    # billing_country = models.CharField(max_length=50)
-    # billing_zip = models.CharField(max_length=10)
 
+
+class OrderTotal(models.Model):
+    shipping_tax = models.DecimalField(default=3.00, decimal_places=2, max_digits=9)
+    discount = models.DecimalField(default=0.00, decimal_places=2, max_digits=9)
+    cart_subtotal = models.DecimalField(decimal_places=2, max_digits=9)
+    purchased = models.BooleanField(default=False)
+
+    @property
+    def total(self):
+        return self.cart_subtotal - self.discount + self.shipping_tax
+
+    def __unicode__(self):
+        return '%d -- %.2f' % (self.id, self.total)
 
 class Order(BaseOrderInfo):
     # each individual status
@@ -55,17 +58,20 @@ class Order(BaseOrderInfo):
     last_updated = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, null=True)
     transaction_id = models.CharField(max_length=20)
+    order_total = models.OneToOneField(OrderTotal)
+    # shipping_tax = models.DecimalField(default=3.00)
+    # discount = models.DecimalField(default=0.00)
 
     def __unicode__(self):
-        return 'Order #' + str(self.id)
+        return 'Order # %d -- %.2f' % (self.id, self.order_total.total)
 
     @property
     def total(self):
-        total = decimal.Decimal('0.00')
-        order_items = OrderItem.objects.filter(order=self)
-        for item in order_items:
-            total += item.total
-        return total
+        # total = decimal.Decimal('0.00')
+        # order_items = OrderItem.objects.filter(order=self)
+        # for item in order_items:
+        #     total += item.total
+        return self.order_total.total
 
     @models.permalink
     def get_absolute_url(self):

@@ -1,6 +1,8 @@
+from decimal import Decimal
 from cart import cart
 from forms import CheckoutForm
-from models import Order, OrderItem
+from manager.models import Promo3
+from models import Order, OrderItem, OrderTotal
 
 
 def do_auth_capture(amount="0.00", card_num=None, exp_date=None, card_cvv=None):
@@ -24,7 +26,13 @@ def process(request):
     exp_year = postdata.get('credit_card_expire_year', '')
     exp_date = exp_month + exp_year
     cvv = postdata.get('credit_card_cvv', '')
-    amount = cart.cart_subtotal(request)
+    # amount = cart.cart_subtotal(request)
+    # order_total_id = 1
+    order_total_id = request.session['ordertotalid']
+    order_total = OrderTotal.objects.get(id=order_total_id)
+    amount = order_total.total
+    del request.session['ordertotalid']
+
     results = {}
     response = do_auth_capture(amount=amount,
                                card_num=card_num,
@@ -32,7 +40,8 @@ def process(request):
                                card_cvv=cvv)
     if response[0] == APPROVED:
         transaction_id = response[6]
-        order = create_order(request, transaction_id)
+        order = create_order(request, order_total, transaction_id)
+        # order = create_order(request, transaction_id)
         results = {'order_number': order.id, 'message': ''}
     if response[0] == DECLINED:
         results = {'order_number': 0, 'message': 'There is a problem with your credit card.'}
@@ -41,7 +50,7 @@ def process(request):
     return results
 
 
-def create_order(request, transaction_id):
+def create_order(request, order_total, transaction_id):
     order = Order()
     checkout_form = CheckoutForm(request.POST, instance=order)
     order = checkout_form.save(commit=False)
@@ -49,6 +58,9 @@ def create_order(request, transaction_id):
     order.ip_address = request.META.get('REMOTE_ADDR')
     order.status = Order.SUBMITTED
     order.user = None
+    order.order_total = order_total
+    order_total.purchased = True
+    order_total.save()
     if request.user.is_authenticated():
         order.user = request.user
         from accounts import profile
@@ -61,6 +73,12 @@ def create_order(request, transaction_id):
     order.save()
     # if the order save succeeded
     if order.pk:
+        try:# eliminar el codigo de promoion para el usuario
+            promo_id = request.session['promo3_id']
+            del request.session['promo3_id']
+            Promo3.objects.get(id=promo_id).delete()
+        except KeyError:
+            pass
         cart_items = cart.get_cart_items(request)
         for ci in cart_items:
             # create order item for each cart item

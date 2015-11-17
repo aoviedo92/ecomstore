@@ -2,11 +2,13 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+from django.conf import settings
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
@@ -71,8 +73,6 @@ class Migration(migrations.Migration):
                 ('is_featured', models.BooleanField(default=False)),
                 ('quantity', models.IntegerField(default=30)),
                 ('description', models.TextField(default=b'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy\n                            nibh\n                            euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim\n                            veniam,\n                            quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo\n                            consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie\n                            consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto\n                            odio\n                            dignissim qui blandit')),
-                ('details', models.TextField(default=b'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy\n                            nibh\n                            euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim\n                            veniam,\n                            quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo\n                            consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie\n                            consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto\n                            odio\n                            dignissim qui blandit', null=True, blank=True)),
-                ('more_info', models.TextField(default=b'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy\n                            nibh\n                            euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim\n                            veniam,\n                            quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo\n                            consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie\n                            consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto\n                            odio\n                            dignissim qui blandit', null=True, blank=True)),
                 ('meta_keywords', models.CharField(default=b'meta', help_text=b'Comma-delimited set of SEO keywords for meta tag', max_length=255)),
                 ('meta_description', models.CharField(default=b'meta', help_text=b'Content for description meta tag', max_length=255)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
@@ -86,6 +86,46 @@ class Migration(migrations.Migration):
             },
             bases=(models.Model,),
         ),
+        migrations.CreateModel(
+            name='ProductRating',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('date', models.DateTimeField(auto_now_add=True)),
+                ('rating', models.IntegerField(default=3)),
+                ('product', models.ForeignKey(to='catalog.Product')),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='ProductReview',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('date', models.DateTimeField(auto_now_add=True)),
+                ('is_approved', models.BooleanField(default=True)),
+                ('content', models.TextField(blank=True)),
+                ('product', models.ForeignKey(to='catalog.Product')),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+            ],
+            options={
+                'abstract': False,
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+            name='Promo2',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('category', models.ForeignKey(blank=True, to='catalog.Category', null=True)),
+                ('product', models.ForeignKey(to='catalog.Product')),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
         migrations.AddField(
             model_name='category',
             name='common',
@@ -95,7 +135,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='category',
             name='group',
-            field=models.ForeignKey(to='catalog.CategoryGroup', null=True),
+            field=models.ForeignKey(blank=True, to='catalog.CategoryGroup', null=True),
             preserve_default=True,
         ),
     ]

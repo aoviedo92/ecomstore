@@ -7,13 +7,13 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('catalog', '0005_auto_20151031_1814'),
+        ('catalog', '0001_initial'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='category',
-            name='group',
-            field=models.ForeignKey(blank=True, to='catalog.CategoryGroup', null=True),
+            model_name='product',
+            name='price',
+            field=models.DecimalField(default=15, max_digits=9, decimal_places=2),
         ),
     ]

@@ -11,7 +11,7 @@ class UserProfile(BaseOrderInfo):
     # birth_day = models.DateField(null=True)
     wish_list = models.ManyToManyField(Product, blank=True)
     loyal_user = models.BooleanField(blank=True, default=False)
-    promo3 = models.OneToOneField(Promo3, null=True, blank=True)
+    # promo3 = models.OneToOneField(Promo3, null=True, blank=True)
 
     def __unicode__(self):
         return 'User Profile for: ' + self.user.username

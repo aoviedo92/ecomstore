@@ -4,15 +4,14 @@ from catalog.product_list import order_products, get_num_x_pag, get_paginator, f
 from models import UserProfile
 import profile
 from django.contrib.auth.decorators import login_required
-# from django.contrib.auth.forms import UserCreationForm
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from django.core import urlresolvers
 from django.http import HttpResponseRedirect
 from forms import UserProfileForm, UserCreationForm
 from checkout.models import Order, OrderItem
-from utils import get_product_row
-
+from utils import get_product_row, get_discount_code
+from manager.models import Promo3
 
 def register(request):
     if request.method == 'POST':
@@ -40,6 +39,9 @@ def my_account(request):
     page_title = 'My Account'
     orders = Order.objects.filter(user=request.user)
     name = request.user.username
+    code, discount_ = get_discount_code(request)
+    small_text = u"Haz recibido un código de descuento! úsalo en el carrito de la compra. %s" % discount_
+    big_text = code
     return render_to_response("registration/my_account.html", locals(), context_instance=RequestContext(request))
 
 

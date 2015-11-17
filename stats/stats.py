@@ -60,7 +60,6 @@ def recommended_from_search(request=None):
                 break
             products = term.found_products.all().filter(is_active=True)
             recommended = recommended.union(products)
-    # print('rec',recommended)
     return list(recommended)[:3]
 
 
@@ -206,10 +205,12 @@ class Get3Product:
         }
 
     def __get_3_top_sellers(self):
+        print('top-sellers')
         products = self.__products.annotate(cont=Count('orderitem')).order_by('-cont')
         return products[:3] if len(products) >= 3 else None
 
     def __get_3_great_sales(self):
+        print('great-sales')
         sales = [product for product in self.__products if product.great_sales()]
         try:
             rand_list = take_three_pos(len(sales) - 1)
@@ -218,6 +219,7 @@ class Get3Product:
             return []
 
     def __get_3_voted(self):
+        print('voted')
         # tomamos para cada producto, su rating promedio, filtramos aquellos cuyo prom sea mas q 3, lo ordenamos
         voted = self.__products.annotate(avg=Avg('productrating__rating')).filter(avg__gt=3).order_by('-avg')
         # reordenamos segun el criterio de q los q tienen mayor cantidad de votos deben ir primero, aunq esto implique
@@ -240,7 +242,7 @@ class Get3Product:
             return []
 
     def __get_3_new(self):
-        # print('stats.py - get_3_new')
+        print('stats.py - get_3_new')
         new = [product for product in self.__products if product.new_product()]
         if len(new) >= 3:
             rand_list = take_three_pos(len(new) - 1)
@@ -256,7 +258,7 @@ class Get3Product:
         return None
 
     def __get_3_polemical(self):
-        # print('stats.py - get_3_polemical')
+        print('stats.py - get_3_polemical')
         polemics = self.__products.annotate(num_rev=Count('productreview')).filter(num_rev__gt=2).order_by('-num_rev')
         return polemics[:3] if len(polemics) >= 3 else None
 
@@ -268,7 +270,7 @@ class Get3Product:
 
     def recommended(self):
         pos = take_three_pos(len(self.__random_labels) - 1)
-        # pos = [8,7,0]
+        # pos = [0,1,2]
         print('stats.py - pos-', pos)
         recommended_1 = {self.__random_labels[pos[0]]: self.__function_dict[self.__random_labels[pos[0]]]()}
         recommended_2 = {self.__random_labels[pos[1]]: self.__function_dict[self.__random_labels[pos[1]]]()}
