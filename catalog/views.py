@@ -19,6 +19,7 @@ from catalog.models import Category, Product, CategoryGroup, CommonCategory, Pro
 from django.template import RequestContext
 from catalog.product_list import *
 from ecomstore import settings
+from manager.models import Promo4
 from stats import stats
 from forms import Currency
 import json
@@ -299,3 +300,8 @@ def add_tag(request):
     else:
         response = json.dumps({'success': 'False'})
     return HttpResponse(response, content_type='application/javascript; charset=utf8')
+
+@login_required
+def rifas(request):
+    promo4 = Promo4.objects.all()
+    return render_to_response("catalog/rifas.html", locals(), context_instance=RequestContext(request))

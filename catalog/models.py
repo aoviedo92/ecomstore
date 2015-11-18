@@ -226,7 +226,6 @@ try:
 except AlreadyRegistered:
     pass
 
-
 class ActiveProductReviewManager(models.Manager):
     # def all(self):
     #     return super(ActiveProductReviewManager, self).all().filter(is_approved=True)
@@ -260,18 +259,4 @@ class ProductRating(Review):
         return "%s - %s " % (str(self.product), str(self.rating))
 
 
-class Promo2(models.Model):
-    """
-    Si compras 2+ de esta <categ> llevate gratis este <prod>
-    <categ> es la categ con menos venta
-    <prod> es un prod definido por el admin
-    """
-    product = models.ForeignKey(Product)
-    category = models.ForeignKey(Category, blank=True, null=True)
 
-    def save(self, *args, **kwargs):
-        from stats import stats
-
-        if not self.category:
-            self.category = stats.category_less_sold()
-        super(Promo2, self).save(*args, **kwargs)

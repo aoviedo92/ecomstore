@@ -29,74 +29,78 @@
     {% if show_toolbar %}
         <div class="mens-toolbar">
 
-        <div class="sort">
-            <div class="sort-by">
-                <form action="." method="POST">
-                    {% csrf_token %}
-                    {{ order_by_form }}
-                    <input type="image" value="up" name="submit_up" src="{% static 'shop_template/images/arrow2.gif' %}"/>
-                    <input type="image" value="down" name="submit_down" src="{% static 'shop_template/images/arrow2-down.png' %}"/>
-                </form>
+            <div class="sort">
+                <div class="sort-by">
+                    <form action="." method="POST">
+                        {% csrf_token %}
+                        {{ order_by_form }}
+                        <input type="image" value="up" name="submit_up"
+                               src="{% static 'shop_template/images/arrow2.gif' %}"/>
+                        <input type="image" value="down" name="submit_down"
+                               src="{% static 'shop_template/images/arrow2-down.png' %}"/>
+                    </form>
+                </div>
             </div>
-        </div>
 
-        <div class="sort">
-            <div class="sort-by">
-                <form action="." method="get" id="id_order_by_brand_form">
-                    {% csrf_token %}
-                    {{ order_by_brand_form }}
-                </form>
+            <div class="sort">
+                <div class="sort-by">
+                    <form action="." method="get" id="id_order_by_brand_form">
+                        {% csrf_token %}
+                        {{ order_by_brand_form }}
+                    </form>
+                </div>
             </div>
-        </div>
 
-        <div class="sort price-filter">
-            <div class="sort-by">
-                <form action="." method="post">
-                    {% csrf_token %}
-                    <input type="text" placeholder="min" name="min_price" id="min_price"/>
-                    <input type="text" placeholder="max" name="max_price" id="max_price"/>
-                    <input type="submit" value="filtrar"/>
-                </form>
+            <div class="sort price-filter">
+                <div class="sort-by">
+                    <form action="." method="post">
+                        {% csrf_token %}
+                        <input type="text" placeholder="min" name="min_price" id="min_price"/>
+                        <input type="text" placeholder="max" name="max_price" id="max_price"/>
+                        <input type="submit" value="filtrar"/>
+                    </form>
+                </div>
             </div>
-        </div>
 
-        <style scoped>
-            .price-filter input{
-                width: 30%;
-                padding-left: 2px;
-            }
-            .price-filter input[type="submit"]{
-                width: 25%;
-                border: 0;
-                cursor: pointer;
-                background-color: transparent;
-                color: #777;
-            }
-            .price-filter input[type="submit"]:hover{
-                color: #333333;
-            }
+            <style scoped>
+                .price-filter input {
+                    width: 30%;
+                    padding-left: 2px;
+                }
 
-        </style>
-        <div class="pager">
-            <div class="limiter visible-desktop">
-                <form action="." method="get" id="id_product_per_pag_form">
-                    {{ product_per_pag_form }}
-                </form>
-                <script>
-                    $(document).ready(function () {
-                        $("#id_products_per_page").change(function () {
-                            $("#id_product_per_pag_form").submit()
-                        });
-                        $("#id_order_by_brand").change(function () {
-                            $("#id_order_by_brand_form").submit()
+                .price-filter input[type="submit"] {
+                    width: 25%;
+                    border: 0;
+                    cursor: pointer;
+                    background-color: transparent;
+                    color: #777;
+                }
+
+                .price-filter input[type="submit"]:hover {
+                    color: #333333;
+                }
+
+            </style>
+            <div class="pager">
+                <div class="limiter visible-desktop">
+                    <form action="." method="get" id="id_product_per_pag_form">
+                        {{ product_per_pag_form }}
+                    </form>
+                    <script>
+                        $(document).ready(function () {
+                            $("#id_products_per_page").change(function () {
+                                $("#id_product_per_pag_form").submit()
+                            });
+                            $("#id_order_by_brand").change(function () {
+                                $("#id_order_by_brand_form").submit()
+                            })
                         })
-                    })
-                </script>
+                    </script>
+                </div>
+                {% pagination_links request paginator %}
             </div>
-            {% pagination_links request paginator %}
+            <div class="clear"></div>
         </div>
-        <div class="clear"></div>
-    </div>
     {% else %}
         <p class="cart">Sin productos...</p>
     {% endif %}
@@ -109,8 +113,8 @@
             <div class="clear"></div>
         </div>
     {% endfor %}
-    {% if recommended_1 %}
-        {% for title, products in recommended_1.iteritems %}
+    {% for title, products in recommended_1.iteritems %}
+        {% if products %}
             <h2 class="head">{{ title|capfirst }}</h2>
             <div class="top-box1">
                 {% for p in products %}
@@ -118,10 +122,10 @@
                 {% endfor %}
                 <div class="clear"></div>
             </div>
-        {% endfor %}
-    {% endif %}
-    {% if recommended_2 %}
-        {% for title, products in recommended_2.iteritems %}
+        {% endif %}
+    {% endfor %}
+    {% for title, products in recommended_2.iteritems %}
+        {% if products %}
             <h2 class="head">{{ title|capfirst }}</h2>
             <div class="top-box1">
                 {% for p in products %}
@@ -129,8 +133,8 @@
                 {% endfor %}
                 <div class="clear"></div>
             </div>
-        {% endfor %}
-    {% endif %}
+        {% endif %}
+    {% endfor %}
 
     <script src="{% static 'shop_template/js/jquery.easydropdown.js' %}"></script>
 

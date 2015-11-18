@@ -1,9 +1,8 @@
 # coding=utf-8
 from random import randint, random
-from catalog.models import Product, Promo2
+from catalog.models import Product
 from ecomstore import settings
-# import stats.stats
-from manager.models import Promo3
+from manager.models import Promo3, Promo2
 
 
 def get_product_row(products_per_pag):
@@ -62,7 +61,7 @@ def promotions():
         product_link = u"<a href='%s'>%s</a>" % (product.get_absolute_url(), product)
         category_link = u"<a href='%s'>%s</a>" % (category.get_absolute_url(), category)
         promo2_label = [u"Llévate gratis este producto: %s, si compras dos productos de esta categoría: %s" % (
-                  product_link, category_link)]
+            product_link, category_link)]
     labels = [u"Si compras +5 artículos obtienes un descuento del 10%",
               ]
     if promo2_label:
@@ -74,11 +73,12 @@ def promotions():
 def promo2():
     try:
         promo = Promo2.objects.first()
-        category = promo.category
-        product = promo.product
+        category = promo.category  # lanza AttributeError si no existe promo
+        product = promo.product  # lanza AttributeError si no existe promo
         return category, product
-    except:
+    except AttributeError:
         return None, None
+
 
 def generate_random_id(id_length=6):
     _id = ''
@@ -86,6 +86,7 @@ def generate_random_id(id_length=6):
     for y in range(id_length):
         _id += characters[randint(0, len(characters) - 1)]
     return _id
+
 
 def get_discount_code(request):
     try:

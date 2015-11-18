@@ -1,14 +1,14 @@
 <ul class="megamenu skyblue">
     {% for group_category in group_categories %}
-        <li><a class="color4" href="#">{{ group_category.group_name }}</a>
+        <li><a href="#">{{ group_category.group_name }}</a>
             <div class="megapanel">
                 {% for category in group_category.category_set.all %}
                     <div class="col1">
                         <div class="h_nav">
                             {% if category.common %}
-                                <a class="color4" href="{{ category.get_absolute_url }}"><h4>{{ category.common.common_name }}</h4></a>
+                                <a href="{{ category.get_absolute_url }}">{{ category.common.common_name }}</a>
                             {% else %}
-                                <a class="color4" href="{{ category.get_absolute_url }}"><h4>{{ category.name }}</h4></a>
+                                <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
                             {% endif %}
                         </div>
                     </div>
@@ -17,3 +17,4 @@
         </li>
     {% endfor %}
 </ul>
+{#div.menu ul.megamenu.skyblue li div.megapanel div.col1 div.h_nav a h5#}

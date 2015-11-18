@@ -1,0 +1,115 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block scripts %}
+    <script src="{% static 'js/django_ajax_post.js' %}"></script>
+{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
+{% endblock %}
+{% block content %}
+    <ul class="rifa-list">
+        {% for promo in promo4 %}
+            <li class="block">
+                <p>habilitada hasta el: {{ promo.valid_until|date }}</p>
+
+                <p>usuarios inscritos: <span id="users-inscritos">{{ promo.users.count }}</span></p>
+                <ul>
+                    {% for p in promo.products.all %}
+                        <li class="product-rifa">
+                            <div class="image">
+                                <img src="{{ p.image.url }}" alt="{{ p.name }}" height="150" width="150"/>
+                                <a class="link-product-rifa" href="{{ p.get_absolute_url }}">{{ p.name }}</a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="div-button" promoid="{{ promo.id }}">
+                    Inscríbete en la rifa!
+                </div>
+                <div class="clear"></div>
+            </li>
+        {% endfor %}
+    </ul>
+    <style>
+        .div-button {
+            display: none;
+            width: 200px;
+            height: 50px;
+            float: right;
+            cursor: pointer;
+            border-radius: 4px;
+            padding-top: 25px;
+            text-align: center;
+            background-color: #7FFFD4;
+            color: #006400;
+        }
+
+        .div-button:hover {
+            transition: 0.3s linear;
+            background-color: #3CB371;
+            color: #00FA9A;
+        }
+
+        .block {
+            width: 80%;
+            margin-bottom: 70px;
+            padding: 15px 15px 30px 10px;
+            box-shadow: 0 0 4px gray;
+        }
+
+        .block:hover {
+            box-shadow: 0 0 5px black;
+        }
+
+        .product-rifa {
+            float: left;
+        }
+
+        .link-product-rifa {
+            position: relative;
+            left: 0;
+            color: #555555;
+        }
+
+        .link-product-rifa:hover {
+            color: #333;
+
+        }
+
+        .image {
+            position: relative;
+            width: 100%;
+            padding: 2px;
+        }
+
+        a.link-product-rifa {
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $('.block').hover(
+                    function () {
+                        $(this).children('.div-button').show('fade');
+                    }, function () {
+                        $(this).children('.div-button').hide();
+                    });
+            $('.div-button').click(function () {
+                {#            alert($(this).attr('promoid'))#}
+                var url = '/rifas/add-user/';
+                var data = {promo_id: $(this).attr('promoid')};
+                var func = function (response) {
+                    if (response.success == 'true') {
+                        $('#users-inscritos').text(response.users_inscritos);
+                        $('.div-button').hide()
+                    }
+                };
+                ajax(url, data, func)
+            })
+        })
+    </script>
+{% endblock %}

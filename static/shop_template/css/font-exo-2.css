@@ -1,0 +1,7 @@
+@font-face {
+    font-family: 'Exo 2';
+    font-style: normal;
+    font-weight: 400;
+    /*src: local('Exo 2'), local('Exo2-Regular'), url(http://fonts.gstatic.com/s/exo2/v3/-A4eIjQkAwKL411pgtQ4VA.woff2) format('woff2');*/
+    src: local('Exo 2'), local('Exo2-Regular'), url(exo.woff2) format('woff2');
+}

@@ -55,16 +55,20 @@ def ajax_promo3(request):
     cart_item_count = cart.cart_distinct_item_count(request)
     cart_items = cart.get_cart_items(request)
     # ver si este usuario tiene asignado un codigo de descuento.
-    promo3 = Promo3.objects.get(user=request.user)
-    real_code = promo3.code
-    code = request.POST.get('code', '')
-    if real_code == code:
-        promotion_by_code_discount = promo3.discount
-        success = 'True'
-        request.session['promo3_id'] = str(promo3.id)
-    else:
-        promotion_by_code_discount = None
+    try:
+        promo3 = Promo3.objects.get(user=request.user)
+        real_code = promo3.code
+        code = request.POST.get('code', '')
+        if real_code == code:
+            promotion_by_code_discount = promo3.discount
+            success = 'True'
+            request.session['promo3_id'] = str(promo3.id)
+        else:
+            promotion_by_code_discount = None
+            success = 'False'
+    except Promo3.DoesNotExist:
         success = 'False'
+        promotion_by_code_discount = None
     total, discount, promotions, cart_subtotal, shipping_tax, shipping_tax_promotions = promo(request,
                                                                                               promotion_by_code_discount,
                                                                                               cart_item_count,
@@ -88,9 +92,8 @@ def promo(request, promotion_by_code_discount, cart_item_count, cart_items):
         percent = promotion_by_code_discount
         discount = cart_subtotal * percent / 100
         promotions = u"Haz recibido un código de descuento de un {percent}% del total".format(percent=percent)
-    # PROMO 2
+    # PROMO 2 -- llevate gratis <P> si compras 2 de <C>
     if not promotions:
-        print(2)
         category, product = promo2()
         style = "<span style='color: #426f42; text-decoration: underline; font-weight: bold;'>"
         promo2_popup = u"Llévate gratis este producto: {style}{product}</span> " \
@@ -128,7 +131,7 @@ def promo(request, promotion_by_code_discount, cart_item_count, cart_items):
     if cart_subtotal >= 75 and not promotions:
         shipping_tax = 0
         shipping_tax_promotions = u"Si compras +75cuc no te cobramos impuestos de envío."
-    # total = cart_subtotal - discount + shipping_tax
+
     total = create_order_step_1(request, cart_subtotal, discount, shipping_tax)
     print('cart-total', total)
     total = Decimal('%.2f' % total)

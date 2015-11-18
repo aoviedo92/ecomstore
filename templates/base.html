@@ -18,6 +18,8 @@
     <meta name="description" content="{{ meta_description }} "/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="{% static 'shop_template/css/font-exo-2.css' %}" rel="stylesheet" type="text/css">
+{#    <link href="http://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet" type="text/css">#}
     <link href="{% static 'shop_template/css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
     <link href="{% static 'shop_template/css/form.css' %}" rel="stylesheet" type="text/css" media="all"/>
     <script type="text/javascript" src="{% static 'shop_template/js/jquery1.min.js' %}"></script>
@@ -51,6 +53,7 @@
     {% endblock %}
     {% block scripts %}
     {% endblock %}
+
 </head>
 <body>
 <div class="header-top">
@@ -98,13 +101,34 @@
         <div class="clear"></div>
     </div>
 </div>
+
 <div class="header-bottom">
     <div class="wrap">
         <div class="header-bottom-left">
             <div class="logo">
                 <a href="{% url 'catalog_home' %}"><img src="{% static 'shop_template/images/logo.png' %}" alt=""/></a>
             </div>
+            {#   MENU    #}
+            <style scoped>
+                .h_nav a {
+                    display: block;
+                    font-size: 1em;
+                    padding-bottom: 5px;
+                    color: #777;
+                    text-transform: capitalize;
+                    line-height: 2em;
+                    transition: all 0.3s ease-in-out 0s;
+                }
+                .h_nav a:hover {
+                    color: #333;
+                    transition: all 0.3s ease-in-out 0s;
+                    border-bottom: 1px solid #ccc;
+                }
+                .skyblue li > a, .skyblue > li.showhide span {
+                    color: #555;
+                }
 
+            </style>
             <div class="menu">
                 {% category_list request.path %}
             </div>
