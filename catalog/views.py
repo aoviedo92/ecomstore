@@ -301,7 +301,10 @@ def add_tag(request):
         response = json.dumps({'success': 'False'})
     return HttpResponse(response, content_type='application/javascript; charset=utf8')
 
-@login_required
+
 def rifas(request):
     promo4 = Promo4.objects.all()
+    if request.user.is_authenticated():
+        user_include = True
+        user_in_rifa = 2
     return render_to_response("catalog/rifas.html", locals(), context_instance=RequestContext(request))

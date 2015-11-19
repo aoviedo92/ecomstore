@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
 {% endblock %}
 {% block content %}
+    <a id="link" href="{% url 'login' %}?next={{ request.path }}" hidden></a>
     <ul class="rifa-list">
         {% for promo in promo4 %}
             <li class="block">
-                <p>habilitada hasta el: {{ promo.valid_until|date }}</p>
+                <p>Habilitada hasta el: {{ promo.valid_until|date }}</p>
 
-                <p>usuarios inscritos: <span id="users-inscritos">{{ promo.users.count }}</span></p>
+                <p>Usuarios inscritos: <span id="users-inscritos">{{ promo.users.count }}</span></p>
+                <hr/>
                 <ul>
                     {% for p in promo.products.all %}
                         <li class="product-rifa">
@@ -24,14 +26,37 @@
                     {% endfor %}
                 </ul>
                 <div class="div-button" promoid="{{ promo.id }}">
-                    Inscríbete en la rifa!
+                    <p id="text-button"></p>
                 </div>
+                {#                <div class="button-exclude-user" promoid="{{ promo.id }}">#}
+                {#                    <p id="text-button-2">Excluirte de la rifa</p>#}
+                {#                </div>#}
                 <div class="clear"></div>
             </li>
         {% endfor %}
     </ul>
     <style>
-        .div-button {
+        {#        {% if user_include %}#}
+        {#            .div-button {#}
+        {#                display: none;#}
+        {#            }#}
+        {#            .button-exclude-user {#}
+        {#                display: block;#}
+        {#            }#}
+        {#        {% else %}#}
+        {#            .div-button {#}
+        {#                display: block;#}
+        {#            }#}
+        {#            .button-exclude-user {#}
+        {#                display: none;#}
+        {#            }#}
+        {#        {% endif %}#}
+
+        .user-include {
+            background-color: rgba(255, 192, 203, 0.13);
+        }
+
+        .div-button, .remove {
             display: none;
             width: 200px;
             height: 50px;
@@ -50,11 +75,21 @@
             color: #00FA9A;
         }
 
+        .remove {
+            background-color: #936b18;
+            color: #5b4210;
+            display: none;
+        }
+
         .block {
             width: 80%;
             margin-bottom: 70px;
             padding: 15px 15px 30px 10px;
             box-shadow: 0 0 4px gray;
+        }
+
+        .block hr {
+            border: 1px solid #ccc;
         }
 
         .block:hover {
@@ -92,24 +127,85 @@
     </style>
     <script>
         $(document).ready(function () {
+            var btn_remove_label = "Darse baja de esta rifa";
+            var btn_include_label = "Inscríbete en la rifa!";
+
+            var button = $('.div-button');
+
+            var user_include = {% if user_include %}true{% else %}false{% endif %}
+            if (user_include) {
+                var id = {{ user_in_rifa }};
+                var remove_button = $('.div-button[promoid="' + id + '"]');
+                //remove_button.addClass('remove').removeClass('div-button');
+                remove_button.text(btn_remove_label);
+                button.remove();
+            }
+
+            var user_logged = {% if request.user.is_authenticated %}true{% else %}false{% endif %};
+            var text = user_logged ? btn_include_label : "Login para inscribirte";
+            $('p#text-button').text(text);
+
             $('.block').hover(
                     function () {
                         $(this).children('.div-button').show('fade');
+                        $(this).children('.remove').show('fade');
                     }, function () {
-                        $(this).children('.div-button').hide();
+                        $(this).children('.div-button').hide('fade');
+                        $(this).children('.remove').hide('fade');
                     });
-            $('.div-button').click(function () {
-                {#            alert($(this).attr('promoid'))#}
-                var url = '/rifas/add-user/';
-                var data = {promo_id: $(this).attr('promoid')};
-                var func = function (response) {
-                    if (response.success == 'true') {
-                        $('#users-inscritos').text(response.users_inscritos);
-                        $('.div-button').hide()
-                    }
-                };
-                ajax(url, data, func)
-            })
+
+            var button_remove = $('.remove');
+
+
+
+            button.click(function () {
+                var this_ = this;
+                if (text == btn_include_label) {
+                    var id = $(this).attr('promoid');
+                    var url = '/manager/rifas/add-user/';
+                    var data = {promo_id: id};
+                    var func = function (response) {
+                        if (response.success == 'true') {
+                            $(this_).parent().find('span#users-inscritos').text(response.users_inscritos);//actualizar cantidad de usuarios
+                            $(this_).parent().addClass('user-include');//poner el bloque rosadito
+                            //var remove_button = $('.div-button[promoid="' + id + '"]');//tomamos el boton de esa rifa
+                            //remove_button.addClass('remove').removeClass('div-button');//le quitamos la clase esa pq los elem de esa clase seran eliminados
+                            //remove_button.text(btn_remove_text);
+                            $('.div-button').remove();
+                        }
+                    };
+                    ajax(url, data, func)
+                } else if (text == "Login para inscribirte") {
+                    //utilizar el método .get() para obtener un elemento DOM a partir de un objeto jQuery
+                    //y simulamos un click en el.
+                    $("#link").get(0).click();//simular click al link para mandarnos a la url login
+                }
+            });
+
+{#            button_remove.click(function () {#}
+{#                var this_ = this;#}
+{#                var text = this_.text();#}
+{#                console.log(text)#}
+{#                if (text == btn_remove_text) {#}
+{#                    var id = $(this).attr('promoid');#}
+{#                    var url = '/manager/rifas/remove-user/';#}
+{#                    var data = {promo_id: id};#}
+{#                    var func = function (response) {#}
+{#                        if (response.success == 'true') {#}
+{#                            $(this_).parent().find('span#users-inscritos').text(response.users_inscritos);//actualizar cantidad de usuarios#}
+{#                            $(this_).parent().removeClass('user-include');//poner el bloque rosadito#}
+{#                            var button = $('.remove[promoid="' + id + '"]');//tomamos el boton de esa rifa#}
+{#                            button.addClass('div-button').removeClass('remove');#}
+{#                            remove_button.text(btn_include);#}
+{#                        }#}
+{#                    };#}
+{#                    ajax(url, data, func)#}
+{#                } else if (text == "Login para inscribirte") {#}
+{#                    //utilizar el método .get() para obtener un elemento DOM a partir de un objeto jQuery#}
+{#                    //y simulamos un click en el.#}
+{#                    $("#link").get(0).click();//simular click al link para mandarnos a la url login#}
+{#                }#}
+{#            })#}
         })
     </script>
 {% endblock %}

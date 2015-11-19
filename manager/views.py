@@ -173,3 +173,13 @@ def send_mail(request):
     send_mail('Subject here', 'Here is the message.', 'aoviedo@estudiantes.uci.cu',
               ['aoviedo@estudiantes.uci.cu'], fail_silently=False)
     return HttpResponse()
+
+def add_user_rifas(request):
+    print(request.POST)
+    response = json.dumps({'success': 'true', 'users_inscritos': 9})
+    return HttpResponse(response, content_type='application/javascript; charset=utf-8')
+
+def remove_user_rifas(request):
+    print(request.POST)
+    response = json.dumps({'success': 'true', 'users_inscritos': 8})
+    return HttpResponse(response, content_type='application/javascript; charset=utf-8')
