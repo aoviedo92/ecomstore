@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="3833716635">
-    <data-source source="LOCAL" name="SQLite - [2]" uuid="57973944-2e11-4dd4-9f10-73eed6f80b1c">
-      <driver-ref>sqlite.zentus</driver-ref>
+  <component name="DataSourceManagerImpl" format="xml" hash="2788826795">
+    <data-source source="LOCAL" name="SQLite -" uuid="ca0f7776-9294-4519-8a0d-4b942910c07c">
+      <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:D:\adri\work\PycharmProjects\ecomstore\db.sqlite3</jdbc-url>

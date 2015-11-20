@@ -12,7 +12,7 @@ from django.template.defaultfilters import slugify
 from django.template.loader import render_to_string
 from accounts.models import UserProfile
 from catalog.models import CategoryGroup, CommonCategory, Category, Product
-from manager.models import Promo3
+from manager.models import Promo3, Promo4
 from utils import generate_random_id
 
 
@@ -175,11 +175,34 @@ def send_mail(request):
     return HttpResponse()
 
 def add_user_rifas(request):
-    print(request.POST)
-    response = json.dumps({'success': 'true', 'users_inscritos': 9})
+    # print(request.POST)
+    users_iscritos = 0
+    if request.POST:
+        promo_id = request.POST.get('promo_id')
+        promo = Promo4.objects.get(id=promo_id)
+        users_iscritos = promo.users.count()
+        if request.user in promo.users.all():
+            print('user esta')
+        else:
+            promo.users.add(request.user)
+            promo.save()
+            users_iscritos = promo.users.count()
+
+    response = json.dumps({'success': 'true', 'users_inscritos': users_iscritos})
     return HttpResponse(response, content_type='application/javascript; charset=utf-8')
 
 def remove_user_rifas(request):
-    print(request.POST)
-    response = json.dumps({'success': 'true', 'users_inscritos': 8})
+    print('remove')
+    users_iscritos = 0
+    if request.POST:
+        promo_id = request.POST.get('promo_id')
+        promo = Promo4.objects.get(id=promo_id)
+        users_iscritos = promo.users.count()
+        if request.user in promo.users.all():
+            print('user esta x')
+            promo.users.remove(request.user)
+            promo.save()
+            users_iscritos = promo.users.count()
+
+    response = json.dumps({'success': 'true', 'users_inscritos': users_iscritos})
     return HttpResponse(response, content_type='application/javascript; charset=utf-8')

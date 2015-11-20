@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source name="SQLite - [2]" uuid="57973944-2e11-4dd4-9f10-73eed6f80b1c">
+  <data-source name="SQLite -" uuid="ca0f7776-9294-4519-8a0d-4b942910c07c">
     <database-info product="SQLite" version="3.7.6.3" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native"/>
     <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed"/>
     <schema name="" catalog=""/>
@@ -78,6 +78,8 @@
       <exported-key name="#FAKE_checkout_order_1" table="checkout_order" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_django_admin_log_1" table="django_admin_log" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_manager_promo3_1" table="manager_promo3" schema="" catalog="" columns="user_id"/>
+      <exported-key name="#FAKE_manager_promo4_1" table="manager_promo4" schema="" catalog="" columns="winner_user_id"/>
+      <exported-key name="#FAKE_manager_promo4_users_1" table="manager_promo4_users" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_search_searchterm_1" table="search_searchterm" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_stats_productview_1" table="stats_productview" schema="" catalog="" columns="user_id"/>
     </table>
@@ -154,16 +156,6 @@
       <index name="catalog_productreview_e8701ad4" unique="true" columns="user_id"/>
       <index name="catalog_productreview_9bea82de" unique="true" columns="product_id"/>
     </table>
-    <table name="catalog_promo2" schema="" catalog="" type="TABLE">
-      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
-      <column name="category_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
-      <column name="product_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
-      <primary-key columns="id"/>
-      <foreign-key name="#FAKE_catalog_promo2_1" columns="product_id" ref-table="products" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="#FAKE_catalog_promo2_2" columns="category_id" ref-table="categories" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <index name="catalog_promo2_9bea82de" unique="true" columns="product_id"/>
-      <index name="catalog_promo2_b583a629" unique="true" columns="category_id"/>
-    </table>
     <table name="categories" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="name" sqlType="VARCHAR(50)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
@@ -175,7 +167,7 @@
       <primary-key columns="id"/>
       <foreign-key name="#FAKE_categories_1" columns="group_id" ref-table="catalog_categorygroup" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <foreign-key name="#FAKE_categories_2" columns="common_id" ref-table="catalog_commoncategory" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <exported-key name="#FAKE_catalog_promo2_2" table="catalog_promo2" schema="" catalog="" columns="category_id"/>
+      <exported-key name="#FAKE_manager_promo2_2" table="manager_promo2" schema="" catalog="" columns="category_id"/>
       <exported-key name="#FAKE_products_categories_1" table="products_categories" schema="" catalog="" columns="category_id"/>
       <index name="categories_0e939a4f" unique="true" columns="group_id"/>
       <index name="categories_44b3ac8e" unique="true" columns="common_id"/>
@@ -259,6 +251,16 @@
       <primary-key columns="session_key"/>
       <index name="django_session_de54fa62" unique="true" columns="expire_date"/>
     </table>
+    <table name="manager_promo2" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="category_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="product_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_manager_promo2_1" columns="product_id" ref-table="products" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_manager_promo2_2" columns="category_id" ref-table="categories" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="manager_promo2_9bea82de" unique="true" columns="product_id"/>
+      <index name="manager_promo2_b583a629" unique="true" columns="category_id"/>
+    </table>
     <table name="manager_promo3" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="code" sqlType="VARCHAR(6)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
@@ -266,6 +268,36 @@
       <column name="user_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <primary-key columns="id"/>
       <foreign-key name="#FAKE_manager_promo3_1" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+    </table>
+    <table name="manager_promo4" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="valid_until" sqlType="DATE" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="winner_user_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_manager_promo4_1" columns="winner_user_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="#FAKE_manager_promo4_products_2" table="manager_promo4_products" schema="" catalog="" columns="promo4_id"/>
+      <exported-key name="#FAKE_manager_promo4_users_2" table="manager_promo4_users" schema="" catalog="" columns="promo4_id"/>
+      <index name="manager_promo4_437f5281" unique="true" columns="winner_user_id"/>
+    </table>
+    <table name="manager_promo4_products" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="promo4_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="product_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_manager_promo4_products_1" columns="product_id" ref-table="products" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_manager_promo4_products_2" columns="promo4_id" ref-table="manager_promo4" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="manager_promo4_products_9bea82de" unique="true" columns="product_id"/>
+      <index name="manager_promo4_products_d4d7a502" unique="true" columns="promo4_id"/>
+    </table>
+    <table name="manager_promo4_users" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="promo4_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="user_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_manager_promo4_users_1" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_manager_promo4_users_2" columns="promo4_id" ref-table="manager_promo4" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="manager_promo4_users_e8701ad4" unique="true" columns="user_id"/>
+      <index name="manager_promo4_users_d4d7a502" unique="true" columns="promo4_id"/>
     </table>
     <table name="products" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
@@ -290,8 +322,9 @@
       <exported-key name="#FAKE_cart_items_1" table="cart_items" schema="" catalog="" columns="product_id"/>
       <exported-key name="#FAKE_catalog_productrating_2" table="catalog_productrating" schema="" catalog="" columns="product_id"/>
       <exported-key name="#FAKE_catalog_productreview_2" table="catalog_productreview" schema="" catalog="" columns="product_id"/>
-      <exported-key name="#FAKE_catalog_promo2_1" table="catalog_promo2" schema="" catalog="" columns="product_id"/>
       <exported-key name="#FAKE_checkout_orderitem_1" table="checkout_orderitem" schema="" catalog="" columns="product_id"/>
+      <exported-key name="#FAKE_manager_promo2_1" table="manager_promo2" schema="" catalog="" columns="product_id"/>
+      <exported-key name="#FAKE_manager_promo4_products_1" table="manager_promo4_products" schema="" catalog="" columns="product_id"/>
       <exported-key name="#FAKE_products_categories_2" table="products_categories" schema="" catalog="" columns="product_id"/>
       <exported-key name="#FAKE_products_second_images_2" table="products_second_images" schema="" catalog="" columns="product_id"/>
       <exported-key name="#FAKE_search_searchterm_found_products_1" table="search_searchterm_found_products" schema="" catalog="" columns="product_id"/>

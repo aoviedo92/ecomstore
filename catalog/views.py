@@ -303,7 +303,11 @@ def add_tag(request):
 
 def rifas(request):
     promo4 = Promo4.objects.all()
+    user_include = False
     if request.user.is_authenticated():
-        user_include = False
-        user_in_rifa = 2
+        for promo in promo4:
+            if request.user in promo.users.all():
+                user_include = True
+                user_in_rifa = promo.id
+                break
     return render_to_response("catalog/rifas.html", locals(), context_instance=RequestContext(request))

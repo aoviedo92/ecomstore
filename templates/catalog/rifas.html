@@ -28,9 +28,6 @@
                 <div class="div-button" promoid="{{ promo.id }}">
                     <p id="text-button"></p>
                 </div>
-                {#                <div class="button-exclude-user" promoid="{{ promo.id }}">#}
-                {#                    <p id="text-button-2">Excluirte de la rifa</p>#}
-                {#                </div>#}
                 <div class="clear"></div>
             </li>
         {% endfor %}
@@ -134,11 +131,13 @@
 
             var user_include = {% if user_include %}true{% else %}false{% endif %}
             if (user_include) {
-                var id = {{ user_in_rifa }};
+                //console.log('user include')
+                var id = {% if user_in_rifa %}{{ user_in_rifa }}{% else %}false{% endif %};
                 var remove_button = $('.div-button[promoid="' + id + '"]');
-                //remove_button.addClass('remove').removeClass('div-button');
+                remove_button.parent().addClass('user-include');
+                remove_button.addClass('remove').removeClass('div-button');
                 remove_button.text(btn_remove_label);
-                button.remove();
+                $('.div-button').remove();
             }
 
             var user_logged = {% if request.user.is_authenticated %}true{% else %}false{% endif %};
@@ -155,7 +154,6 @@
                     });
 
             var button_remove = $('.remove');
-
 
 
             button.click(function () {
@@ -182,30 +180,23 @@
                 }
             });
 
-{#            button_remove.click(function () {#}
-{#                var this_ = this;#}
-{#                var text = this_.text();#}
-{#                console.log(text)#}
-{#                if (text == btn_remove_text) {#}
-{#                    var id = $(this).attr('promoid');#}
-{#                    var url = '/manager/rifas/remove-user/';#}
-{#                    var data = {promo_id: id};#}
-{#                    var func = function (response) {#}
-{#                        if (response.success == 'true') {#}
-{#                            $(this_).parent().find('span#users-inscritos').text(response.users_inscritos);//actualizar cantidad de usuarios#}
-{#                            $(this_).parent().removeClass('user-include');//poner el bloque rosadito#}
-{#                            var button = $('.remove[promoid="' + id + '"]');//tomamos el boton de esa rifa#}
-{#                            button.addClass('div-button').removeClass('remove');#}
-{#                            remove_button.text(btn_include);#}
-{#                        }#}
-{#                    };#}
-{#                    ajax(url, data, func)#}
-{#                } else if (text == "Login para inscribirte") {#}
-{#                    //utilizar el método .get() para obtener un elemento DOM a partir de un objeto jQuery#}
-{#                    //y simulamos un click en el.#}
-{#                    $("#link").get(0).click();//simular click al link para mandarnos a la url login#}
-{#                }#}
-{#            })#}
+            button_remove.click(function () {
+                var this_ = this;
+                var id = $(this).attr('promoid');
+                var url = '/manager/rifas/remove-user/';
+                var data = {promo_id: id};
+                var func = function (response) {
+                    if (response.success == 'true') {
+                        $(this_).parent().find('span#users-inscritos').text(response.users_inscritos);//actualizar cantidad de usuarios
+                        $(this_).parent().removeClass('user-include');//poner el bloque rosadito
+                        this_.remove();
+                        //var button = $('.remove[promoid="' + id + '"]');//tomamos el boton de esa rifa
+                        //button.addClass('div-button').removeClass('remove');
+                        //remove_button.text(btn_include);
+                    }
+                };
+                ajax(url, data, func)
+            })
         })
     </script>
 {% endblock %}
