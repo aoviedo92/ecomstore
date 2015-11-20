@@ -278,7 +278,6 @@ def remove_wish_list(request):
         user_profile.wish_list.remove(product)
         response = json.dumps({'success': 'True'})
     except product.DoesNotExist:
-        print(111)
         response = json.dumps({'success': 'False'})
     return HttpResponse(response, content_type='application/javascript; charset=utf-8')
 
@@ -305,6 +304,6 @@ def add_tag(request):
 def rifas(request):
     promo4 = Promo4.objects.all()
     if request.user.is_authenticated():
-        user_include = True
+        user_include = False
         user_in_rifa = 2
     return render_to_response("catalog/rifas.html", locals(), context_instance=RequestContext(request))

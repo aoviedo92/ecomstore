@@ -1,6 +1,6 @@
 <ul class="megamenu skyblue">
     {% for group_category in group_categories %}
-        <li><a href="#">{{ group_category.group_name }}</a>
+        <li><a href="#" class="group-name">{{ group_category.group_name }}</a>
             <div class="megapanel">
                 {% for category in group_category.category_set.all %}
                     <div class="col1">
