@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/templates/base.html" line="172" />
+    <bookmark url="file://$PROJECT_DIR$/templates/base.html" line="175" />
     <bookmark url="file://$PROJECT_DIR$/static/shop_template/css/style.css" line="552" />
     <bookmark url="file://$PROJECT_DIR$/templates/cart/show_cart.html" line="130" />
     <bookmark url="file://$PROJECT_DIR$/templates/cart/show_cart.html" line="138" />
@@ -11,14 +11,23 @@
     <bookmark url="file://$PROJECT_DIR$/stats/stats.py" line="282" />
     <bookmark url="file://$PROJECT_DIR$/stats/stats.py" line="180" />
     <bookmark url="file://$PROJECT_DIR$/templates/base.html" line="110" />
-    <bookmark url="file://$PROJECT_DIR$/templates/catalog/product.html" line="162" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c67dc18-dfcf-489c-8aea-89a3654a4f89" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/catalog/templatetags/catalog_filters.py" afterPath="$PROJECT_DIR$/catalog/templatetags/catalog_filters.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/catalog/forms.py" afterPath="$PROJECT_DIR$/catalog/forms.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manager/models.py" afterPath="$PROJECT_DIR$/manager/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/catalog/product.html" afterPath="$PROJECT_DIR$/templates/catalog/product.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/catalog/rifas.html" afterPath="$PROJECT_DIR$/templates/catalog/rifas.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/styles.css" afterPath="$PROJECT_DIR$/static/css/styles.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/catalog/tags_cloud.html" afterPath="$PROJECT_DIR$/templates/catalog/tags_cloud.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manager/urls.py" afterPath="$PROJECT_DIR$/manager/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/catalog/views.py" afterPath="$PROJECT_DIR$/catalog/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manager/views.py" afterPath="$PROJECT_DIR$/manager/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -63,6 +72,24 @@
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
     </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DbRootNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="SQLite -" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="manager_promo4" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
   </component>
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
@@ -73,14 +100,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="rifas.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="rifas.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/catalog/rifas.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.53583616">
-              <caret line="191" column="39" selection-start-line="191" selection-start-column="39" selection-end-line="191" selection-end-column="39" />
-              <folding>
-                <element signature="e#1373#3489#0#HTML" expanded="false" />
-              </folding>
+            <state vertical-scroll-proportion="-2.25">
+              <caret line="77" column="26" selection-start-line="77" selection-start-column="26" selection-end-line="77" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -89,13 +114,53 @@
         <entry file="file://$PROJECT_DIR$/catalog/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="311" column="21" selection-start-line="311" selection-start-column="21" selection-end-line="311" selection-end-column="21" />
+              <caret line="183" column="30" selection-start-line="183" selection-start-column="30" selection-end-line="183" selection-end-column="30" />
               <folding>
-                <element signature="e#8377#9457#0" expanded="false" />
-                <element signature="e#9503#10895#0" expanded="false" />
-                <element signature="e#10946#11500#0" expanded="false" />
-                <element signature="e#12038#12640#0" expanded="false" />
+                <element signature="e#8382#9462#0" expanded="false" />
+                <element signature="e#9508#10900#0" expanded="false" />
+                <element signature="e#10951#11505#0" expanded="false" />
+                <element signature="e#12043#12645#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catalog/forms.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="46" column="70" selection-start-line="46" selection-start-column="70" selection-end-line="46" selection-end-column="70" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="product_list.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/tags/product_list.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.428572">
+              <caret line="48" column="35" selection-start-line="48" selection-start-column="35" selection-end-line="48" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="product.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/catalog/product.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="15" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="layout.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/layout.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -103,63 +168,38 @@
       <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.038462">
-              <caret line="131" column="38" selection-start-line="131" selection-start-column="38" selection-end-line="131" selection-end-column="38" />
+            <state vertical-scroll-proportion="-1.3846154">
+              <caret line="29" column="28" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="category_list.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/tags/category_list.html">
+      <file leaf-file-name="megamenu.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/static/shop_template/js/megamenu.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.076923">
-              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="catalog_filters.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/catalog/templatetags/catalog_filters.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/manager/views.py">
+        <entry file="file://$PROJECT_DIR$/accounts/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="201" column="30" selection-start-line="201" selection-start-column="30" selection-end-line="201" selection-end-column="30" />
-              <folding>
-                <element signature="e#15#42#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/manager/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="8" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-                <element signature="e#591#692#1" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/manager/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="show_cart.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/cart/show_cart.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-47.0">
-              <caret line="73" column="71" selection-start-line="73" selection-start-column="49" selection-end-line="73" selection-end-column="71" />
+              <caret line="92" column="18" selection-start-line="92" selection-start-column="18" selection-end-line="92" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -184,9 +224,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/catalog/forms.py" />
-        <option value="$PROJECT_DIR$/catalog/product_list.py" />
-        <option value="$PROJECT_DIR$/templates/tags/filter_products.html" />
         <option value="$PROJECT_DIR$/templates/tags/product_list_quick_access.html" />
         <option value="$PROJECT_DIR$/templates/tags/quick_access.html" />
         <option value="$PROJECT_DIR$/templates/tags/form_table_row.html" />
@@ -225,16 +262,19 @@
         <option value="$PROJECT_DIR$/utils.py" />
         <option value="$PROJECT_DIR$/templates/tags/product_list.html" />
         <option value="$PROJECT_DIR$/cart/views.py" />
-        <option value="$PROJECT_DIR$/templates/catalog/product.html" />
-        <option value="$PROJECT_DIR$/manager/models.py" />
         <option value="$PROJECT_DIR$/catalog/urls.py" />
-        <option value="$PROJECT_DIR$/manager/urls.py" />
-        <option value="$PROJECT_DIR$/static/css/styles.css" />
         <option value="$PROJECT_DIR$/templates/tags/category_list.html" />
-        <option value="$PROJECT_DIR$/templates/base.html" />
-        <option value="$PROJECT_DIR$/catalog/views.py" />
+        <option value="$PROJECT_DIR$/manager/models.py" />
+        <option value="$PROJECT_DIR$/manager/urls.py" />
         <option value="$PROJECT_DIR$/manager/views.py" />
+        <option value="$PROJECT_DIR$/catalog/views.py" />
+        <option value="$PROJECT_DIR$/templates/base.html" />
+        <option value="$PROJECT_DIR$/catalog/forms.py" />
         <option value="$PROJECT_DIR$/templates/catalog/rifas.html" />
+        <option value="$PROJECT_DIR$/catalog/templatetags/catalog_filters.py" />
+        <option value="$PROJECT_DIR$/templates/catalog/product.html" />
+        <option value="$PROJECT_DIR$/static/css/styles.css" />
+        <option value="$PROJECT_DIR$/templates/catalog/tags_cloud.html" />
       </list>
     </option>
   </component>
@@ -710,8 +750,13 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="SearchEverywhereHistoryKey" value="models&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/manager/models.py&#10;categor&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/tags/category_list.html&#10;base&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/base.html&#10;show&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/cart/show_cart.html&#10;produc&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/static/js/product.js&#10;produ&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/catalog/product.html&#10;views&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/views.py&#10;urls&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/manager/urls.py&#10;sty&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/static/shop_template/css/style.css&#10;profil&#9;null&#9;null&#10;prod&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/tags/product_list.html&#10;category_lis&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/tags/category_list.html&#10;cart&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/cart/cart.py&#10;util&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/utils.py&#10;home&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/home.html&#10;url&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/manager/urls.py&#10;sett&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/ecomstore/settings.py&#10;utils&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/utils.py&#10;stats&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/stats/stats.py&#10;checko&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/checkout/checkout.py&#10;curre&#9;null&#9;null&#10;che&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/checkout/checkout.html&#10;stat&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/stats/stats.py&#10;product_lis&#9;null&#9;null&#10;sho&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/cart/show_cart.html&#10;tags&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/catalog/tags_cloud.html&#10;products&#9;null&#9;null&#10;product&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/catalog/product.html&#10;product_review&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/catalog/product_review.html&#10;ajax&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/static/js/django_ajax_post.js&#10;cart_&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/tags/cart_items.html&#10;mode&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/models.py&#10;layout&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/tags/category_list_to_layout.html&#10;wish_list&#9;null&#9;null&#10;my_&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/registration/my_account.html&#10;model&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/models.py&#10;sta&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/stats/stats.py&#10;style&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/static/css/styles.css&#10;chec&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/checkout/checkout.py&#10;hom&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/home.html&#10;vie&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/views.py&#10;order&#9;null&#9;null&#10;view&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/views.py&#10;show_&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/cart/show_cart.html&#10;product_re&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/catalog/product_review.html&#10;userprofi&#9;null&#9;null&#10;test&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/utils_/tests.py&#10;admin&#9;null&#9;null&#10;tag&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/templatetags/catalog_tags.py" />
+    <property name="SearchEverywhereHistoryKey" value="base&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/base.html&#10;sty&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/static/css/styles.css&#10;tags&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/catalog/tags_cloud.html&#10;prod&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/catalog/product.html&#10;rifas&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/catalog/rifas.html&#10;product_&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/tags/product_list.html&#10;models&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/models.py&#10;product&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/tags/product_thumbnail.html&#10;ajax&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/static/js/django_ajax_post.js&#10;categor&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/tags/category_list.html&#10;show&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/cart/show_cart.html&#10;produc&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/static/js/product.js&#10;produ&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/catalog/product.html&#10;views&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/views.py&#10;urls&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/manager/urls.py&#10;profil&#9;null&#9;null&#10;category_lis&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/tags/category_list.html&#10;cart&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/cart/cart.py&#10;util&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/utils.py&#10;home&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/home.html&#10;url&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/manager/urls.py&#10;sett&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/ecomstore/settings.py&#10;utils&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/utils.py&#10;stats&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/stats/stats.py&#10;checko&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/checkout/checkout.py&#10;curre&#9;null&#9;null&#10;che&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/checkout/checkout.html&#10;stat&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/stats/stats.py&#10;product_lis&#9;null&#9;null&#10;sho&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/cart/show_cart.html&#10;products&#9;null&#9;null&#10;product_review&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/catalog/product_review.html&#10;cart_&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/tags/cart_items.html&#10;mode&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/models.py&#10;layout&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/tags/category_list_to_layout.html&#10;wish_list&#9;null&#9;null&#10;my_&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/registration/my_account.html&#10;model&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/models.py&#10;sta&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/stats/stats.py&#10;style&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/static/css/styles.css&#10;chec&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/checkout/checkout.py&#10;hom&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/home.html&#10;vie&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/views.py&#10;order&#9;null&#9;null&#10;view&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/views.py&#10;show_&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/cart/show_cart.html&#10;product_re&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/catalog/product_review.html&#10;userprofi&#9;null&#9;null&#10;test&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/utils_/tests.py&#10;admin&#9;null&#9;null" />
     <property name="dynamic.classpath" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -1178,7 +1223,13 @@
       <option name="project" value="LOCAL" />
       <updated>1448012382819</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="promo4: cuando se da incluirse en esta rifa, se deshabilita el boton para incluirse, no es hasta que se refresca la pag q se muestra el boton de excluirse.&#10;cuando te excluyes se deshabilita el boton hasta q refresques la pag, y es cuando se muestran nuevamente los botones de incluirse">
+      <created>1448025395540</created>
+      <option name="number" value="00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1448025395540</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1196,25 +1247,26 @@
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29575163" sideWeight="0.5030257" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29248366" sideWeight="0.5045386" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2685325" sideWeight="0.4969743" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38398692" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29727685" sideWeight="0.4969743" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29248366" sideWeight="0.49546143" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2624811" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22012103" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39561272" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="manage.py@ecomstore" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28431374" sideWeight="0.4969743" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3267974" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="manage.py@ecomstore" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13235295" sideWeight="0.4969743" order="8" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1245,7 +1297,8 @@
     <MESSAGE value="add exo-2 font&#10;add promo4 -- sorteo (working on)" />
     <MESSAGE value="sorteo fronted -- working on" />
     <MESSAGE value="megamenu ahora salen alineados los elems del menu correspondientes al group name" />
-    <option name="LAST_COMMIT_MESSAGE" value="megamenu ahora salen alineados los elems del menu correspondientes al group name" />
+    <MESSAGE value="promo4: cuando se da incluirse en esta rifa, se deshabilita el boton para incluirse, no es hasta que se refresca la pag q se muestra el boton de excluirse.&#10;cuando te excluyes se deshabilita el boton hasta q refresques la pag, y es cuando se muestran nuevamente los botones de incluirse" />
+    <option name="LAST_COMMIT_MESSAGE" value="promo4: cuando se da incluirse en esta rifa, se deshabilita el boton para incluirse, no es hasta que se refresca la pag q se muestra el boton de excluirse.&#10;cuando te excluyes se deshabilita el boton hasta q refresques la pag, y es cuando se muestran nuevamente los botones de incluirse" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1254,82 +1307,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/tags/include_code_discount.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3076923">
-          <caret line="2" column="42" selection-start-line="2" selection-start-column="42" selection-end-line="2" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/accounts/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="19" selection-start-line="43" selection-start-column="19" selection-end-line="43" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cart/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/checkout/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cart/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/tags/currency_.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="27" selection-start-line="0" selection-start-column="27" selection-end-line="0" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog/templatetags/catalog_tags.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="13" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cart/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="61" selection-start-line="5" selection-start-column="61" selection-end-line="5" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Python27/Lib/decimal.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.16666667">
-          <caret line="505" column="6" selection-start-line="505" selection-start-column="6" selection-end-line="505" selection-end-column="6" />
-          <folding>
-            <element signature="e#5421#5980#2" expanded="false" />
-            <element signature="e#8473#8908#2" expanded="false" />
-            <element signature="e#9550#10029#2" expanded="false" />
-            <element signature="e#10070#10484#2" expanded="false" />
-            <element signature="e#12310#12948#2" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/e88aaa2a-2963-493e-a300-3ea25e6ea72e/console.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1367,14 +1344,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="288" column="0" selection-start-line="288" selection-start-column="0" selection-end-line="288" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/tags/product_thumbnail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1525,10 +1494,126 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/tags/product_list.html">
+    <entry file="file://$PROJECT_DIR$/static/shop_template/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="116" column="22" selection-start-line="116" selection-start-column="22" selection-end-line="116" selection-end-column="22" />
+          <caret line="1972" column="4" selection-start-line="1972" selection-start-column="4" selection-end-line="1972" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/product.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.5833333">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/cart/show_cart.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-47.0">
+          <caret line="73" column="71" selection-start-line="73" selection-start-column="49" selection-end-line="73" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/ca0f7776-9294-4519-8a0d-4b942910c07c/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/e8326f82/ca0f7776-9294-4519-8a0d-4b942910c07c/..manager_promo4">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/e8326f82/ca0f7776-9294-4519-8a0d-4b942910c07c/..manager_promo4_users">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/e8326f82/d4889a6b-b71c-44e0-bbcb-c1c6e1dc4ae9/..manager_promo4">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/d4889a6b-b71c-44e0-bbcb-c1c6e1dc4ae9/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manager/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="64" selection-start-line="10" selection-start-column="64" selection-end-line="10" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/django_ajax_post.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.75">
+          <caret line="70" column="1" selection-start-line="70" selection-start-column="1" selection-end-line="70" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#548#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manager/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="4" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#28#0" expanded="false" />
+            <element signature="e#591#768#1" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/tags/product_thumbnail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.576923">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1536,7 +1621,7 @@
     <entry file="file://$PROJECT_DIR$/catalog/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="261" column="0" selection-start-line="261" selection-start-column="0" selection-end-line="261" selection-end-column="0" />
+          <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
           <folding>
             <element signature="e#411#609#0" expanded="false" />
             <element signature="e#538#609#0" expanded="false" />
@@ -1563,7 +1648,6 @@
             <element signature="e#9277#9378#0" expanded="false" />
             <element signature="e#9413#9576#0" expanded="false" />
             <element signature="e#9433#9448#0" expanded="false" />
-            <element signature="e#9612#9833#0" expanded="false" />
             <element signature="e#9814#9833#0" expanded="false" />
             <element signature="e#9869#10002#0" expanded="false" />
             <element signature="e#9945#10002#0" expanded="false" />
@@ -1571,51 +1655,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/shop_template/css/style.css">
+    <entry file="file://$PROJECT_DIR$/templates/tags/category_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.076923">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manager/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="1972" column="4" selection-start-line="1972" selection-start-column="4" selection-end-line="1972" selection-end-column="28" />
+          <caret line="165" column="42" selection-start-line="165" selection-start-column="42" selection-end-line="165" selection-end-column="42" />
+          <folding>
+            <element signature="e#15#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/tags/product_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.428572">
+          <caret line="48" column="35" selection-start-line="48" selection-start-column="35" selection-end-line="48" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/catalog/urls.py">
+    <entry file="file://$PROJECT_DIR$/accounts/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <caret line="92" column="18" selection-start-line="92" selection-start-column="18" selection-end-line="92" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/product.js">
+    <entry file="file://$PROJECT_DIR$/templates/catalog/rifas.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.5833333">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="-2.25">
+          <caret line="77" column="26" selection-start-line="77" selection-start-column="26" selection-end-line="77" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/catalog/product.html">
+    <entry file="file://$PROJECT_DIR$/catalog/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.307692">
-          <caret line="223" column="68" selection-start-line="223" selection-start-column="16" selection-end-line="223" selection-end-column="68" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="183" column="30" selection-start-line="183" selection-start-column="30" selection-end-line="183" selection-end-column="30" />
+          <folding>
+            <element signature="e#8382#9462#0" expanded="false" />
+            <element signature="e#9508#10900#0" expanded="false" />
+            <element signature="e#10951#11505#0" expanded="false" />
+            <element signature="e#12043#12645#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog/templatetags/catalog_filters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="22" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/cart/show_cart.html">
+    <entry file="file://$PROJECT_DIR$/templates/catalog/tags_cloud.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-47.0">
-          <caret line="73" column="71" selection-start-line="73" selection-start-column="49" selection-end-line="73" selection-end-column="71" />
+        <state vertical-scroll-proportion="-3.9230769">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/css/styles.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.8611111">
+          <caret line="283" column="0" selection-start-line="283" selection-start-column="0" selection-end-line="283" selection-end-column="0" />
           <folding>
+            <element signature="e#33#135#0" expanded="false" />
             <element signature="e#146#187#0" expanded="false" />
             <element signature="e#210#230#0" expanded="false" />
             <element signature="e#247#270#0" expanded="false" />
@@ -1635,6 +1751,7 @@
             <element signature="e#1385#1565#0" expanded="false" />
             <element signature="e#1580#1646#0" expanded="false" />
             <element signature="e#1660#1694#0" expanded="false" />
+            <element signature="e#1744#1783#0" expanded="false" />
             <element signature="e#1812#1920#0" expanded="false" />
             <element signature="e#1946#1970#0" expanded="false" />
             <element signature="e#1980#2002#0" expanded="false" />
@@ -1653,109 +1770,50 @@
             <element signature="e#3498#3629#0" expanded="false" />
             <element signature="e#3639#3665#0" expanded="false" />
             <element signature="e#3814#3888#0" expanded="false" />
+            <element signature="e#3907#3963#0" expanded="false" />
+            <element signature="e#3989#4080#0" expanded="false" />
+            <element signature="e#4099#4123#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manager/models.py">
+    <entry file="file://$PROJECT_DIR$/catalog/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="8" selection-start-line="23" selection-start-column="8" selection-end-line="23" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-            <element signature="e#591#692#1" expanded="true" />
-          </folding>
+          <caret line="46" column="70" selection-start-line="46" selection-start-column="70" selection-end-line="46" selection-end-column="70" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/tags/category_list.html">
+    <entry file="file://$PROJECT_DIR$/templates/catalog/product.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.076923">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="15" selection-start-line="0" selection-start-column="15" selection-end-line="0" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/layout.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.038462">
-          <caret line="131" column="38" selection-start-line="131" selection-start-column="38" selection-end-line="131" selection-end-column="38" />
+        <state vertical-scroll-proportion="-1.3846154">
+          <caret line="29" column="28" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/ca0f7776-9294-4519-8a0d-4b942910c07c/console.sql">
+    <entry file="file://$PROJECT_DIR$/static/shop_template/js/megamenu.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/e8326f82/ca0f7776-9294-4519-8a0d-4b942910c07c/..manager_promo4">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/catalog/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="311" column="21" selection-start-line="311" selection-start-column="21" selection-end-line="311" selection-end-column="21" />
-          <folding>
-            <element signature="e#8377#9457#0" expanded="false" />
-            <element signature="e#9503#10895#0" expanded="false" />
-            <element signature="e#10946#11500#0" expanded="false" />
-            <element signature="e#12038#12640#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/e8326f82/ca0f7776-9294-4519-8a0d-4b942910c07c/..manager_promo4_users">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manager/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="201" column="30" selection-start-line="201" selection-start-column="30" selection-end-line="201" selection-end-column="30" />
-          <folding>
-            <element signature="e#15#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manager/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="39" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/catalog/rifas.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53583616">
-          <caret line="191" column="39" selection-start-line="191" selection-start-column="39" selection-end-line="191" selection-end-column="39" />
-          <folding>
-            <element signature="e#1373#3489#0#HTML" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>

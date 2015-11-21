@@ -8,5 +8,7 @@ urlpatterns = patterns('manager.views',
                        url(r'^create_products/$', 'create_products'),
                        url(r'^rifas/add-user/$', 'add_user_rifas'),
                        url(r'^rifas/remove-user/$', 'remove_user_rifas'),
+                       url(r'^rifas/retrieve-info/$', 'retrieve_info'),
+
                        url(r'^send_mail/$', 'send_mail'),
                        )

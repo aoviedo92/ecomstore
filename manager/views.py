@@ -4,6 +4,7 @@ import glob
 import json
 from random import randint
 from django.contrib.auth.decorators import login_required
+from django.db.models import Sum
 from django.http import HttpResponse
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
@@ -174,6 +175,7 @@ def send_mail(request):
               ['aoviedo@estudiantes.uci.cu'], fail_silently=False)
     return HttpResponse()
 
+
 def add_user_rifas(request):
     # print(request.POST)
     users_iscritos = 0
@@ -191,6 +193,7 @@ def add_user_rifas(request):
     response = json.dumps({'success': 'true', 'users_inscritos': users_iscritos})
     return HttpResponse(response, content_type='application/javascript; charset=utf-8')
 
+
 def remove_user_rifas(request):
     print('remove')
     users_iscritos = 0
@@ -205,4 +208,17 @@ def remove_user_rifas(request):
             users_iscritos = promo.users.count()
 
     response = json.dumps({'success': 'true', 'users_inscritos': users_iscritos})
+    return HttpResponse(response, content_type='application/javascript; charset=utf-8')
+
+
+def retrieve_info(request):
+    print('retrie')
+    print(request.POST.get('promoid'))
+    promo_id = request.POST.get('promoid')
+    promo = Promo4.objects.get(id=promo_id)
+    total = promo.products.aggregate(Sum('price'))['price__sum']
+    percent = promo.discount
+    discount = total * percent / 100
+    response = json.dumps({"data": u"Apúntate en la rifa y llévate<br/> estos productos sólo por: %s" % discount})
+
     return HttpResponse(response, content_type='application/javascript; charset=utf-8')

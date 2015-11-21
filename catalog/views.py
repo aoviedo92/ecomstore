@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.core import urlresolvers
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
-from django.db.models import Avg
+from django.db.models import Avg, Sum
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template.loader import render_to_string
@@ -303,11 +303,15 @@ def add_tag(request):
 
 def rifas(request):
     promo4 = Promo4.objects.all()
+    promo4 = [promo for promo in promo4 if promo.is_open]
     user_include = False
-    if request.user.is_authenticated():
-        for promo in promo4:
-            if request.user in promo.users.all():
-                user_include = True
-                user_in_rifa = promo.id
-                break
+    for promo in promo4:
+        # total = promo.products.aggregate(Sum('price'))['price__sum']
+        # percent = promo.discount
+        # discount = total * percent / 100
+        # print(total-discount)
+        if request.user in promo.users.all():
+            user_include = True
+            user_in_rifa = promo.id
+            break
     return render_to_response("catalog/rifas.html", locals(), context_instance=RequestContext(request))

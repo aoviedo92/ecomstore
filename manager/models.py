@@ -18,12 +18,14 @@ class Promo3(models.Model):
 
 class Promo4(models.Model):
     """
-    rifas gratis, escogemos 3 productos, y q los usuarios se vayan registrando en la rifa
+    rifas gratis, escogemos 1-3 productos, y q los usuarios se vayan registrando en la rifa.
+    las rifas disminuyen entree un 40-50% aleatorio el total del precio.
     """
     products = models.ManyToManyField(Product)
     users = models.ManyToManyField(User, null=True, blank=True, related_name='usuarios inscritos')
     winner_user = models.ForeignKey(User, null=True, blank=True, related_name='usuario ganador')
     valid_until = models.DateField()
+    discount = models.IntegerField(default=40)
 
     def __unicode__(self):
         products = self.products.all()

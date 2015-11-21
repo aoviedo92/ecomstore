@@ -18,4 +18,5 @@ def currency(value, request=None):
         currency_ = "cuc"
     if currency_ == "mn":
         value *= 25
-    return "$" + str(value)
+        return "$%d.00" % value
+    return "$%.2f" % value

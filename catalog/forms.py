@@ -44,7 +44,7 @@ class OrderByForm(forms.Form):
     order_by = forms.ChoiceField(choices=OPTIONS, label="Ordenar por", required=False)
 
 class OrderByBrandForm(forms.Form):
-    OPTIONS = (("0", "filtra por la marca"),("brand", "brand"), ("brand2", "brand2"), ("brand3", "brand3"), ("brand4", "brand4"),)
+    OPTIONS = (("0", "filtra por la marca"),("giorgio", "GIORGIO"), ("armani", "brand2"), ("brand3", "brand3"), ("brand4", "brand4"),)
     order_by_brand = forms.ChoiceField(choices=OPTIONS, label="")
 
 
