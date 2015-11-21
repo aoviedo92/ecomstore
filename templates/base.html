@@ -40,15 +40,9 @@
     <link rel="stylesheet" href="{% static 'tooltipster/css/tooltipster.css' %}"/>
     <link rel="stylesheet" href="{% static 'tooltipster/css/themes/tooltipster-shadow.css' %}"/>
     <script src="{% static 'tooltipster/js/jquery.tooltipster.min.js' %}"></script>
-    <script>
-        $(document).ready(function () {
-            $('.tooltip').tooltipster({
-                maxWidth: 250,
-                contentAsHTML: true,
-                theme: 'tooltipster-shadow'
-            });
-        });
-    </script>
+
+    <script src="{% static 'js/base.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}"/>
     {% block styles %}
     {% endblock %}
     {% block scripts %}
@@ -72,13 +66,7 @@
             </div>
             {#CURRENCY#}
             {% currency_tag request %}
-            <script>
-                $(document).ready(function () {
-                    $("#id_currency_select").change(function () {
-                        $("#id_currency_form").submit()
-                    })
-                })
-            </script>
+
         </div>
 
         <div class="cssmenu">
@@ -109,62 +97,6 @@
                 <a href="{% url 'catalog_home' %}"><img src="{% static 'shop_template/images/logo.png' %}" alt=""/></a>
             </div>
             {#   MENU    #}
-            <script>
-                $(document).ready(function () {
-                    $('a.group-name').hover(function () {
-                        var group_name = $(this).text();
-                        var megapanel = $('.megapanel');
-                        switch (group_name) {
-                            case "Uniformes":
-{#                                megapanel.css({'padding': '15px', 'padding-right': '25px'});#}
-                                megapanel.css({'margin-left':'300px'});
-                                break;
-                            case "Tejidos":
-{#                                megapanel.css({'padding': '15px', 'padding-right': '150px'});#}
-                                megapanel.css({'margin-left':'250px'});
-                                break;
-                            case "Bodas":
-                                megapanel.css({'margin-left':'180px'});
-                                break;
-                            case "Mujeres":
-                                megapanel.css({'margin-left':'110px'});
-                                break;
-                            case "Hombres":
-                                megapanel.css({'margin-left':'0px'});
-                                break;
-                        }
-                    })
-                })
-            </script>
-            <style scoped>
-                .megapanel {
-                    padding: 5px 5px 5px 20px;
-                    width: 400px;
-                    text-align: left;
-{#                    margin-left: 200px;#}
-                }
-
-                .h_nav a {
-                    display: block;
-                    font-size: 1em;
-                    padding-bottom: 5px;
-                    color: #777;
-                    text-transform: capitalize;
-                    line-height: 2em;
-                    transition: all 0.3s ease-in-out 0s;
-                }
-
-                .h_nav a:hover {
-                    color: #333;
-                    transition: all 0.3s ease-in-out 0s;
-                    border-bottom: 1px solid #ccc;
-                }
-
-                .skyblue li > a, .skyblue > li.showhide span {
-                    color: #555;
-                }
-
-            </style>
             <div class="menu">
                 {% category_list request.path %}
             </div>

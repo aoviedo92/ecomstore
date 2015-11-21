@@ -43,10 +43,13 @@ class OrderByForm(forms.Form):
     OPTIONS = (("created_at", "Fecha"), ("name", "Nombre"), ("price", "Precio"), ("brand", "Marca"),)
     order_by = forms.ChoiceField(choices=OPTIONS, label="Ordenar por", required=False)
 
-class OrderByBrandForm(forms.Form):
-    OPTIONS = (("0", "filtra por la marca"),("giorgio", "GIORGIO"), ("armani", "brand2"), ("brand3", "brand3"), ("brand4", "brand4"),)
-    order_by_brand = forms.ChoiceField(choices=OPTIONS, label="")
 
+class OrderByBrandForm(forms.Form):
+    # TODO: trabajar en esta lista para mostrar las marcas, se puede poner en utils.py para usar DRY, pq tb usamos esta lista en la toolbar de produc_list
+
+    OPTIONS = (("0", "filtra por la marca"), ("giorgio", "GIORGIO"), ("armani", "brand2"), ("brand3", "brand3"),
+               ("brand4", "brand4"),)
+    order_by_brand = forms.ChoiceField(choices=OPTIONS, label="")
 
 
 class ProductsPerPageForm(forms.Form):

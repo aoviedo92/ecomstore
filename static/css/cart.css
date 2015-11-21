@@ -1,0 +1,25 @@
+.code-error {
+    border: 1px solid crimson;
+    color: crimson;
+}
+
+.code-success {
+    border: 1px solid #7CFC00;
+    color: #7CFC00;
+}
+
+.discount-yes {
+    color: #88ca25;
+    cursor: pointer;
+    background-color: #e0ffd5;
+}
+
+.tax-yes {
+    color: crimson;
+}
+
+.tax-no {
+    background-color: #e0ffd5;
+    color: #88ca25;
+    cursor: pointer;
+}

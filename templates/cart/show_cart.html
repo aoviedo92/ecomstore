@@ -3,6 +3,7 @@
 {% load catalog_filters %}
 {% block styles %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}"/>
     <link rel="stylesheet" href="{% static 'tooltipster/css/themes/tooltipster-discount.css' %}"/>
     <style>
         .promotions p.discount {
@@ -13,95 +14,12 @@
             color: {% if shipping_tax > 0 %}crimson{% else %}#88ca25; cursor: pointer;
                 background-color: #e0ffd5{% endif %};
         }
-
-        .code-error {
-            border: 1px solid crimson;
-            color: crimson;
-        }
-
-        .code-success {
-            border: 1px solid #7CFC00;
-            color: #7CFC00;
-        }
-        .discount-yes{
-            color: #88ca25;
-            cursor: pointer;
-            background-color: #e0ffd5;
-        }
-
-        .tax-yes {
-            color: crimson;
-        }
-
-        .tax-no {
-            background-color: #e0ffd5;
-            color : #88ca25;
-            cursor: pointer;
-        }
-
     </style>
 {% endblock %}
 {% block scripts %}
     <script src="{% static 'js/django_ajax_post.js' %}"></script>
-    <script>
-        $(document).ready(function () {
-            function tooltip(elem, content) {
-                $(elem).tooltipster({
-                    maxWidth: 300,
-                    contentAsHTML: true,
-                    theme: 'tooltipster-discount',
-                    arrow: false,
-                    content: content
-                });
-            }
-            tooltip('.tooltip-discount', null);
-            tooltip('.tooltip-tax', null);
+    <script src="{% static 'js/cart.js' %}"></script>
 
-            $("#discount_code").keypress(function (event) {
-                var code = $(this).val();
-                if (event.keyCode == 13) {
-                    var url = "/cart/process-discount-code/";
-                    var data = {code: code};
-                    var func = function (response) {
-                        var css_class;
-                        var cart_discount = $('#cart-discount');
-                        var cart_tax = $('#cart-tax');
-                        if (response.success == "True") {
-                            css_class = 'code-success'
-                        } else {
-                            css_class = 'code-error'
-                        }
-                        $('#cart-subtotal').text(response.cart_subtotal);
-                        cart_discount.text(response.discount);
-                        cart_tax.text(response.shipping_tax);
-
-                        $('#cart-total').text(response.total);
-                        $("#discount_code").removeClass().addClass(css_class);
-                        if (response.shipping_tax == "0"){
-                            cart_tax.removeClass().addClass('tax-no');
-                            tooltip('.tooltip-tax', null)
-                        }
-                        else{
-                            cart_tax.removeClass().addClass('tax-yes');
-                            $('.tooltip-tax').tooltipster('hide');
-                        }
-
-                        if(response.promotions){
-                            cart_discount.removeClass().addClass('tooltip-discount discount-yes');
-                            tooltip('.tooltip-discount', response.promotions)
-                        }
-                        else{
-                            cart_discount.removeClass().addClass('cart');
-                            $('.tooltip-discount').tooltipster('hide');
-                        }
-                    };
-                    ajax(url, data, func);
-                    event.preventDefault();
-                }
-            });
-
-        });
-    </script>
 {% endblock %}
 {% block content %}
     {% include 'tags/include_code_discount.html' %}

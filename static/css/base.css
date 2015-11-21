@@ -1,0 +1,25 @@
+.megapanel {
+    padding: 5px 5px 5px 20px;
+    width: 400px;
+    text-align: left;
+}
+
+.h_nav a {
+    display: block;
+    font-size: 1em;
+    padding-bottom: 5px;
+    color: #777;
+    text-transform: capitalize;
+    line-height: 2em;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.h_nav a:hover {
+    color: #333;
+    transition: all 0.3s ease-in-out 0s;
+    border-bottom: 1px solid #ccc;
+}
+
+.skyblue li > a, .skyblue > li.showhide span {
+    color: #555;
+}

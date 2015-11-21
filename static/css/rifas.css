@@ -1,0 +1,77 @@
+.tooltip-info {
+    width: 160px;
+    cursor: pointer;
+}
+
+.user-include {
+    background-color: rgba(255, 192, 203, 0.13);
+}
+
+.div-button, .remove {
+    display: none;
+    width: 200px;
+    height: 50px;
+    float: right;
+    cursor: pointer;
+    border-radius: 4px;
+    padding-top: 25px;
+    text-align: center;
+    background-color: #7FFFD4;
+    color: #006400;
+}
+
+.div-button:hover {
+    transition: 0.3s linear;
+    background-color: #3CB371;
+    color: #00FA9A;
+}
+
+.remove {
+    background-color: #936b18;
+    color: #5b4210;
+    display: none;
+}
+
+.block {
+    width: 99%;
+    margin-top: 50px;
+    padding: 15px 15px 30px 10px;
+    box-shadow: 0 0 4px gray;
+}
+
+.block hr {
+    border: 1px solid #ccc;
+}
+
+.block:hover {
+    box-shadow: 0 0 5px black;
+}
+
+.product-rifa {
+    float: left;
+}
+
+.link-product-rifa {
+    position: relative;
+    left: 0;
+    color: #555555;
+}
+
+.link-product-rifa:hover {
+    color: #333;
+
+}
+
+.image {
+    position: relative;
+    width: 100%;
+    padding: 2px;
+}
+
+a.link-product-rifa {
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
