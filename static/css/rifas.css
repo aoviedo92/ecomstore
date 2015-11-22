@@ -75,3 +75,20 @@ a.link-product-rifa {
     width: 100%;
     text-align: center;
 }
+.discount{
+    float: right;
+    /*color: #4CB1CA ;*/
+    color: #7DB122;
+    /*color: #6b4c10;*/
+    /*color: #999;*/
+    font-weight: bold;
+    font-size: 20px;
+}
+/*.cart-2{*/
+    /*color: #7DB122;*/
+/*}*/
+.percent{
+    color: #FFB929;
+    font-weight: bold;
+    font-size: 60px;
+}

@@ -11,24 +11,18 @@
     <a id="link" href="{% url 'login' %}?next={{ request.path }}" hidden></a>
     <ul class="rifa-list">
         {% for promo in promo4 %}
-            <li class="block">
+            <li class="block tooltip-info" promoid="{{ promo.id }}">
+                <div class="discount">
+                    <p class="">Descuento del <span class="percent">{{ promo.discount }}%</span></p>
+                </div>
                 <p class="cart">Habilitada hasta el: {{ promo.valid_until|date }}</p>
 
                 <p class="cart">Usuarios inscritos: <span id="users-inscritos">{{ promo.users.count }}</span></p>
 
-                <div>
-                    <p></p>
-                </div>
-                <p class="tooltip-info" promoid="{{ promo.id }}">descuento del {{ promo.discount }}%</p>
+                <div class="clear"></div>
                 <hr/>
                 <ul>
                     {% for p in promo.products.all %}
-{#                        <li class="product-rifa">#}
-{#                            <div class="image">#}
-{#                                <img src="{{ p.image.url }}" alt="{{ p.name }}" height="150" width="150"/>#}
-{#                                <a class="link-product-rifa" href="{{ p.get_absolute_url }}">{{ p.name }}</a>#}
-{#                            </div>#}
-{#                        </li>#}
                         {% include 'tags/product_thumbnail.html' %}
                     {% endfor %}
                 </ul>

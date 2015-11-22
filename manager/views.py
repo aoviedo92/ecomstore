@@ -196,18 +196,18 @@ def add_user_rifas(request):
 
 def remove_user_rifas(request):
     print('remove')
-    users_iscritos = 0
+    users_inscritos = 0
     if request.POST:
         promo_id = request.POST.get('promo_id')
         promo = Promo4.objects.get(id=promo_id)
-        users_iscritos = promo.users.count()
+        users_inscritos = promo.users.count()
         if request.user in promo.users.all():
             print('user esta x')
             promo.users.remove(request.user)
             promo.save()
-            users_iscritos = promo.users.count()
+            users_inscritos = promo.users.count()
 
-    response = json.dumps({'success': 'true', 'users_inscritos': users_iscritos})
+    response = json.dumps({'success': 'true', 'users_inscritos': users_inscritos})
     return HttpResponse(response, content_type='application/javascript; charset=utf-8')
 
 
@@ -219,6 +219,7 @@ def retrieve_info(request):
     total = promo.products.aggregate(Sum('price'))['price__sum']
     percent = promo.discount
     discount = total * percent / 100
-    response = json.dumps({"data": u"Apúntate en la rifa y llévate<br/> estos productos sólo por: %s" % discount})
+    data = u"Con un total de $%.2f y un descuento del %d%%<br/>llévate estos productos sólo por: $%s" % (total, percent, discount)
+    response = json.dumps({"data": data})
 
     return HttpResponse(response, content_type='application/javascript; charset=utf-8')

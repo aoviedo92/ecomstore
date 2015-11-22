@@ -146,7 +146,7 @@
                 </div>
                 <div class="col_1_of_2 span_1_of_2">
                     <ul class="f-list">
-                        <li><img src="{% static 'shop_template/images/3.png' %}"><span class="f-text">atención al cliente 78358301</span>
+                        <li><img src="{% static 'shop_template/images/3.png' %}"><span class="f-text">atención al cliente (+537)835 8301</span>
 
                             <div class="clear"></div>
                         </li>
@@ -239,10 +239,17 @@
                         <div class="col_1_of_f_2 span_1_of_f_2">
                             <h3> Desde Facebook</h3>
 {#                                                                            ../images/img-sprite.png#}
+{#  style="background: url({% static 'shop_template/images/img-sprite.png' %}) -157px -170px;"                          #}
                             <div class="recent-tweet">
+{#todo:el icono de facebook#}
                                 <div class="recent-tweet-info">
-                                    <span style="background: url({% static 'shop_template/images/img-sprite.png' %}) -157px -170px;"> </span>
+                                    <span id="face"> </span>
                                 </div>
+                                <style scoped>
+                                    #face{
+                                        background: url(../static/shop_template/images/img-sprite.png) -157px -170px;
+                                    }
+                                </style>
                                 <div class="recent-tweet-info">
                                     <p>Los <a href="/category/abrigos/">abrigos</a> de hombre son una pasada. Tienen muy
                                         buena calidad, me encanta <a href="/">Leoshop</a>.</p>
@@ -330,7 +337,7 @@
 
                                 <p>Cuba</p>
 
-                                <p>Teléfono:(+53) 7835 8301</p>
+                                <p>Teléfono:(+537)835 8301</p>
 
                                 <p>Email: <span>leoshop@uci.cu</span></p>
                             </div>
