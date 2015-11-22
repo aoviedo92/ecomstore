@@ -1,0 +1,30 @@
+{% load static %}
+
+<script src="{% static 'shop_template/js/jquery1.min.js' %}"></script>
+<script src="{% static 'js/django_ajax_post.js' %}"></script>
+<select title="rifas cerradas" id="select-closed-rifas">
+    <option value="0">seleccione rifa cerrada</option>
+    {% for closed_promo in closed_promos %}
+        <option value="{{ closed_promo.id }}">{{ closed_promo }}</option>
+    {% endfor %}
+</select>
+<button id="btn" hidden>Usuario ganador aleatorio</button>
+<div id="result"></div>
+<script>
+    $(document).ready(function () {
+        $("#select-closed-rifas").change(function () {
+            $('#btn').show()
+        });
+        $('#btn').click(function () {
+            $('#result').empty();
+            var selected_rifa_id = $("#select-closed-rifas").val();
+            var data = {selected_rifa_id: selected_rifa_id};
+            var url = '/manager/rifas/get-winner-user/';
+            var func = function (response) {
+                $('#result').append(response.result)
+            };
+            ajax(url, data, func)
+{#            console.log(selected_rifa_id)#}
+        })
+    })
+</script>

@@ -177,15 +177,12 @@ def send_mail(request):
 
 
 def add_user_rifas(request):
-    # print(request.POST)
     users_iscritos = 0
     if request.POST:
         promo_id = request.POST.get('promo_id')
         promo = Promo4.objects.get(id=promo_id)
         users_iscritos = promo.users.count()
-        if request.user in promo.users.all():
-            print('user esta')
-        else:
+        if request.user not in promo.users.all():
             promo.users.add(request.user)
             promo.save()
             users_iscritos = promo.users.count()
@@ -195,14 +192,12 @@ def add_user_rifas(request):
 
 
 def remove_user_rifas(request):
-    print('remove')
     users_inscritos = 0
     if request.POST:
         promo_id = request.POST.get('promo_id')
         promo = Promo4.objects.get(id=promo_id)
         users_inscritos = promo.users.count()
         if request.user in promo.users.all():
-            print('user esta x')
             promo.users.remove(request.user)
             promo.save()
             users_inscritos = promo.users.count()
@@ -212,14 +207,35 @@ def remove_user_rifas(request):
 
 
 def retrieve_info(request):
-    print('retrie')
-    print(request.POST.get('promoid'))
     promo_id = request.POST.get('promoid')
     promo = Promo4.objects.get(id=promo_id)
     total = promo.products.aggregate(Sum('price'))['price__sum']
     percent = promo.discount
     discount = total * percent / 100
-    data = u"Con un total de $%.2f y un descuento del %d%%<br/>llévate estos productos sólo por: $%s" % (total, percent, discount)
+    data = u"Con un total de $%.2f y un descuento del %d%%<br/>llévate estos productos sólo por: $%s" % (
+    total, percent, discount)
     response = json.dumps({"data": data})
 
     return HttpResponse(response, content_type='application/javascript; charset=utf-8')
+
+
+@login_required
+def rifas_results(request):
+    promos = Promo4.objects.all()
+    closed_promos = [promo for promo in promos if not promo.is_open]
+    return render_to_response('manager/promo4_results.html', locals(), context_instance=RequestContext(request))
+
+
+def get_winner_user(request):
+    promo_id = request.POST.get('selected_rifa_id')
+    promo = Promo4.objects.get(id=promo_id)
+    users = promo.users.all()
+    try:
+        winner_user = users[randint(0, len(users) - 1)]
+        promo.winner_user = winner_user
+        promo.save()
+        response = json.dumps({'result': 'el usuario ganador fue %s' % unicode(winner_user)})
+    except ValueError:
+        response = json.dumps({'result': 'No se inscribieron usuarios en esta rifa'})
+    return HttpResponse(response, content_type='application/javascript; charset=utf-8')
+

@@ -9,6 +9,8 @@ urlpatterns = patterns('manager.views',
                        url(r'^rifas/add-user/$', 'add_user_rifas'),
                        url(r'^rifas/remove-user/$', 'remove_user_rifas'),
                        url(r'^rifas/retrieve-info/$', 'retrieve_info'),
+                       url(r'^rifas/rifas-results/$', 'rifas_results'),
+                       url(r'^rifas/get-winner-user/$', 'get_winner_user'),
 
                        url(r'^send_mail/$', 'send_mail'),
                        )
