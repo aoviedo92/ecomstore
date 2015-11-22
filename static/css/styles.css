@@ -270,15 +270,4 @@ p.wishlist:hover {
 }
 
 /*tag cloud*/
-#tag_cloud {
-    padding: 10px;
-    background-color: #FFB929;
-}
-
-#tag_cloud a {
-    color: #fff;
-}
-
-#tag_cloud a:hover {
-    color: #6b4c10;
-}
+/*en la pag tag_cloud pq este fichero no lo cargan todas las pag y para evitar muchos css files*/
