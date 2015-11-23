@@ -73,12 +73,15 @@ class Images(models.Model):
     def __unicode__(self):
         return self.image.name
 
+BRANDS = [(1, "Dolce & Gabana"), (2, "Gucci"), (3, "Hugo Boss"), (4, "Versace"), (5, "Ralph Lauren"),
+              (6, "Lacoste"),
+              (7, "Chanel")]
 
 class Product(models.Model):
+
     name = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255, unique=True)
-
-    brand = models.CharField(max_length=50, default="brand")
+    brand = models.CharField(choices=BRANDS, max_length=50, default=1)
     sku = models.CharField(max_length=50, default="sku")
     price = models.DecimalField(max_digits=9, decimal_places=2, default=15)
     old_price = models.DecimalField(max_digits=9, decimal_places=2, blank=True, default=0.00)
@@ -226,6 +229,7 @@ try:
 except AlreadyRegistered:
     pass
 
+
 class ActiveProductReviewManager(models.Manager):
     # def all(self):
     #     return super(ActiveProductReviewManager, self).all().filter(is_approved=True)
@@ -257,6 +261,3 @@ class ProductRating(Review):
 
     def __unicode__(self):
         return "%s - %s " % (str(self.product), str(self.rating))
-
-
-

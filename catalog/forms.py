@@ -3,7 +3,7 @@ from ecomstore import settings
 
 __author__ = 'adrian'
 from django import forms
-from catalog.models import Product, ProductReview, ProductRating
+from catalog.models import Product, ProductReview, ProductRating, BRANDS
 
 
 class ProductAdminForm(forms.ModelForm):
@@ -45,11 +45,8 @@ class OrderByForm(forms.Form):
 
 
 class OrderByBrandForm(forms.Form):
-    # TODO: trabajar en esta lista para mostrar las marcas, se puede poner en utils.py para usar DRY, pq tb usamos esta lista en la toolbar de produc_list
-
-    OPTIONS = (("0", "filtra por la marca"), ("giorgio", "GIORGIO"), ("armani", "brand2"), ("brand3", "brand3"),
-               ("brand4", "brand4"),)
-    order_by_brand = forms.ChoiceField(choices=OPTIONS, label="")
+    BRANDS.insert(0, (0, "Todas las marcas"))
+    order_by_brand = forms.ChoiceField(choices=BRANDS, label="")
 
 
 class ProductsPerPageForm(forms.Form):

@@ -142,3 +142,5 @@ EMAIL_HOST_PASSWORD = 'test..15'
 # control whether a secure connection is use
 EMAIL_USE_TLS = True
 # EMAIL_USE_SSL = ''
+# BRANDS = [(1, "Dolce & Gabana"), (2, "Gucci"), (3, "Hugo Boss"), (4, "Versace"), (5, "Ralph Lauren"), (6, "Lacoste"),
+#           (7, "Chanel")]
