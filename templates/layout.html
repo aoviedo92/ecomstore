@@ -14,6 +14,7 @@
     <div class="rsidebar span_1_of_left">
         {% category_list_to_layout reques.path %}
         {% block filter_products %}{% endblock %}
+        {% tag_promotions %}
         {% tag_cloud %}
     </div>
     <div class="clear"></div>

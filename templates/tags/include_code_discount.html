@@ -1,6 +1,6 @@
 {% if big_text %}
     <div id="code">
-        <span id="label">{{ small_text }}%</span>
-        <span id="label-code"> {{ big_text }}</span>
+        <span id="label">{{ small_text|safe }}</span>
+        <span id="label-code"> {{ big_text|safe }}</span>
     </div>
 {% endif %}

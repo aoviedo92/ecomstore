@@ -212,8 +212,9 @@ def retrieve_info(request):
     total = promo.products.aggregate(Sum('price'))['price__sum']
     percent = promo.discount
     discount = total * percent / 100
+    total_discount = total - discount
     data = u"Con un total de $%.2f y un descuento del %d%%<br/>llévate estos productos sólo por: $%s" % (
-    total, percent, discount)
+    total, percent, total_discount)
     response = json.dumps({"data": data})
 
     return HttpResponse(response, content_type='application/javascript; charset=utf-8')

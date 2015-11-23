@@ -71,7 +71,7 @@
 
         <div class="cssmenu">
             <ul>
-                <li><a href="{% url 'checkout' %}">Checkout</a></li>
+                <li><a href="/rifas/">Rifas</a></li>
                 |
                 {% if user.is_authenticated %}
                     <li class="active"><a href="{% url 'my_account' %}">Mi cuenta</a></li>|
@@ -241,15 +241,10 @@
 {#                                                                            ../images/img-sprite.png#}
 {#  style="background: url({% static 'shop_template/images/img-sprite.png' %}) -157px -170px;"                          #}
                             <div class="recent-tweet">
-{#todo:el icono de facebook#}
-                                <div class="recent-tweet-info">
-                                    <span id="face"> </span>
+                                <div class="facebook-icon">
+                                    <span> </span>
                                 </div>
-                                <style scoped>
-                                    #face{
-                                        background: url(../static/shop_template/images/img-sprite.png) -157px -170px;
-                                    }
-                                </style>
+
                                 <div class="recent-tweet-info">
                                     <p>Los <a href="/category/abrigos/">abrigos</a> de hombre son una pasada. Tienen muy
                                         buena calidad, me encanta <a href="/">Leoshop</a>.</p>
@@ -257,7 +252,7 @@
                                 <div class="clear"></div>
                             </div>
                             <div class="recent-tweet">
-                                <div class="recent-tweet-icon">
+                                <div class="facebook-icon">
                                     <span> </span>
                                 </div>
                                 <div class="recent-tweet-info">

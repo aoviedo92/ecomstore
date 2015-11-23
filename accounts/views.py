@@ -11,7 +11,8 @@ from django.http import HttpResponseRedirect
 from forms import UserProfileForm, UserCreationForm
 from checkout.models import Order, OrderItem
 from utils import get_product_row, get_discount_code
-from manager.models import Promo3
+from manager.models import Promo3, Promo4
+
 
 def register(request):
     if request.method == 'POST':
@@ -39,9 +40,18 @@ def my_account(request):
     page_title = 'My Account'
     orders = Order.objects.filter(user=request.user)
     name = request.user.username
-    code, discount_ = get_discount_code(request)
-    small_text = u"Haz recibido un código de descuento! úsalo en el carrito de la compra. %s" % discount_
-    big_text = code
+    promo4 = Promo4.objects.filter(winner_user=request.user, active=True).first()  # siempre sera uno solo
+    products_chain = ''
+    if promo4:
+        for product in promo4.products.all():
+            products_chain += unicode(product) + '<br/>'
+        small_text = "Ud. ha sido el ganador de una rifa, y ahora puede comprar estos productos:<br/>" + products_chain
+        print(small_text)
+        big_text = "por un descuento del %d%%" % promo4.discount
+    else:
+        code, discount_ = get_discount_code(request)
+        small_text = u"Haz recibido un código de descuento! úsalo en el carrito de la compra. %s" % discount_
+        big_text = code
     return render_to_response("registration/my_account.html", locals(), context_instance=RequestContext(request))
 
 
@@ -97,6 +107,5 @@ def wish_list(request):
         show_toolbar = False
         paginator, products_per_pag = get_paginator(request, [], 1)
     product_row = get_product_row(products_per_pag)
-
 
     return render_to_response("tags/product_list.html", locals(), context_instance=RequestContext(request))

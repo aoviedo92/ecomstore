@@ -62,7 +62,7 @@ class ProductsPerPageForm(forms.Form):
 
 
 class Currency(forms.Form):
-    OPTIONS = (('cuc', 'CUC'), ('mn', 'MN'),)
+    OPTIONS = (('cuc', 'CUC'), ('mn', 'CUP'),)
     currency = forms.ChoiceField(choices=OPTIONS,
                                  label="",
                                  required=False,

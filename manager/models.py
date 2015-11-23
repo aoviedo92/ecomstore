@@ -26,6 +26,7 @@ class Promo4(models.Model):
     winner_user = models.ForeignKey(User, null=True, blank=True, related_name='usuario ganador')
     valid_until = models.DateField()
     discount = models.IntegerField(default=40)
+    active = models.BooleanField(default=True)
 
     def __unicode__(self):
         products = self.products.all()

@@ -1,7 +1,7 @@
 from decimal import Decimal
 from cart import cart
 from forms import CheckoutForm
-from manager.models import Promo3
+from manager.models import Promo3, Promo4
 from models import Order, OrderItem, OrderTotal
 
 
@@ -73,7 +73,16 @@ def create_order(request, order_total, transaction_id):
     order.save()
     # if the order save succeeded
     if order.pk:
-        try:# eliminar el codigo de promoion para el usuario
+        # verificar si el usuario tuvo la promo4, para eliminarla
+        try:
+            promo4_id = request.session['promo4_id']
+            del request.session['promo4_id']
+            promo4 = Promo4.objects.get(id=promo4_id)
+            promo4.active = False
+            promo4.save()
+        except KeyError:
+            pass
+        try:  # eliminar el codigo de promoion para el usuario
             promo_id = request.session['promo3_id']
             del request.session['promo3_id']
             Promo3.objects.get(id=promo_id).delete()

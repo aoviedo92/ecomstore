@@ -9,15 +9,11 @@ from django.template import RequestContext
 import cart
 from catalog.models import Product, Category
 from checkout.models import Order, OrderTotal
-from manager.models import Promo3
+from manager.models import Promo3, Promo4
 from utils import promo2, get_discount_code
 
 
-def show_cart(request, promotion_by_code_discount=None):
-    # try:
-    #     del request.session['promo3_id']
-    # except KeyError:
-    #     pass
+def show_cart(request):
     if request.method == 'POST':
         post_data = request.POST.copy()
         if 'submit_remove.x' in post_data:
@@ -26,17 +22,19 @@ def show_cart(request, promotion_by_code_discount=None):
             cart.update_cart(request)
     cart_item_count = cart.cart_distinct_item_count(request)
     cart_items = cart.get_cart_items(request)
-
-    code, discount_ = get_discount_code(request)
-    small_text = u"Puedes usar tu código de descuento aquí. %s" % discount_
-    big_text = code
+    # mostrar el panel amarillo con infos muy importantes(1 de solo 2)
+    try:
+        promo4 = Promo4.objects.get(winner_user=request.user, active=True)
+        small_text = "Ud. ha sido el ganador de una rifa, y ahora puede comprar estos productos<br/>"
+        big_text = "Por un descuento del %d%%" % promo4.discount
+    except Promo4.DoesNotExist:
+        code, discount_ = get_discount_code(request)
+        small_text = u"Puedes usar tu código de descuento aquí. %s%%" % discount_
+        big_text = code
 
     total, discount, promotions, cart_subtotal, shipping_tax, shipping_tax_promotions = promo(request,
-                                                                                              promotion_by_code_discount,
                                                                                               cart_item_count,
                                                                                               cart_items)
-    # request.session['total'] = str(total)
-    # print('cook total - views',request.session['total'])
     page_title = 'Shopping Cart'
     return render_to_response('cart/show_cart.html', locals(), context_instance=RequestContext(request))
 
@@ -70,9 +68,10 @@ def ajax_promo3(request):
         success = 'False'
         promotion_by_code_discount = None
     total, discount, promotions, cart_subtotal, shipping_tax, shipping_tax_promotions = promo(request,
-                                                                                              promotion_by_code_discount,
                                                                                               cart_item_count,
-                                                                                              cart_items)
+                                                                                              cart_items,
+                                                                                              promotion_by_code_discount=promotion_by_code_discount
+                                                                                              )
 
     resp_dict = {'success': success, 'total': '$%.2f' % total, 'discount': '$%.2f' % discount, 'promotions': promotions,
                  'cart_subtotal': '$%.2f' % cart_subtotal, 'shipping_tax': '$%.2f' % shipping_tax,
@@ -82,13 +81,26 @@ def ajax_promo3(request):
     return HttpResponse(response, content_type='application/javascript; charset=utf-8')
 
 
-def promo(request, promotion_by_code_discount, cart_item_count, cart_items):
+def promo(request, cart_item_count, cart_items, promotion_by_code_discount=None):
     discount = Decimal(0.00)
     shipping_tax = Decimal(3.00)
     promotions = False
+    # PROMO 4 -- RIFAS
+    promo4 = Promo4.objects.filter(winner_user=request.user, active=True).first()
+    if promo4:
+        request.session['promo4_id'] = str(promo4.id)
+        total = Decimal(0.00)
+        cart_items_products = cart.get_product_from_cart_item(cart_items)
+        for product in promo4.products.all():
+            if product not in cart_items_products:
+                cart.add_to_cart(request, product)
+            total += product.price
+        percent = promo4.discount
+        discount = total * percent / 100
+        promotions = "Ud. ha sido el ganador de una rifa, y ahora puede comprar estos productos"
     # PROMO 3 -- BY CODE DISCOUNT
     cart_subtotal = cart.cart_subtotal(request)
-    if promotion_by_code_discount:
+    if promotion_by_code_discount and not promotions:
         percent = promotion_by_code_discount
         discount = cart_subtotal * percent / 100
         promotions = u"Haz recibido un código de descuento de un {percent}% del total".format(percent=percent)

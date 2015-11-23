@@ -36,6 +36,10 @@ def get_cart_items(request):
     """
     return CartItem.objects.filter(cart_id=_cart_id(request))
 
+def get_product_from_cart_item(cart_items):
+    product_ids_dict = cart_items.values('product')
+    product_ids = [product['product'] for product in product_ids_dict]
+    return Product.active.filter(id__in=product_ids)
 
 def add_to_cart(request, product=None):
     """

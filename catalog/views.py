@@ -39,12 +39,10 @@ def index(request):
             recommendations_for_user = recommendations_for_user_login(request)
             if len(recommendations_for_user.values()[0]) < 3:
                 recommendations_for_user_active = False
-    print(1)
     recommended_1, recommended_2, recommended_3 = random_recommendations()
     # --> {u'Deseados': [<Product: prod14>, <Product: pro11>, <Product: prod12>]}
     # buscar hasta q encontremos productos que hayan sido comprado juntos
-    promotion = utils.promotions()
-    print(2)
+    # promotion = utils.promotions()
     random_list = []
     while True:
         all_products = Product.active.all()
@@ -59,7 +57,6 @@ def index(request):
                 continue
         else:
             continue
-    print(3)
     featured_list = Product.active.filter(is_featured=True)
     featured_list = list(featured_list)
     shuffle(featured_list)
@@ -302,14 +299,10 @@ def add_tag(request):
 
 
 def rifas(request):
-    promo4 = Promo4.objects.all()
+    promo4 = Promo4.objects.filter(active=True)
     promo4 = [promo for promo in promo4 if promo.is_open]
     user_include = False
     for promo in promo4:
-        # total = promo.products.aggregate(Sum('price'))['price__sum']
-        # percent = promo.discount
-        # discount = total * percent / 100
-        # print(total-discount)
         if request.user in promo.users.all():
             user_include = True
             user_in_rifa = promo.id
