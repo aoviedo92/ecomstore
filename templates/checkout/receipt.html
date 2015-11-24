@@ -19,7 +19,7 @@
         <tfoot>
         <tr>
             <td colspan="4" class="right">
-                <h4 class="total_cart">Total: {{ order.total|currency:request }}</h4>
+                <h4 class="total_cart">Total: {{ order.ordertotal.total|currency:request }}</h4>
             </td>
         </tr>
         </tfoot>

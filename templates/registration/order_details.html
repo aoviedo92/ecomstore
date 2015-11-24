@@ -18,9 +18,15 @@
         </tr>
         </thead>
         <tfoot>
+        {% if order.ordertotal.discount > 0 %}
+            <tr>
+                <td colspan="4" class="right"><p class="cart">descuento
+                    de {{ order.ordertotal.discount|currency:request }}</p></td>
+            </tr>
+        {% endif %}
         <tr>
             <td colspan="4" class="right">
-                <h4 class="total_cart">Total: {{ order.total|currency:request }}</h4>
+                <h4 class="total_cart">Total: {{ order.ordertotal.total|currency:request }}</h4>
             </td>
         </tr>
         </tfoot>

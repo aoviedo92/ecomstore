@@ -27,19 +27,6 @@ class BaseOrderInfo(models.Model):
     shipping_city = models.IntegerField(choices=CITIES, max_length=50, default=0)
 
 
-class OrderTotal(models.Model):
-    shipping_tax = models.DecimalField(default=3.00, decimal_places=2, max_digits=9)
-    discount = models.DecimalField(default=0.00, decimal_places=2, max_digits=9)
-    cart_subtotal = models.DecimalField(decimal_places=2, max_digits=9)
-    purchased = models.BooleanField(default=False)
-
-    @property
-    def total(self):
-        return Decimal(self.cart_subtotal) - Decimal(self.discount) + Decimal(self.shipping_tax)
-
-    def __unicode__(self):
-        return '%d -- %.2f' % (self.id, self.total)
-
 class Order(BaseOrderInfo):
     # each individual status
     SUBMITTED = 1
@@ -58,24 +45,41 @@ class Order(BaseOrderInfo):
     last_updated = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, null=True)
     transaction_id = models.CharField(max_length=20)
-    order_total = models.OneToOneField(OrderTotal)
+    # order_total = models.OneToOneField(OrderTotal)
     # shipping_tax = models.DecimalField(default=3.00)
     # discount = models.DecimalField(default=0.00)
 
     def __unicode__(self):
-        return 'Order # %d -- %.2f' % (self.id, self.order_total.total)
+        # return 'Order # %d -- %.2f' % (self.id, self.order_total.total)
+        return 'Order # %d' % self.id
 
-    @property
-    def total(self):
+    # @property
+    # def total(self):
         # total = decimal.Decimal('0.00')
         # order_items = OrderItem.objects.filter(order=self)
         # for item in order_items:
         #     total += item.total
-        return self.order_total.total
+        # return self.order_total.total
 
     @models.permalink
     def get_absolute_url(self):
         return 'order_details', (), {'order_id': self.id}
+
+
+class OrderTotal(models.Model):
+    shipping_tax = models.DecimalField(default=3.00, decimal_places=2, max_digits=9)
+    discount = models.DecimalField(default=0.00, decimal_places=2, max_digits=9)
+    cart_subtotal = models.DecimalField(decimal_places=2, max_digits=9)
+    purchased = models.BooleanField(default=False)
+    order = models.OneToOneField(Order, blank=True, null=True)
+    promo = models.CharField(max_length=50, default='no')
+
+    @property
+    def total(self):
+        return self.cart_subtotal - self.discount + self.shipping_tax
+
+    def __unicode__(self):
+        return '%d -- %.2f' % (self.id, self.total)
 
 
 class OrderItem(models.Model):

@@ -46,7 +46,6 @@ def my_account(request):
         for product in promo4.products.all():
             products_chain += unicode(product) + '<br/>'
         small_text = "Ud. ha sido el ganador de una rifa, y ahora puede comprar estos productos:<br/>" + products_chain
-        print(small_text)
         big_text = "por un descuento del %d%%" % promo4.discount
     else:
         code, discount_ = get_discount_code(request)

@@ -46,7 +46,7 @@ def show_checkout(request):
 def receipt(request):
     order_number = request.session.get('order_number', '')
     if order_number:
-        order = Order.objects.filter(id=order_number)[0]
+        order = Order.objects.get(id=order_number)
         order_items = OrderItem.objects.filter(order=order)
         del request.session['order_number']
     else:

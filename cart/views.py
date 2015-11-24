@@ -13,6 +13,7 @@ from manager.models import Promo3, Promo4
 from utils import promo2, get_discount_code
 
 
+
 def show_cart(request):
     if request.method == 'POST':
         post_data = request.POST.copy()
@@ -62,6 +63,7 @@ def ajax_promo3(request):
             promotion_by_code_discount = promo3.discount
             success = 'True'
             request.session['promo3_id'] = str(promo3.id)
+
         else:
             promotion_by_code_discount = None
             success = 'False'
@@ -83,39 +85,24 @@ def ajax_promo3(request):
 
 
 def promo(request, cart_item_count, cart_items, promotion_by_code_discount=None):
-    # discount = Decimal(0.00)
-    # shipping_tax = Decimal(3.00)
-    # promotions = False
-    # USUARIO ANONIMO
-    discount, promotions = anonymous_user(request)
-
-    # PROMO 4 -- RIFAS
+    discount, promotions, promo_label_for_db = anonymous_user(request)
     if not promotions:
-        discount, promotions = promo4_rifas(request, cart_items)
-
-    # PROMO 3 -- BY CODE DISCOUNT
+        discount, promotions, promo_label_for_db = promo4_rifas(request, cart_items)
     if not promotions:
-        discount, promotions = promo3_code_discount(request, promotion_by_code_discount)
-
+        discount, promotions, promo_label_for_db = promo3_code_discount(request, promotion_by_code_discount)
     if not promotions:
-        discount, promotions = promo2_buy_two_take_one(request, cart_items)
-        print(discount, promotions)
-
-    # PROMO 1 -- 5+ prods
+        discount, promotions, promo_label_for_db = promo2_buy_two_take_one(request, cart_items)
     if not promotions:
-        discount, promotions = promo1_more_5_prods(request, cart_item_count)
-
-    # PROMO 0 -- SHIPPING TAX
+        discount, promotions, promo_label_for_db = promo1_more_5_prods(request, cart_item_count)
     shipping_tax, shipping_tax_promotions = promo0_shipping_tax(request, promotions)
-
+    if shipping_tax_promotions:
+        promo_label_for_db = 'shipping_tax'
     cart_subtotal = cart.cart_subtotal(request)
-    total = create_order_step_1(request, cart_subtotal, discount, shipping_tax)
-    print('cart-total', total)
-    total = Decimal('%.2f' % total)
-    discount = Decimal('%.2f' % discount)
-    discount = Decimal('%.2f' % discount)
     cart_subtotal = Decimal('%.2f' % cart_subtotal)
+    discount = Decimal('%.2f' % discount)
     shipping_tax = Decimal('%.2f' % shipping_tax)
+    total = create_order_step_1(request, cart_subtotal, discount, shipping_tax, promo_label_for_db)
+    total = Decimal('%.2f' % total)
     return total, discount, promotions, cart_subtotal, shipping_tax, shipping_tax_promotions
 
 
@@ -123,8 +110,8 @@ def anonymous_user(request):
     if request.user.is_anonymous():
         discount = 0.00
         promotions = u"Convirtiéndote en usuario de nuestro sitio podrías obtener numerosas ventajas a la hora de la compra y también generosos descuentos!"
-        return discount, promotions
-    return 0.00, False
+        return discount, promotions, 'no'
+    return 0.00, False, 'no'
 
 
 def promo4_rifas(request, cart_items):
@@ -132,6 +119,7 @@ def promo4_rifas(request, cart_items):
         promo4 = Promo4.objects.filter(winner_user=request.user, active=True).first()
         if promo4:
             request.session['promo4_id'] = str(promo4.id)
+
             total = Decimal(0.00)
             cart_items_products = cart.get_product_from_cart_item(cart_items)
             for product in promo4.products.all():
@@ -142,8 +130,8 @@ def promo4_rifas(request, cart_items):
             discount = total * percent / 100
             promotions = "Ud. ha sido el ganador de una rifa, y ahora puede comprar estos productos " \
                          "por un descuento del %d%%" % percent
-            return discount, promotions
-    return 0.00, False
+            return discount, promotions, 'rifas'
+    return 0.00, False, 'no'
 
 
 def promo3_code_discount(request, promotion_by_code_discount):
@@ -152,8 +140,8 @@ def promo3_code_discount(request, promotion_by_code_discount):
         percent = promotion_by_code_discount
         discount = cart_subtotal * percent / 100
         promotions = u"Haz recibido un código de descuento de un {percent}% del total".format(percent=percent)
-        return discount, promotions
-    return 0.00, False
+        return discount, promotions, 'code_discount'
+    return 0.00, False, 'no'
 
 
 def promo2_buy_two_take_one(request, cart_items):
@@ -176,9 +164,8 @@ def promo2_buy_two_take_one(request, cart_items):
             cart.add_to_cart(request, product)
         discount = product.price
         promotions = promo2_popup
-        return discount, promotions
-
-    return 0.00, False
+        return discount, promotions, "buy_two_take_one"
+    return 0.00, False, 'no'
 
 
 def promo1_more_5_prods(request, cart_item_count):
@@ -187,8 +174,8 @@ def promo1_more_5_prods(request, cart_item_count):
         percent = 10  # 10% de descuento
         discount = cart_subtotal * percent / 100
         promotions = "Si llevas 5+ productos te descontamos el 10% del total."
-        return discount, promotions
-    return 0.00, False
+        return discount, promotions, 'more_5_prods'
+    return 0.00, False, 'no'
 
 
 def promo0_shipping_tax(request, promotions):
@@ -200,13 +187,22 @@ def promo0_shipping_tax(request, promotions):
     return 3.00, False
 
 
-def create_order_step_1(request, cart_subtotal, discount, shipping_tax):
+def create_order_step_1(request, cart_subtotal, discount, shipping_tax, shipping_tax_promotions):
+    total = cart_subtotal - discount + shipping_tax
     try:
-        del request.session['ordertotalid']
+        order_total_id = request.session['ordertotalid']
+        order_total = OrderTotal.objects.get(id=order_total_id)
+        order_total.shipping_tax = shipping_tax
+        order_total.discount = discount
+        order_total.cart_subtotal = cart_subtotal
+        order_total.promo = shipping_tax_promotions
+        order_total.save()
     except KeyError:
-        pass
-    total = Decimal(cart_subtotal) - Decimal(discount) + Decimal(shipping_tax)
-    order_total = OrderTotal.objects.create(shipping_tax=shipping_tax, discount=discount, cart_subtotal=cart_subtotal)
-    order_total.save()
-    request.session['ordertotalid'] = order_total.id
+        order_total = OrderTotal()
+        order_total.shipping_tax = shipping_tax
+        order_total.discount = discount
+        order_total.cart_subtotal = cart_subtotal
+        order_total.promo = shipping_tax_promotions
+        order_total.save()
+        request.session['ordertotalid'] = order_total.id
     return total

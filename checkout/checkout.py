@@ -59,9 +59,9 @@ def create_order(request, order_total, transaction_id):
     order.ip_address = request.META.get('REMOTE_ADDR')
     order.status = Order.SUBMITTED
     order.user = None
-    order.order_total = order_total
+    # order.order_total = order_total
     order_total.purchased = True
-    order_total.save()
+
     if request.user.is_authenticated():
         order.user = request.user
         from accounts import profile
@@ -72,6 +72,8 @@ def create_order(request, order_total, transaction_id):
         if not user_profile.email or not user_profile.shipping_name or user_profile.shipping_city == 0:
             profile.set_profile(request)
     order.save()
+    order_total.order = order
+    order_total.save()
     # if the order save succeeded
     if order.pk:
         # verificar si el usuario tuvo la promo4, para eliminarla
