@@ -2,7 +2,7 @@ from django.db import models
 from django import forms
 from django.contrib.auth.models import User
 from catalog.models import Product
-import decimal
+from decimal import Decimal
 
 
 class BaseOrderInfo(models.Model):
@@ -35,7 +35,7 @@ class OrderTotal(models.Model):
 
     @property
     def total(self):
-        return self.cart_subtotal - self.discount + self.shipping_tax
+        return Decimal(self.cart_subtotal) - Decimal(self.discount) + Decimal(self.shipping_tax)
 
     def __unicode__(self):
         return '%d -- %.2f' % (self.id, self.total)

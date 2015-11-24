@@ -169,10 +169,7 @@ def create_product_aux(category):
 
 
 def send_mail(request):
-    from django.core.mail import send_mail
 
-    send_mail('Subject here', 'Here is the message.', 'aoviedo@estudiantes.uci.cu',
-              ['aoviedo@estudiantes.uci.cu'], fail_silently=False)
     return HttpResponse()
 
 

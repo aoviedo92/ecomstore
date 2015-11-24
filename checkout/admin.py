@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import Order, OrderItem
+from models import Order, OrderItem, OrderTotal
 
 
 class OrderItemInline(admin.StackedInline):
@@ -26,3 +26,4 @@ class OrderAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Order, OrderAdmin)
+admin.site.register(OrderTotal)

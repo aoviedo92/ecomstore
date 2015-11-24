@@ -3,6 +3,7 @@ from random import randint, random
 from catalog.models import Product
 from ecomstore import settings
 from manager.models import Promo3, Promo2
+from django.core.mail import send_mail
 
 
 def get_product_row(products_per_pag):
@@ -97,3 +98,9 @@ def get_discount_code(request):
         code = False
         discount = False
     return code, discount
+
+def send_email(subject, message, to):
+    if not isinstance(to, list):
+        to = [to]
+    send_mail(subject, message, 'aoviedo@estudiantes.uci.cu',
+              to, fail_silently=False)

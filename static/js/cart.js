@@ -11,7 +11,7 @@ $(document).ready(function () {
 
     tooltip('.tooltip-discount', null);
     tooltip('.tooltip-tax', null);
-
+    //todo cuando se recibe la respuesta, esta viene en este formato: $xx.xx, llevarlo a xx.xxcuc, tratar de agregarle + o - delante denotando promocion o impuesto
     $("#discount_code").keypress(function (event) {
         var code = $(this).val();
         if (event.keyCode == 13) {

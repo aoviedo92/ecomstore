@@ -39,7 +39,7 @@ def show_checkout(request):
             form = CheckoutForm(label_suffix="")
     page_title = 'Checkout'
     small_text = u"Total en el carrito"
-    big_text = OrderTotal.objects.get(id=request.session['ordertotalid']).total
+    big_text = "%.2fcuc" % OrderTotal.objects.get(id=request.session['ordertotalid']).total
     return render_to_response('checkout/checkout.html', locals(), context_instance=RequestContext(request))
 
 

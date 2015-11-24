@@ -50,7 +50,7 @@ def my_account(request):
         big_text = "por un descuento del %d%%" % promo4.discount
     else:
         code, discount_ = get_discount_code(request)
-        small_text = u"Haz recibido un código de descuento! úsalo en el carrito de la compra. %s" % discount_
+        small_text = u"Haz recibido un código de descuento! úsalo en el carrito de la compra. %s%%" % discount_
         big_text = code
     return render_to_response("registration/my_account.html", locals(), context_instance=RequestContext(request))
 

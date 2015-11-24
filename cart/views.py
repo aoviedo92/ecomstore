@@ -23,14 +23,15 @@ def show_cart(request):
     cart_item_count = cart.cart_distinct_item_count(request)
     cart_items = cart.get_cart_items(request)
     # mostrar el panel amarillo con infos muy importantes(1 de solo 2)
-    try:
-        promo4 = Promo4.objects.get(winner_user=request.user, active=True)
-        small_text = "Ud. ha sido el ganador de una rifa, y ahora puede comprar estos productos<br/>"
-        big_text = "Por un descuento del %d%%" % promo4.discount
-    except Promo4.DoesNotExist:
-        code, discount_ = get_discount_code(request)
-        small_text = u"Puedes usar tu código de descuento aquí. %s%%" % discount_
-        big_text = code
+    if request.user.is_authenticated():
+        try:
+            promo4 = Promo4.objects.get(winner_user=request.user, active=True)
+            small_text = "Ud. ha sido el ganador de una rifa, y ahora puede comprar estos productos<br/>"
+            big_text = "Por un descuento del %d%%" % promo4.discount
+        except Promo4.DoesNotExist:
+            code, discount_ = get_discount_code(request)
+            small_text = u"Puedes usar tu código de descuento aquí. %s%%" % discount_
+            big_text = code
 
     total, discount, promotions, cart_subtotal, shipping_tax, shipping_tax_promotions = promo(request,
                                                                                               cart_item_count,
@@ -82,68 +83,32 @@ def ajax_promo3(request):
 
 
 def promo(request, cart_item_count, cart_items, promotion_by_code_discount=None):
-    discount = Decimal(0.00)
-    shipping_tax = Decimal(3.00)
-    promotions = False
-    # PROMO 4 -- RIFAS
-    promo4 = Promo4.objects.filter(winner_user=request.user, active=True).first()
-    if promo4:
-        request.session['promo4_id'] = str(promo4.id)
-        total = Decimal(0.00)
-        cart_items_products = cart.get_product_from_cart_item(cart_items)
-        for product in promo4.products.all():
-            if product not in cart_items_products:
-                cart.add_to_cart(request, product)
-            total += product.price
-        percent = promo4.discount
-        discount = total * percent / 100
-        promotions = "Ud. ha sido el ganador de una rifa, y ahora puede comprar estos productos"
-    # PROMO 3 -- BY CODE DISCOUNT
-    cart_subtotal = cart.cart_subtotal(request)
-    if promotion_by_code_discount and not promotions:
-        percent = promotion_by_code_discount
-        discount = cart_subtotal * percent / 100
-        promotions = u"Haz recibido un código de descuento de un {percent}% del total".format(percent=percent)
-    # PROMO 2 -- llevate gratis <P> si compras 2 de <C>
-    if not promotions:
-        category, product = promo2()
-        style = "<span style='color: #426f42; text-decoration: underline; font-weight: bold;'>"
-        promo2_popup = u"Llévate gratis este producto: {style}{product}</span> " \
-                       u"si compras dos de esta categoria: {style}{category}</span>".format(style=style,
-                                                                                            product=product,
-                                                                                            category=category)
+    # discount = Decimal(0.00)
+    # shipping_tax = Decimal(3.00)
+    # promotions = False
+    # USUARIO ANONIMO
+    discount, promotions = anonymous_user(request)
 
-        # obtener productos de los cart items
-        product_ids = cart_items.values('product')
-        product_ids = [product_id['product'] for product_id in product_ids]
-        products = Product.active.filter(id__in=product_ids)
-        # obtener las categorias de estos prod
-        categories = Category.active.filter(product__in=products)
-        cant_prod_of_this_cat = list(categories).count(category)
-        if cant_prod_of_this_cat == 2:
-            if product not in products:
-                cart.add_to_cart(request, product)
-                discount = product.price
-                promotions = promo2_popup
-        elif cant_prod_of_this_cat > 2:
-            if product not in products:
-                cart.add_to_cart(request, product)
-            discount = product.price
-            promotions = promo2_popup
-        cart_subtotal = cart.cart_subtotal(request)
+    # PROMO 4 -- RIFAS
+    if not promotions:
+        discount, promotions = promo4_rifas(request, cart_items)
+
+    # PROMO 3 -- BY CODE DISCOUNT
+    if not promotions:
+        discount, promotions = promo3_code_discount(request, promotion_by_code_discount)
+
+    if not promotions:
+        discount, promotions = promo2_buy_two_take_one(request, cart_items)
+        print(discount, promotions)
 
     # PROMO 1 -- 5+ prods
-    if cart_item_count >= 5 and not promotions:
-        percent = 10  # 10% de descuento
-        discount = cart_subtotal * percent / 100
-        promotions = "Si llevas 5+ productos te descontamos el 10% del total."
+    if not promotions:
+        discount, promotions = promo1_more_5_prods(request, cart_item_count)
 
     # PROMO 0 -- SHIPPING TAX
-    shipping_tax_promotions = None
-    if cart_subtotal >= 75 and not promotions:
-        shipping_tax = 0
-        shipping_tax_promotions = u"Si compras +75cuc no te cobramos impuestos de envío."
+    shipping_tax, shipping_tax_promotions = promo0_shipping_tax(request, promotions)
 
+    cart_subtotal = cart.cart_subtotal(request)
     total = create_order_step_1(request, cart_subtotal, discount, shipping_tax)
     print('cart-total', total)
     total = Decimal('%.2f' % total)
@@ -154,15 +119,94 @@ def promo(request, cart_item_count, cart_items, promotion_by_code_discount=None)
     return total, discount, promotions, cart_subtotal, shipping_tax, shipping_tax_promotions
 
 
+def anonymous_user(request):
+    if request.user.is_anonymous():
+        discount = 0.00
+        promotions = u"Convirtiéndote en usuario de nuestro sitio podrías obtener numerosas ventajas a la hora de la compra y también generosos descuentos!"
+        return discount, promotions
+    return 0.00, False
+
+
+def promo4_rifas(request, cart_items):
+    if request.user.is_authenticated():
+        promo4 = Promo4.objects.filter(winner_user=request.user, active=True).first()
+        if promo4:
+            request.session['promo4_id'] = str(promo4.id)
+            total = Decimal(0.00)
+            cart_items_products = cart.get_product_from_cart_item(cart_items)
+            for product in promo4.products.all():
+                if product not in cart_items_products:
+                    cart.add_to_cart(request, product)
+                total += product.price
+            percent = promo4.discount
+            discount = total * percent / 100
+            promotions = "Ud. ha sido el ganador de una rifa, y ahora puede comprar estos productos " \
+                         "por un descuento del %d%%" % percent
+            return discount, promotions
+    return 0.00, False
+
+
+def promo3_code_discount(request, promotion_by_code_discount):
+    cart_subtotal = cart.cart_subtotal(request)
+    if promotion_by_code_discount:
+        percent = promotion_by_code_discount
+        discount = cart_subtotal * percent / 100
+        promotions = u"Haz recibido un código de descuento de un {percent}% del total".format(percent=percent)
+        return discount, promotions
+    return 0.00, False
+
+
+def promo2_buy_two_take_one(request, cart_items):
+    category, product = promo2()
+    style = "<span style='color: #426f42; text-decoration: underline; font-weight: bold;'>"
+    promo2_popup = u"Llévate gratis este producto: {style}{product}</span> " \
+                   u"si compras dos de esta categoria: {style}{category}</span>".format(style=style,
+                                                                                        product=product,
+                                                                                        category=category)
+
+    # obtener productos de los cart items
+    product_ids = cart_items.values('product')
+    product_ids = [product_id['product'] for product_id in product_ids]
+    products = Product.active.filter(id__in=product_ids)
+    # obtener las categorias de estos prod
+    categories = Category.active.filter(product__in=products)
+    cant_prod_of_this_cat = list(categories).count(category)
+    if cant_prod_of_this_cat >= 2:
+        if product not in products:
+            cart.add_to_cart(request, product)
+        discount = product.price
+        promotions = promo2_popup
+        return discount, promotions
+
+    return 0.00, False
+
+
+def promo1_more_5_prods(request, cart_item_count):
+    if cart_item_count >= 5:
+        cart_subtotal = cart.cart_subtotal(request)
+        percent = 10  # 10% de descuento
+        discount = cart_subtotal * percent / 100
+        promotions = "Si llevas 5+ productos te descontamos el 10% del total."
+        return discount, promotions
+    return 0.00, False
+
+
+def promo0_shipping_tax(request, promotions):
+    cart_subtotal = cart.cart_subtotal(request)
+    if cart_subtotal >= 75 and request.user.is_authenticated() and not promotions:
+        shipping_tax = 0
+        shipping_tax_promotions = u"Si compras +75cuc no te cobramos impuestos de envío."
+        return shipping_tax, shipping_tax_promotions
+    return 3.00, False
+
+
 def create_order_step_1(request, cart_subtotal, discount, shipping_tax):
     try:
         del request.session['ordertotalid']
     except KeyError:
         pass
-    total = cart_subtotal - discount + shipping_tax
+    total = Decimal(cart_subtotal) - Decimal(discount) + Decimal(shipping_tax)
     order_total = OrderTotal.objects.create(shipping_tax=shipping_tax, discount=discount, cart_subtotal=cart_subtotal)
     order_total.save()
     request.session['ordertotalid'] = order_total.id
-    print('order-total', order_total)
-
     return total

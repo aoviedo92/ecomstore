@@ -27,6 +27,7 @@ def order_products(request, products):
     :return: productos ordenados, y la instancia del form de ordanamiento
     """
     if not products:
+        # todo fix bug: realice una busqueda, le puse ver 18results y mostro busq vacia
         # si no hay productos es pq este metodo es llamado desde search/views.py
         # obtenemos la cadena de busqueda de la session donde se guardo
         # buscamos en la db para esa cadena, q resultados(productos) arrojo.

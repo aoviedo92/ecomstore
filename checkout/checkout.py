@@ -3,6 +3,7 @@ from cart import cart
 from forms import CheckoutForm
 from manager.models import Promo3, Promo4
 from models import Order, OrderItem, OrderTotal
+import utils
 
 
 def do_auth_capture(amount="0.00", card_num=None, exp_date=None, card_cvv=None):
@@ -102,5 +103,6 @@ def create_order(request, order_total, transaction_id):
             oi.save()
             # all set, empty cart
         cart.empty_cart(request)
+        utils.send_email("Leoshop", "Gracias por preferirnos", user_profile.email)
     # return the new order object
     return order
