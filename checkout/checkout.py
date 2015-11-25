@@ -105,6 +105,6 @@ def create_order(request, order_total, transaction_id):
             oi.save()
             # all set, empty cart
         cart.empty_cart(request)
-        utils.send_email("Leoshop", "Gracias por preferirnos", user_profile.email)
+        # utils.send_email("Leoshop", "Gracias por preferirnos", user_profile.email)
     # return the new order object
     return order

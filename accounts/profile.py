@@ -34,7 +34,7 @@ def set_profile(request):
         post_data.setlist(k, v)
     post_data._mutable = False
     print('post_data2', post_data)
-    profile_form = UserProfileForm(post_data, instance=profile)
+    profile_form = UserProfileForm(None, post_data, instance=profile)
     if profile_form.is_valid():
         print('tamos entrando')
         # print(profile_form.se)

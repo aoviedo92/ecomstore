@@ -13,6 +13,7 @@
                 {% csrf_token %}
                 <div class="col_1_of_2 span_1_of_2">
                     <div>{{ form.username }}{{ form.username.errors }}</div>
+                    <div>{{ form.email }}{{ form.email.errors }}</div>
                     <div>{{ form.password1 }}{{ form.password1.errors }}</div>
                     <div>{{ form.password2 }}{{ form.password2.errors }}</div>
                 </div>

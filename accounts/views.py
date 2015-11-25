@@ -8,7 +8,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from django.core import urlresolvers
 from django.http import HttpResponseRedirect
-from forms import UserProfileForm, UserCreationForm
+from forms import UserProfileForm, UserCreationForm, RegistrationForm
 from checkout.models import Order, OrderItem
 from utils import get_product_row, get_discount_code
 from manager.models import Promo3, Promo4
@@ -17,9 +17,11 @@ from manager.models import Promo3, Promo4
 def register(request):
     if request.method == 'POST':
         postdata = request.POST.copy()
-        form = UserCreationForm(postdata)
+        form = RegistrationForm(postdata)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            user.email = postdata.get('email','')
+            user.save()
             un = postdata.get('username', '')
             pw = postdata.get('password1', '')
             from django.contrib.auth import login, authenticate
@@ -30,7 +32,7 @@ def register(request):
                 url = urlresolvers.reverse('my_account')
                 return HttpResponseRedirect(url)
     else:
-        form = UserCreationForm()
+        form = RegistrationForm()
     page_title = 'User Registration'
     return render_to_response("registration/register.html", locals(), context_instance=RequestContext(request))
 
@@ -69,18 +71,14 @@ def order_details(request, order_id):
 def order_info(request):
     if request.method == 'POST':
         post_data = request.POST.copy()
-        form = UserProfileForm(post_data)
+        form = UserProfileForm(None, post_data)
         if form.is_valid():
             profile.set_profile(request)
             url = urlresolvers.reverse('my_account')
             return HttpResponseRedirect(url)
     else:
-        # user_profile = UserProfile(user=request.user)
         user_profile = profile.get_profile(request)
-        print('account - order_info - userprofile', user_profile)
-        form = UserProfileForm(instance=user_profile)
-    envio = u"envío"
-    info = u"información"
+        form = UserProfileForm(email_from_user=request.user.email, instance=user_profile)
     page_title = 'Edit Order Information'
     return render_to_response("registration/order_info.html", locals(), context_instance=RequestContext(request))
 

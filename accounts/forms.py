@@ -5,6 +5,14 @@ from models import UserProfile
 
 
 class UserProfileForm(forms.ModelForm):
+    """
+    override init para poner un attr a email(value) si este lo lleva
+    """
+    def __init__(self, email_from_user=None, *args, **kwargs):
+        super(UserProfileForm, self).__init__(*args, **kwargs)
+        if email_from_user:
+            self.fields['email'].widget.attrs['value'] = email_from_user
+
     email = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Email'}))
     # first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Nombre'}))
     # last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Apellidos'}))
@@ -21,18 +29,18 @@ class UserProfileForm(forms.ModelForm):
         exclude = ('user', 'wish_list')
         # fields = ('phone', 'shipping_name', 'shipping_address_1', 'shipping_address_2', 'shipping_city', 'sex',
         #           )
-    # NO validamos para q el usuario si no quiere, no registre estos datos
-    # def clean_sex(self):
-    #     sex = self.cleaned_data.get("sex")
-    #     if sex == 0:
-    #         raise forms.ValidationError("Debes escoger tu sexo")
-    #     return sex
+        # NO validamos para q el usuario si no quiere, no registre estos datos
+        # def clean_sex(self):
+        #     sex = self.cleaned_data.get("sex")
+        #     if sex == 0:
+        #         raise forms.ValidationError("Debes escoger tu sexo")
+        #     return sex
 
-    # def clean_shipping_city(self):
-    #     shipping_city = self.cleaned_data.get("shipping_city")
-    #     if shipping_city == 0:
-    #         raise forms.ValidationError("Debes escoger tu municipio")
-    #     return shipping_city
+        # def clean_shipping_city(self):
+        #     shipping_city = self.cleaned_data.get("shipping_city")
+        #     if shipping_city == 0:
+        #         raise forms.ValidationError("Debes escoger tu municipio")
+        #     return shipping_city
 
 
 class UserCreationForm(forms.ModelForm):
@@ -42,10 +50,9 @@ class UserCreationForm(forms.ModelForm):
     }
     username = forms.RegexField(label="Nombre", max_length=30,
                                 regex=r'^[\w.@+-]+$',
-                                widget=forms.TextInput(attrs={'placeholder': 'Nombre'}),
+                                widget=forms.TextInput(attrs={'placeholder': 'Nombre de usuario'}),
                                 error_messages={
-                                    'invalid': "This value may contain only letters, numbers and "
-                                               "@/./+/-/_ characters."})
+                                    'invalid': u"Debe contener solo letras, números y los caracteres @/./+/-/_."})
     password1 = forms.CharField(label="Password",
                                 widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
     password2 = forms.CharField(label="Confirmar password",
@@ -72,3 +79,7 @@ class UserCreationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class RegistrationForm(UserCreationForm):
+    email = forms.EmailField(max_length="50", widget=forms.TextInput(attrs={'placeholder': 'Email'}))
