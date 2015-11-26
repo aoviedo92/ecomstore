@@ -1,5 +1,8 @@
 import random
 import decimal
+from datetime import datetime, timedelta
+from django.db.models import Max
+from ecomstore import settings
 from models import CartItem
 from catalog.models import Product
 from django.shortcuts import get_object_or_404
@@ -36,10 +39,12 @@ def get_cart_items(request):
     """
     return CartItem.objects.filter(cart_id=_cart_id(request))
 
+
 def get_product_from_cart_item(cart_items):
     product_ids_dict = cart_items.values('product')
     product_ids = [product['product'] for product in product_ids_dict]
     return Product.active.filter(id__in=product_ids)
+
 
 def add_to_cart(request, product=None):
     """
@@ -136,3 +141,21 @@ def empty_cart(request):
     """ empties the shopping cart of the current customer """
     user_cart = get_cart_items(request)
     user_cart.delete()
+
+
+def remove_old_cart_items():
+    """
+    1. calculate date of 90 days ago (or session lifespan)
+    2. create a list of cart IDs that haven't been modified
+    3. delete those CartItem instances
+    """
+    print "Removing old carts"
+    remove_before = datetime.now() + timedelta(days=-settings.SESSION_AGE_DAYS)
+    cart_ids = []
+    old_items = CartItem.objects.values('cart_id').annotate(last_change=Max('date_added')).filter(
+        last_change__lt=remove_before).order_by()
+    for item in old_items:
+        cart_ids.append(item['cart_id'])
+    to_remove = CartItem.objects.filter(cart_id__in=cart_ids)
+    to_remove.delete()
+    print str(len(cart_ids)) + " carts were removed"
