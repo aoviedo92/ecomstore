@@ -168,7 +168,8 @@
                             <div class="slider-wrapper theme-default" style="max-height: 320px; height: 320px">
                                 <div id="slider" class="nivoSlider" style="max-height: 300px; height: 300px">
                                     {% for product in products_bought_together %}
-                                        <img src="{{ product.image.url }}" alt="{{ product.slug }}" style="max-height: 300%;"/>
+                                        <img src="{{ product.image.url }}" alt="{{ product.slug }}"
+                                             style="max-height: 300%;"/>
                                     {% endfor %}
                                 </div>
                             </div>
@@ -194,15 +195,8 @@
                         </div>
                     </div>
 
-                    {#                   PROMOS #}
-{#                    <div class="top-border" style="margin-top: 20px"></div>#}
-{#                    <div class="sidebar-bottom">#}
-{#                        <h2 class="m_1">Promociones</h2>#}
-{##}
-{#                        <p class="m_text">{{ promotion|safe }}</p>#}
-{##}
-{#                    </div>#}
                     {% tag_promotions %}
+
                 </div>
                 <div class="clear"></div>
             </div>

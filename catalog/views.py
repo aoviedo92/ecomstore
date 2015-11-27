@@ -39,25 +39,30 @@ def index(request):
             recommendations_for_user = recommendations_for_user_login(request)
             if len(recommendations_for_user.values()[0]) < 3:
                 recommendations_for_user_active = False
-    recommended_1, recommended_2, recommended_3 = random_recommendations()
-    # --> {u'Deseados': [<Product: prod14>, <Product: pro11>, <Product: prod12>]}
+    recommended_1, recommended_2, recommended_3 = random_recommendations()  # --> {u'Deseados': [<Product: prod14>, <Product: pro11>, <Product: prod12>]}
+
+    all_products = Product.active.all()
+
     # buscar hasta q encontremos productos que hayan sido comprado juntos
-    random_list = []
-    while True:
-        all_products = Product.active.all()
-        pos = randint(0, len(all_products) - 1)
-        if pos not in random_list:
-            random_list.append(pos)
-            take_random_product = all_products[pos]
-            products_bought_together = utils.products_bought_together(take_random_product)
-            if products_bought_together:
-                break
+    products_bought_together_key = 'products_bought_together_key'
+    products_bought_together = cache.get(products_bought_together_key)
+    if not products_bought_together:
+        random_list = []
+        while True:
+            pos = randint(0, len(all_products) - 1)
+            if pos not in random_list:
+                random_list.append(pos)
+                take_random_product = all_products[pos]
+                products_bought_together = utils.products_bought_together(take_random_product)
+                if products_bought_together:
+                    cache.set(products_bought_together_key, products_bought_together, settings.CACHE_TIMEOUT)
+                    break
+                else:
+                    continue
             else:
                 continue
-        else:
-            continue
-    featured_list = Product.active.filter(is_featured=True)
-    featured_list = list(featured_list)
+    featured_list = all_products.filter(is_featured=True)
+    featured_list = list(featured_list)  # transf QuerySet en lista para regar los elems con shuffle
     shuffle(featured_list)
     featured1 = featured_list[:3]
     featured2 = featured_list[3:6]

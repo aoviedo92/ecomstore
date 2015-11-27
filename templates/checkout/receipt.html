@@ -34,6 +34,24 @@
         {% endfor %}
         </tbody>
     </table>
-{#    todo poner esto como un boton grande   #}
-    Continuar comprando...
+
+    <a href="{% url 'catalog_home' %}" class="continue-shipping">Continuar comprando...</a>
+    <style>
+        .continue-shipping {
+            font-family: "Exo 2", sans-serif;
+            cursor: pointer;
+            border: medium none;
+            outline: medium none;
+            display: inline-block;
+            font-size: 1em;
+            padding: 10px 34px;
+            background: #4CB1CA none repeat scroll 0% 0%;
+            color: #FFF;
+            text-transform: uppercase;
+            transition: all 0.3s ease-in-out 0s;
+        }
+        .continue-shipping:hover{
+            background-color: #555;
+        }
+    </style>
 {% endblock %}

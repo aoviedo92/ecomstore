@@ -8,7 +8,6 @@
             {% if p.new_product %}
                 <div class="sale-box"><span class="on_sale title_shop">Nuevo</span></div>
             {% elif p.sale_price %}
-{#            {% if p.sale_price %}#}
                 <div class="sale-box1"><span class="on_sale title_shop">Rebaja</span></div>
             {% endif %} 
             <div class="price">
@@ -28,8 +27,8 @@
                      title="{{ p.tooltip }}"
                         >
                 </div>
-    <input type="hidden" id="tooltip_rating" value="{{ p.avg_rating }}"/>
-    <input type="hidden" id="tooltip_desc" value="{{ p.description|truncatewords:10 }}"/>
+                <input type="hidden" id="tooltip_rating" value="{{ p.avg_rating }}"/>
+                <input type="hidden" id="tooltip_desc" value="{{ p.description|truncatewords:10 }}"/>
                 <div class="clear"></div>
             </div>
         </div>

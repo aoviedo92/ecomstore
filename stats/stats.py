@@ -337,12 +337,11 @@ class Get3Product(QuickAccess):
     def __get_3_great_sales(self):
         print('great-sales')
         # en esta no tomamos el metodo de la clase padre pq esta limitado a 9 elems
-        sales = [product for product in self.__products if product.super_discount()]
-        try:
-            rand_list = take_three_pos(len(sales) - 1)
-            return [sales[rand_list[0]], sales[rand_list[1]], sales[rand_list[2]]]
-        except ValueError:
+        sales = [product for product in self.__products if product.great_sales()]
+        if len(sales) < 3:
             return []
+        rand_list = take_three_pos(len(sales) - 1)
+        return [sales[rand_list[0]], sales[rand_list[1]], sales[rand_list[2]]]
 
     def __get_3_voted(self):
         print('voted')
@@ -355,7 +354,7 @@ class Get3Product(QuickAccess):
         """
         print('sales')
         # rebajas por debajo del 45%
-        sales = [product for product in self.__products if product.sale_price() and not product.super_discount()]
+        sales = [product for product in self.__products if product.sale_price() and not product.great_sales()]
         try:
             if len(sales) >= 3:
                 rand_list = take_three_pos(len(sales) - 1)
@@ -391,9 +390,9 @@ class Get3Product(QuickAccess):
         return desired[:3] if len(desired) >= 3 else None
 
     def recommended(self):
-        # pos = take_three_pos(len(self.__random_labels) - 1)
-        pos = [8, 6, 2]
-        print('stats.py - pos-', pos)
+        pos = take_three_pos(len(self.__random_labels) - 1)
+        # pos = [6,7,8]
+        # print('stats.py - pos-', pos)
         recommended_1 = {self.__random_labels[pos[0]]: self.__function_dict[self.__random_labels[pos[0]]]()}
         recommended_2 = {self.__random_labels[pos[1]]: self.__function_dict[self.__random_labels[pos[1]]]()}
         if self.__num_recommend == 2:
