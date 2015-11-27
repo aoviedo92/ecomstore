@@ -6,16 +6,22 @@ import search
 from ecomstore import settings
 from stats import stats
 from utils import get_product_row
+from django.core.cache import cache
 
 
 def results(request):
     # get current search phrase
     q = request.GET.get('q', '')
 
-    matching = search.products(q)
     if q:
         request.session['search_key'] = q
-
+    else:
+        q = request.session.get('search_key', '')
+    cache_key = 'search_cache' + q
+    matching = cache.get(cache_key)
+    if not matching:
+        matching = search.products(q)
+        cache.set(cache_key, matching, settings.CACHE_TIMEOUT)
     if matching:
         products, order_by_form = order_products(request, matching)
         num_x_pag, product_per_pag_form = get_num_x_pag(request)

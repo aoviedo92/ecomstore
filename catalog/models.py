@@ -73,12 +73,12 @@ class Images(models.Model):
     def __unicode__(self):
         return self.image.name
 
-BRANDS = [(1, "Dolce & Gabana"), (2, "Gucci"), (3, "Hugo Boss"), (4, "Versace"), (5, "Ralph Lauren"),
-              (6, "Lacoste"),
-              (7, "Chanel")]
+
+BRANDS = [("1", "Dolce & Gabana"), ("2", "Gucci"), ("3", "Hugo Boss"), ("4", "Versace"), ("5", "Ralph Lauren"),
+          ("6", "Lacoste"), ("7", "Chanel")]
+
 
 class Product(models.Model):
-
     name = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255, unique=True)
     brand = models.CharField(choices=BRANDS, max_length=50, default=1)

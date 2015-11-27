@@ -43,6 +43,7 @@ def take_three_pos(length):
 
 
 def products_bought_together(product):
+    # todo este metodo puede estar en stats.py y las dos funciones q lo llaman q lo hagan a stats.py
     from stats import stats
     # buscar que productos se han vendido junto con este, mediante la Order lo buscamos
     order = stats.customers_who_bought_this_item_also_bought(product)

@@ -1,6 +1,7 @@
 import os
 import base64
 from random import randint
+from django.core.cache import cache
 from django.db.models import Count, Avg
 from catalog.models import Product, Category
 from checkout.models import Order, OrderItem
@@ -8,7 +9,7 @@ from ecomstore import settings
 from search.models import SearchTerm
 from models import ProductView
 from utils import take_three_pos
-
+# todo las funciones para obtener 3 productos (accesos rapidos) se pueden dejar como parte de un cmd de manage.py y crear un modelo q almacene cada uno de estos 3 valores, asi cuando se inicie la pagina y se vaya a calcular no se necesite calcular en hot lo mismo con lo mismo, sino, se consulta tal modelo y se devuelven los valores previamente calculados
 PRODUCTS_PER_ROW = settings.PRODUCTS_PER_ROW
 
 
@@ -49,17 +50,21 @@ def __frequent_search_words(request=None):
 def recommended_from_search(request=None):
     print('stats.py - recommended_from_search 1')
     # get the common words from the stored searches
-    common_words = __frequent_search_words(request)
-    from search.models import SearchTerm
+    cache_key = "recommended_from_search"
+    recommended = cache.get(cache_key)
+    if not recommended:
+        common_words = __frequent_search_words(request)
+        from search.models import SearchTerm
 
-    recommended = set()
-    for word in common_words:
-        search_terms = SearchTerm.objects.filter(q__icontains=word)
-        for term in search_terms:
-            if len(recommended) >= PRODUCTS_PER_ROW:
-                break
-            products = term.found_products.all().filter(is_active=True)
-            recommended = recommended.union(products)
+        recommended = set()
+        for word in common_words:
+            search_terms = SearchTerm.objects.filter(q__icontains=word)
+            for term in search_terms:
+                if len(recommended) >= PRODUCTS_PER_ROW:
+                    break
+                products = term.found_products.all().filter(is_active=True)
+                recommended = recommended.union(products)
+        cache.set(cache_key, recommended, settings.CACHE_TIMEOUT)
     return list(recommended)[:3]
 
 
@@ -178,9 +183,129 @@ def category_less_sold():
         cant_prod__gt=3).order_by('sold').first()
 
 
-class Get3Product:
+# QUICK ACCESS
+class QuickAccess:
+    def __init__(self, products=None):
+        self.__products = products if products else Product.active.all()
+        self.__cache = False if products else True#cache para cuando no se pasen productos, pq si se pasan no sabemos cuales seran
+
+    @property
+    def products(self):
+        return self.__products
+
+    @products.setter
+    def products(self, products):
+        if products:
+            self.__products = products
+
+    def top_sellers(self):
+        cache_key = "top_sellers"
+        products = None
+        if self.__cache:
+            products = cache.get(cache_key)
+        if not products:
+            print('NO CACHE')
+            products = self.__products.annotate(cont=Count('orderitem')).order_by('-cont')[:9]
+            cache.set(cache_key, products, settings.CACHE_TIMEOUT)
+        return products
+
+    def super_discount(self):
+        cache_key = "great_sales"
+        sales = None
+        if self.__cache:
+            sales = cache.get(cache_key)
+        if not sales:
+            print('NO CACHE')
+            sales = [product for product in self.__products if product.great_sales()][:9]
+            cache.set(cache_key, sales, settings.CACHE_TIMEOUT)
+        return sales
+
+    def voted(self):
+        cache_key = "voted"
+        voted = None
+        if self.__cache:
+            voted = cache.get(cache_key)
+        if not voted:
+            print('NO CACHE')
+            # tomamos para cada producto, su rating promedio, filtramos aquellos cuyo prom sea mas q 3, lo ordenamos
+            voted = self.__products.annotate(avg=Avg('productrating__rating')).filter(avg__gt=3).order_by('-avg')
+            # reordenamos segun el criterio de q los q tienen mayor cantidad de votos deben ir primero, aunq esto implique
+            # q un prod con menos prom quede mas arriba.
+            voted = voted.annotate(cant=Count('productrating')).order_by('-cant')[:9]
+            cache.set(cache_key, voted, settings.CACHE_TIMEOUT)
+        return voted
+
+    def discount(self):
+        cache_key = "discount"
+        sales = None
+        if self.__cache:
+            sales = cache.get(cache_key)
+        if not sales:
+            sales = [product for product in self.__products if product.sale_price() and not product.great_sales()][:9]
+            cache.set(cache_key, sales, settings.CACHE_TIMEOUT)
+        return sales
+
+    def new_products(self):
+        cache_key = "new_products"
+        new = None
+        if self.__cache:
+            new = cache.get(cache_key)
+        if not new:
+            new = [product for product in self.__products if product.new_product()][:9]
+            cache.set(cache_key, new, settings.CACHE_TIMEOUT)
+        return new
+
+    def bestseller(self):
+        cache_key = "bestseller"
+        bestseller = None
+        if self.__cache:
+            bestseller = cache.get(cache_key)
+        if not bestseller:
+            bestseller = self.__products.filter(is_bestseller=True)[:9]
+            cache.set(cache_key, bestseller, settings.CACHE_TIMEOUT)
+        return bestseller
+
+    def polemical(self):
+        cache_key = "polemical"
+        polemics = None
+        if self.__cache:
+            polemics = cache.get(cache_key)
+        if not polemics:
+            polemics = self.__products.annotate(num_rev=Count('productreview')).filter(num_rev__gt=2).order_by(
+                '-num_rev')[:9]
+            cache.set(cache_key, polemics, settings.CACHE_TIMEOUT)
+        return polemics
+
+    def desired(self):
+        cache_key = "desired"
+        desired = None
+        if self.__cache:
+            desired = cache.get(cache_key)
+        if not desired:
+            desired = self.__products.annotate(num_desired=Count('userprofile__wish_list')).filter(
+                num_desired__gt=2).order_by('-num_desired')[:9]
+            cache.set(cache_key, desired, settings.CACHE_TIMEOUT)
+        return desired
+
+    def top_searches(self):
+        return recommended_from_search()
+
+    def featured(self):
+        cache_key = "featured"
+        featured = None
+        if self.__cache:
+            featured = cache.get(cache_key)
+        if not featured:
+            featured = self.__products.filter(is_featured=True)[:9]
+            cache.set(cache_key, featured, settings.CACHE_TIMEOUT)
+        return featured
+
+
+class Get3Product(QuickAccess):
     def __init__(self, products=None, num_recommend=3):
         self.__products = products if products else Product.active.all()
+        QuickAccess.__init__(self, self.__products)
+        # self.products = products
         self.__num_recommend = num_recommend
         self.__random_labels = [u"Productos nuevos",
                                 u"Otros usuarios tambien han buscado",
@@ -206,12 +331,13 @@ class Get3Product:
 
     def __get_3_top_sellers(self):
         print('top-sellers')
-        products = self.__products.annotate(cont=Count('orderitem')).order_by('-cont')
+        products = self.top_sellers()
         return products[:3] if len(products) >= 3 else None
 
     def __get_3_great_sales(self):
         print('great-sales')
-        sales = [product for product in self.__products if product.great_sales()]
+        # en esta no tomamos el metodo de la clase padre pq esta limitado a 9 elems
+        sales = [product for product in self.__products if product.super_discount()]
         try:
             rand_list = take_three_pos(len(sales) - 1)
             return [sales[rand_list[0]], sales[rand_list[1]], sales[rand_list[2]]]
@@ -220,11 +346,7 @@ class Get3Product:
 
     def __get_3_voted(self):
         print('voted')
-        # tomamos para cada producto, su rating promedio, filtramos aquellos cuyo prom sea mas q 3, lo ordenamos
-        voted = self.__products.annotate(avg=Avg('productrating__rating')).filter(avg__gt=3).order_by('-avg')
-        # reordenamos segun el criterio de q los q tienen mayor cantidad de votos deben ir primero, aunq esto implique
-        # q un prod con menos prom quede mas arriba.
-        voted = voted.annotate(cant=Count('productrating')).order_by('-cant')
+        voted = self.voted()
         return voted[:3] if len(voted) >= 3 else None
 
     def __get_3_sales(self):
@@ -233,7 +355,7 @@ class Get3Product:
         """
         print('sales')
         # rebajas por debajo del 45%
-        sales = [product for product in self.__products if product.sale_price() and not product.great_sales()]
+        sales = [product for product in self.__products if product.sale_price() and not product.super_discount()]
         try:
             if len(sales) >= 3:
                 rand_list = take_three_pos(len(sales) - 1)
@@ -259,18 +381,18 @@ class Get3Product:
 
     def __get_3_polemical(self):
         print('stats.py - get_3_polemical')
-        polemics = self.__products.annotate(num_rev=Count('productreview')).filter(num_rev__gt=2).order_by('-num_rev')
+        # polemics = self.__products.annotate(num_rev=Count('productreview')).filter(num_rev__gt=2).order_by('-num_rev')
+        polemics = self.polemical()
         return polemics[:3] if len(polemics) >= 3 else None
 
     def __get_3_desired(self):
         print('stats.py - get_3_desired')
-        desired = self.__products.annotate(num_desired=Count('userprofile__wish_list')).filter(
-            num_desired__gt=2).order_by('-num_desired')
+        desired = self.desired()
         return desired[:3] if len(desired) >= 3 else None
 
     def recommended(self):
-        pos = take_three_pos(len(self.__random_labels) - 1)
-        # pos = [0,1,2]
+        # pos = take_three_pos(len(self.__random_labels) - 1)
+        pos = [8, 6, 2]
         print('stats.py - pos-', pos)
         recommended_1 = {self.__random_labels[pos[0]]: self.__function_dict[self.__random_labels[pos[0]]]()}
         recommended_2 = {self.__random_labels[pos[1]]: self.__function_dict[self.__random_labels[pos[1]]]()}
@@ -306,47 +428,3 @@ class RecommendedForUsers:
         pos = randint(0, len(self.__random_labels) - 1)
         # pos = 2
         return {self.__random_labels[pos]: self.__function_dict[self.__random_labels[pos]]()}
-
-
-# QUICK ACCESS
-class QuickAccess:
-    def __init__(self):
-        self.__products = Product.active.all()
-
-    def top_sellers(self):
-        return self.__products.annotate(cont=Count('orderitem')).order_by('-cont')[:9]
-
-    def great_sales(self):
-        sales = [product for product in self.__products if product.great_sales()]
-        return sales[:9]
-
-    def voted(self):
-        voted = self.__products.annotate(avg=Avg('productrating__rating')).filter(avg__gt=3).order_by('-avg')
-        voted = voted.annotate(cant=Count('productrating')).order_by('-cant')
-        return voted[:9]
-
-    def discount(self):
-        sales = [product for product in self.__products if product.sale_price() and not product.great_sales()]
-        return sales[:9]
-
-    def new_products(self):
-        new = [product for product in self.__products if product.new_product()]
-        return new[:9]
-
-    def bestseller(self):
-        return self.__products.filter(is_bestseller=True)[:9]
-
-    def polemical(self):
-        polemics = self.__products.annotate(num_rev=Count('productreview')).filter(num_rev__gt=2).order_by('-num_rev')
-        return polemics[:9]
-
-    def desired(self):
-        desired_ = self.__products.annotate(num_desired=Count('userprofile__wish_list')).filter(
-            num_desired__gt=2).order_by('-num_desired')
-        return desired_[:9]
-
-    def top_searches(self):
-        return recommended_from_search()
-
-    def featured(self):
-        return self.__products.filter(is_featured=True)[:9]

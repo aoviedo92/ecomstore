@@ -8,6 +8,8 @@ from cart import cart
 from catalog import forms
 from catalog.models import Category, CategoryGroup, CommonCategory, Product
 from utils import promo2
+from django.core.cache import cache
+from ecomstore import settings
 
 register = template.Library()
 
@@ -27,9 +29,25 @@ def cart_num_items(request):
 
 @register.inclusion_tag("tags/category_list.html")
 def category_list(request_path):
-    active_categories = Category.active.all()
-    active_categories_not_common = active_categories.filter(common=None)
-    common = CommonCategory.objects.all()
+    active_category_key = 'active_category_key'
+    active_categories_not_common_key = 'active_categories_not_common_key'
+    common_key = 'common_key'
+
+    active_categories = cache.get(active_category_key)
+    active_categories_not_common = cache.get(active_categories_not_common_key)
+    common = cache.get(common_key)
+    print('get',cache.get(common_key))
+
+    if not active_categories:
+        active_categories = Category.active.all()
+        cache.set(active_category_key, active_categories, settings.CACHE_TIMEOUT)
+    if not active_categories_not_common:
+        active_categories_not_common = active_categories.filter(common=None)
+        cache.set(active_categories_not_common_key, active_categories_not_common, settings.CACHE_TIMEOUT)
+    if not common:
+        common = CommonCategory.objects.all()
+        cache.set(common_key, common, settings.CACHE_TIMEOUT)
+
     return {
         'group_categories': CategoryGroup.objects.all(),
         'active_categories': active_categories,

@@ -24,9 +24,9 @@ from stats import stats
 from forms import Currency
 import json
 from utils import get_product_row
-# import utils
 import datetime
 import utils
+from django.core.cache import cache
 
 
 def index(request):
@@ -42,7 +42,6 @@ def index(request):
     recommended_1, recommended_2, recommended_3 = random_recommendations()
     # --> {u'Deseados': [<Product: prod14>, <Product: pro11>, <Product: prod12>]}
     # buscar hasta q encontremos productos que hayan sido comprado juntos
-    # promotion = utils.promotions()
     random_list = []
     while True:
         all_products = Product.active.all()
@@ -69,13 +68,23 @@ def show_category(request, category_slug=None, common_name=None):
     # esta vista maneja dos urls q tienen el mismo proposito: mostrar productos agrupados por categorias.
     if category_slug:
         # para una categoria en especifico
-        c = get_object_or_404(Category, slug=category_slug)
-        products = c.product_set.all().filter(is_active=True)
+        category_cache_key = request.path
+        c = cache.get(category_cache_key)
+        if not c:
+            print('cat not in cache')
+            c = get_object_or_404(Category, slug=category_slug)
+            cache.set(category_cache_key, c, settings.CACHE_TIMEOUT)
+        products = c.product_set.filter(is_active=True)
         title_head = c.name
     elif common_name:
         # para una categoria q es comun a otras categorias (almacena categorias)
         # como Accesorios, es comun a Accesorios de bodas, Accesorios de mujeres, Accesorios tejidos...
-        common = get_object_or_404(CommonCategory, common_name=common_name)
+        common_category_cache_key = request.path
+        common = cache.get(common_category_cache_key)
+        if not common:
+            print('cat common not in cache')
+            common = get_object_or_404(CommonCategory, common_name=common_name)
+            cache.set(common_category_cache_key, common, settings.CACHE_TIMEOUT)
         common_categories = common.category_set.all()
         title_head = common.common_name
         products = Product.active.filter(categories__in=common_categories).distinct()
@@ -118,13 +127,12 @@ def quick_access(request, quick_access_slug):
                    'bestseller': quick_access_.bestseller,
                    'voted': quick_access_.voted,
                    'featured': quick_access_.featured,
-                   'super_discount': quick_access_.great_sales
+                   'super_discount': quick_access_.super_discount
                    }
     products = switch_dict[quick_access_slug]()
     product_row = get_product_row(products)
     product_row.reverse()
     return render_to_response("tags/product_list_quick_access.html", locals(), context_instance=RequestContext(request))
-
 
 
 def show_product(request, product_slug):
