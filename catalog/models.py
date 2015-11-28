@@ -5,8 +5,9 @@ from django.db import models
 from django.db.models import Avg
 from django.template.defaultfilters import slugify, truncatewords, capfirst
 from django.utils import timezone
-import tagging
 from tagging.registry import register as register_tag_for, AlreadyRegistered
+from django.db.models.signals import post_save, post_delete
+from caching.caching import cache_evict, cache_update
 
 
 class ActiveManager(models.Manager):
@@ -61,6 +62,10 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return reverse('catalog_category', kwargs={'category_slug': self.slug})
+
+    @property
+    def cache_key(self):
+        return self.get_absolute_url()
 
     def save(self, *args, **kwargs):
         # self.slug = slugify(self.name)
@@ -219,6 +224,10 @@ class Product(models.Model):
                   u"<span style='color:#999;font-size:0.70em;line-height:1.8em;'>%s</span>" % (desc, avg, comments)
         return tooltip
 
+    @property
+    def cache_key(self):
+        return self.get_absolute_url()
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Product, self).save(*args, **kwargs)
@@ -261,3 +270,9 @@ class ProductRating(Review):
 
     def __unicode__(self):
         return "%s - %s " % (str(self.product), str(self.rating))
+
+
+post_save.connect(cache_update, sender=Product)
+post_delete.connect(cache_evict, sender=Product)
+post_save.connect(cache_update, sender=Category)
+post_delete.connect(cache_evict, sender=Category)
