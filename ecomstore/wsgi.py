@@ -8,7 +8,7 @@ https://docs.djangoproject.com/en/1.7/howto/deployment/wsgi/
 """
 
 import os, sys
-# from ecomstore import settings
+# from settings import BASE_DIR
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 sys.path.append(BASE_DIR)

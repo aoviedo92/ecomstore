@@ -81,6 +81,7 @@ def show_category(request, category_slug=None, common_name=None):
             cache.set(category_cache_key, c, settings.CACHE_TIMEOUT)
         products = c.product_set.filter(is_active=True)
         title_head = c.name
+        page_title = title_head
     elif common_name:
         # para una categoria q es comun a otras categorias (almacena categorias)
         # como Accesorios, es comun a Accesorios de bodas, Accesorios de mujeres, Accesorios tejidos...
@@ -92,9 +93,11 @@ def show_category(request, category_slug=None, common_name=None):
             cache.set(common_category_cache_key, common, settings.CACHE_TIMEOUT)
         common_categories = common.category_set.all()
         title_head = common.common_name
+        page_title = title_head
         products = Product.active.filter(categories__in=common_categories).distinct()
     else:
         title_head = "Productos"
+        page_title = title_head
         products = Product.active.all()[0:20]
     # random_products = products
     recommended_1, recommended_2, recommended_3 = random_recommendations(products, 2)
@@ -110,6 +113,7 @@ def show_category(request, category_slug=None, common_name=None):
 
 def tag(request, tag_):
     title_head = "Etiquetado con " + tag_
+    page_title = title_head
     products = TaggedItem.objects.get_by_model(Product.active, tag_)
 
     products, order_by_form = order_products(request, products)
@@ -137,6 +141,7 @@ def quick_access(request, quick_access_slug):
     products = switch_dict[quick_access_slug]()
     product_row = get_product_row(products)
     product_row.reverse()
+    page_title = quick_access_slug
     return render_to_response("tags/product_list_quick_access.html", locals(), context_instance=RequestContext(request))
 
 
@@ -320,4 +325,5 @@ def rifas(request):
             user_include = True
             user_in_rifa = promo.id
             break
+    page_title = 'rifas'
     return render_to_response("catalog/rifas.html", locals(), context_instance=RequestContext(request))
