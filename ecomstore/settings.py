@@ -31,8 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'material',
-    'material.admin',
+    # 'material',
+    # 'material.admin',
     # 'wpadmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -146,3 +146,5 @@ EMAIL_USE_TLS = True
 SESSION_AGE_DAYS = 90
 SESSION_COOKIE_AGE = 60 * 60 * 24 * SESSION_AGE_DAYS
 CACHE_TIMEOUT = 60 * 60 * 12
+
+ADMIN_MEDIA_PREFIX = 'static/admin'
