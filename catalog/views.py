@@ -42,7 +42,7 @@ def index(request):
     recommended_1, recommended_2, recommended_3 = random_recommendations()  # --> {u'Deseados': [<Product: prod14>, <Product: pro11>, <Product: prod12>]}
 
     all_products = Product.active.all()
-
+    print('all_products',all_products)
     # buscar hasta q encontremos productos que hayan sido comprado juntos
     products_bought_together_key = 'products_bought_together_key'
     products_bought_together = cache.get(products_bought_together_key)
