@@ -1,24 +1,22 @@
-# class A:
-#     def __init__(self):
-#         self.__a = 10
-#
-#     @property
-#     def a(self):
-#         return self.__a
-#
-#     @a.setter
-#     def a(self, value):
-#         self.__a = value
-#
-#     def sum(self):
-#         return [self.__a, 1, 2, 3]
-#
-#
-# class B(object, A):
-#     def __init__(self):
-#         A.__init__(self)
-#         # super(B, self).__init__()
-#         self.a = 40
-#
-#
-# print B().sum()[:3]
+import re, urllib, httplib
+
+post_params = {"Cuenta_Empresarial": "0123456",
+               "Costo_Productos_Comprar": 123.00,
+               "URL_Salto": "/"}
+campos = urllib.urlencode(post_params)
+# url = "http://127.0.0.1:8000/test_urllib/"
+# url = "http://10.56.8.132/Banco/Consumo/Consumo.php"
+# sitio = urllib.urlopen(url, campos)
+# print(sitio.read())
+# parametros = urllib.urlencode(post_params)
+url_port = "10.56.8.132:80"
+# url_port = "127.0.0.1:8000"
+file_to_consume = "/Banco/Consumo/Consumo.php"
+# file_to_consume = "/test_urllib/"
+cabeceras = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
+abrir_conexion = httplib.HTTPConnection(url_port)
+abrir_conexion.request("POST", file_to_consume, campos, cabeceras)
+respuesta = abrir_conexion.getresponse()
+print respuesta.status
+ver_source = respuesta.read()
+print ver_source

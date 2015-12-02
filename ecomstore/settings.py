@@ -73,7 +73,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     # 'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
-    'utils_.context_processors.ecomstore',
+    'ecomstore.context_processors.ecomstore',
     'django.core.context_processors.request',
     # 'django.template.context_processors.request',
 )

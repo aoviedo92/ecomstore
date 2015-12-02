@@ -2,7 +2,7 @@ from decimal import Decimal
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.core import urlresolvers
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpRequest, HttpResponse
 from accounts import profile
 from accounts.models import UserProfile
 from forms import CheckoutForm
@@ -28,6 +28,8 @@ def show_checkout(request):
                 request.session['order_number'] = order_number
                 receipt_url = urlresolvers.reverse('checkout_receipt')
                 return HttpResponseRedirect(receipt_url)
+            else:
+                return HttpResponse(error_message)
         else:
             error_message = 'Corrige los errores abajo'
     else:

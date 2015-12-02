@@ -9,6 +9,7 @@ from django.db.models import Avg, Sum
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template.loader import render_to_string
+from django.views.decorators.csrf import csrf_exempt
 from tagging.models import Tag, TaggedItem
 from accounts import profile
 from accounts.models import UserProfile
@@ -327,3 +328,9 @@ def rifas(request):
             break
     page_title = 'rifas'
     return render_to_response("catalog/rifas.html", locals(), context_instance=RequestContext(request))
+
+@csrf_exempt
+def test_urllib(request):
+    # data_post = request.POST.get('data_post', '')
+    process = "true"
+    return HttpResponse(process, content_type='text/plain; charset=utf8')

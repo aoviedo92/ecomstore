@@ -1,0 +1,10 @@
+.flatpage {
+    font-size: 20px;
+    color: #555;
+    width: 70%;
+    text-align: justify;
+}
+
+.flatpage p {
+    margin-bottom: 50px;
+}

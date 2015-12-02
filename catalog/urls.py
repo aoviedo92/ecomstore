@@ -12,6 +12,7 @@ urlpatterns = patterns('catalog.views',
                        url(r'^catalog/quick-access/(?P<quick_access_slug>[-\w]+)/$', 'quick_access', name='quick_access'),
                        url(r'^rifas/$', 'rifas', name='rifas'),
                        url(r'^tag/(?P<tag_>[-\w]+)/$', 'tag', name='tag'),
+                       url(r'^test_urllib/$', 'test_urllib', name='test_urllib'),
                        # ajax call
                        url(r'^review/product/add/$', 'add_review'),
                        url(r'^review/product/vote/$', 'add_vote'),

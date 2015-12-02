@@ -1,4 +1,8 @@
+# coding=utf-8
 from decimal import Decimal
+import httplib
+import socket
+import urllib
 from cart import cart
 from forms import CheckoutForm
 from manager.models import Promo3, Promo4
@@ -10,17 +14,51 @@ def do_auth_capture(amount="0.00", card_num=None, exp_date=None, card_cvv=None):
     """
     procesar los datos consumiendo algun servicio.
     """
-    response_code = '1'
+    transaction_result = {
+        '1': 'transaccion aprobada',
+        '2': 'DECLINED - Hubo problemas procesando su tarjeta de credito',
+        '3': 'ERROR - Error con su transaction',
+        '4': 'HELD_FOR_REVIEW - Retenida para revision',
+        '5': u"Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder",
+        '6': 'Prohibido - acceso denegado'
+    }
+    raw_params = {"Cuenta_Empresarial": card_num,
+                  "Costo_Productos_Comprar": amount,
+                  "URL_Salto": "/"}
+    params = urllib.urlencode(raw_params)
+
+    post_url = "127.0.0.1:8000"
+    # post_url = "10.56.8.132:80"
+    post_path = "/test_urllib/"
+    # post_path = "/Banco/Consumo/Consumo.php"
+    headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
+
+    try:
+        cxc = httplib.HTTPConnection(post_url)
+        cxc.request(method='POST', url=post_path, body=params, headers=headers)
+        response = cxc.getresponse()
+        status = response.status
+        source = response.read()
+        if status == 403:
+            response_code = '6'
+        elif status == 200 and source == 'true':
+            response_code = '1'
+        else:
+            response_code = '3'
+    except socket.error:
+        response_code = '5'
+    msg = transaction_result[response_code]
+    # response_code = '3'
     transaction_id = 'trans_ID'
-    return [response_code, 0, 0, 0, 0, 0, transaction_id]
+    return [response_code, msg, 0, 0, 0, 0, transaction_id]
 
 
 def process(request):
     # Transaction results
     APPROVED = '1'
-    DECLINED = '2'
-    ERROR = '3'
-    HELD_FOR_REVIEW = '4'
+    # DECLINED = '2'
+    # ERROR = '3'
+    # HELD_FOR_REVIEW = '4'
     postdata = request.POST.copy()
     card_num = postdata.get('credit_card_number', '')
     exp_month = postdata.get('credit_card_expire_month', '')
@@ -34,7 +72,7 @@ def process(request):
     amount = order_total.total
     del request.session['ordertotalid']
 
-    results = {}
+    # results = {}
     response = do_auth_capture(amount=amount,
                                card_num=card_num,
                                exp_date=exp_date,
@@ -44,10 +82,13 @@ def process(request):
         order = create_order(request, order_total, transaction_id)
         # order = create_order(request, transaction_id)
         results = {'order_number': order.id, 'message': ''}
-    if response[0] == DECLINED:
-        results = {'order_number': 0, 'message': 'There is a problem with your credit card.'}
-    if response[0] == ERROR or response[0] == HELD_FOR_REVIEW:
-        results = {'order_number': 0, 'message': 'Error processing your order.'}
+    else:
+        results = {'order_number': 0, 'message': response[1]}
+
+    # if response[0] == DECLINED:
+    #     results = {'order_number': 0, 'message': 'Hubo problemas procesando su tarjeta de credito'}
+    # if response[0] == ERROR or response[0] == HELD_FOR_REVIEW:
+    #     results = {'order_number': 0, 'message': u'Retenida para revisión.'}
     return results
 
 
