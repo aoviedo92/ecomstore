@@ -10,19 +10,20 @@
     {#            <li>{{ error_message }}</li>#}
     {#        </ul>#}
     {#    {% endif %}#}
-    <h4>Edit Order Information</h4>
+    <h4>Editar tus datos</h4>
     <div class="register_account">
         <div class="wrap">
             <form action="." method="post">
                 {% csrf_token %}
                 <div class="col_1_of_2 span_1_of_2">
                     <fieldset>
-                        <legend><p class="cart">{{ info|capfirst }} personal</p></legend>
+                        <legend><p class="cart">Información personal</p></legend>
                         <div>{{ form.email }}{{ form.email.errors }}</div>
                         <div>{{ form.phone }}{{ form.phone.errors }}</div>
                         <div>{{ form.birth_day }}{{ form.birth_day.errors }}</div>
                         <div>{{ form.sex }}{{ form.sex.errors }}</div>
                         <div>{{ form.shipping_city }}{{ form.shipping_city.errors }}</div>
+                        <div>{{ form.ci }}{{ form.ci.errors }}</div>
                     </fieldset>
                 </div>
                 <div class="account_advantages span_1_of_2">

@@ -14,6 +14,7 @@ class UserProfileForm(forms.ModelForm):
             self.fields['email'].widget.attrs['value'] = email_from_user
 
     email = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Email'}))
+    ci = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Carnet de identidad'}))
     # first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Nombre'}))
     # last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Apellidos'}))
     phone = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Teléfono'}))
@@ -23,6 +24,7 @@ class UserProfileForm(forms.ModelForm):
         widget=forms.TextInput(attrs={'placeholder': 'Enviado a esta dirección opcional'}))
     # birth_day = forms.DateField(input_formats='%d/%m/%Y',
     #                             widget=forms.DateInput(attrs={'placeholder': 'Fecha de nacimiento'}))
+    # ci = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Carnet de identidad'}), required=False)
 
     class Meta:
         model = UserProfile

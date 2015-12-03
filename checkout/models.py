@@ -1,3 +1,4 @@
+# coding=utf-8
 from django.db import models
 from django import forms
 from django.contrib.auth.models import User
@@ -11,20 +12,21 @@ class BaseOrderInfo(models.Model):
     class Meta:
         abstract = True
 
-    CITIES = [(0, "Seleccione municipio"), (1, "playa"), (2, "cerro"), (3, "lisa"), (4, "boyeros"), (5, "plaza"),
-              (6, "arroyo naranjo"),
-              (7, "cotorro"), (8, "marianao"), (9, "regla"), (10, "centro habana"), (11, "habana vieja"),
-              (12, "habana del este"), (13, "10 de octubre"), (14, "guanabacoa"), (15, "san miguel")]
+    CITIES = [(0, "Seleccione municipio"), (1, "Playa"), (2, "Cerro"), (3, "Lisa"), (4, "Boyeros"), (5, "Plaza"),
+              (6, "Arroyo Naranjo"),
+              (7, "Cotorro"), (8, "Marianao"), (9, "Regla"), (10, "Centro Habana"), (11, "Habana Vieja"),
+              (12, "Habana del Este"), (13, "10 de Octubre"), (14, "Guanabacoa"), (15, "San Miguel")]
 
     # contact info
     email = models.EmailField(max_length=50)
-    phone = models.CharField(max_length=20)
+    phone = models.CharField(max_length=20, verbose_name=u"Teléfono")
+    ci = models.CharField(max_length=11, verbose_name="Carnet de identidad", default='')
 
     # shipping information
-    shipping_name = models.CharField(max_length=50, verbose_name="Envio a nombre de")
-    shipping_address_1 = models.CharField(max_length=50)
-    shipping_address_2 = models.CharField(max_length=50, blank=True)
-    shipping_city = models.IntegerField(choices=CITIES, max_length=50, default=0)
+    shipping_name = models.CharField(max_length=50, verbose_name=u"Envío a nombre de")
+    shipping_address_1 = models.CharField(max_length=50, verbose_name=u"Dirección principal")
+    shipping_address_2 = models.CharField(max_length=50, blank=True, verbose_name=u"Dirección secundaria")
+    shipping_city = models.IntegerField(choices=CITIES, max_length=50, default=0, verbose_name=u"Municipio")
 
 
 class Order(BaseOrderInfo):
@@ -40,7 +42,7 @@ class Order(BaseOrderInfo):
                       (CANCELLED, 'Cancelled'),)
     # order info
     date = models.DateTimeField(auto_now_add=True)
-    status = models.IntegerField(choices=ORDER_STATUSES, default=SUBMITTED)
+    status = models.IntegerField(choices=ORDER_STATUSES, default=SUBMITTED, null=True)
     ip_address = models.IPAddressField()
     last_updated = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, null=True)

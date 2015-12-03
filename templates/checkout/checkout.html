@@ -22,15 +22,16 @@
 
         <form action="." method="post">
             {% csrf_token %}
-            <p class="cart">Informacion de contacto</p>
+            <p class="cart">Información de contacto</p>
             {% form_table_row form.email %}
             {% form_table_row form.phone %}
-            <p class="cart">Informacion de envio</p>
+            {% form_table_row form.ci %}
+            <p class="cart">Información de envió</p>
             {% form_table_row form.shipping_name %}
             {% form_table_row form.shipping_address_1 %}
             {% form_table_row form.shipping_address_2 %}
             {% form_table_row form.shipping_city %}
-            <p class="cart">Informacion de credito</p>
+            <p class="cart">Información de crédito</p>
             {% form_table_row form.credit_card_number %}
             {% form_table_row form.credit_card_type %}
             {% form_table_row form.credit_card_expire_month %}
