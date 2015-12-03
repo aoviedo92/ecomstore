@@ -1,0 +1,42 @@
+{% extends 'manager/dashboard_base.html' %}
+{% load static %}
+{% block scripts %}
+    <script src="{% static 'chart/Chart.min.js' %}"></script>
+    <script src="{% static 'js/django_ajax_post.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            var ctx = $("#chart1").get(0).getContext("2d");
+{#            var info = [65, 59, 80, 81, 56, 55, 40];#}
+            var url = '/manager/sex-chart/';
+            var ajax_data = {};
+            var func = function (response) {
+                {#                console.log(response)#}
+                {#                var info = response#}
+                var data = {
+                    labels: ["January", "February", "March", "April", "May", "June", "July"],
+                    datasets: [
+                        {
+                            label: "My First dataset",
+                            fillColor: "rgba(220,220,220,0.2)",
+                            strokeColor: "rgba(220,220,220,1)",
+                            pointColor: "rgba(220,220,220,1)",
+                            pointStrokeColor: "#fff",
+                            pointHighlightFill: "#fff",
+                            pointHighlightStroke: "rgba(220,220,220,1)",
+                            data: response
+                        }
+
+                    ]
+                };
+                var myLineChart = new Chart(ctx).Line(data);
+            };
+            ajax(url, ajax_data, func);
+
+        })
+
+    </script>
+{% endblock %}
+
+{% block content %}
+    <canvas id="chart1" width="800" height="400"></canvas>
+{% endblock %}

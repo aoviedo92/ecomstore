@@ -20,8 +20,9 @@ from utils import generate_random_id
 def test_superuser(user):
     return user.is_superuser
 
-
-
+@user_passes_test(test_superuser, login_url='/admin/')
+def dashboard(request):
+    return render_to_response('manager/analytics.html', {}, context_instance=RequestContext(request))
 
 
 @user_passes_test(test_superuser)

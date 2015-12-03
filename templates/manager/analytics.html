@@ -1,10 +1,202 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{% extends 'manager/dashboard_base.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="fa fa-envelope-o"></i></span>
 
-</body>
-</html>
+                <div class="info-box-content">
+                    <span class="info-box-text">Mensajes</span>
+                    <span class="info-box-number">21</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="fa fa-flag-o"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Promociones</span>
+                    <span class="info-box-number">6</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Rifas</span>
+                    <span class="info-box-number">2</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="fa fa-star-o"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Votos</span>
+                    <span class="info-box-number">93</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-aqua">
+                <span class="info-box-icon"><i class="fa fa-bookmark-o"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Productos en almacén</span>
+                    <span class="info-box-number">543</span>
+
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 70%"></div>
+                    </div>
+                  <span class="progress-description">
+                    70% incr - 30 Días
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-green">
+                <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Usuarios registrados</span>
+                    <span class="info-box-number">12</span>
+
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 60%"></div>
+                    </div>
+                  <span class="progress-description">
+                    60% incr - 30 Días
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-yellow">
+                <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Ventas</span>
+                    <span class="info-box-number">18</span>
+
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 50%"></div>
+                    </div>
+                  <span class="progress-description">
+                    50% incr - 30 Días
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box bg-red">
+                <span class="info-box-icon"><i class="fa fa-comments-o"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Comentarios</span>
+                    <span class="info-box-number">41</span>
+
+                    <div class="progress">
+                        <div class="progress-bar" style="width: 70%"></div>
+                    </div>
+                  <span class="progress-description">
+                    70% Increase in 30 Days
+                  </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3>150</h3>
+
+                    <p>Nuevos pedidos</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-bag"></i>
+                </div>
+                <a href="#" class="small-box-footer">Más info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+                    <p>Tasa de rebote</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="#" class="small-box-footer">Más info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>33<sup style="font-size: 20px">%</sup></h3>
+
+                    <p>Carritos abandonados</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+                <a href="#" class="small-box-footer">Más info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h3>147</h3>
+
+                    <p>Visitas</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
+                </div>
+                <a href="#" class="small-box-footer">Más info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+    </div>
+
+{% endblock %}
