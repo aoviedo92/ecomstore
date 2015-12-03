@@ -15,6 +15,11 @@ urlpatterns = patterns('',
                        url(r'^manager/', include('manager.urls')),
 
                        url(r'^quienes-somos/$', TemplateView.as_view(template_name='flatpages/about_us.html'), name='about_us'),
+                       url(r'^faq/$', TemplateView.as_view(template_name='flatpages/faq.html'), name='faq'),
+                       url(r'^payments/$', TemplateView.as_view(template_name='flatpages/payments.html'), name='payments'),
+                       url(r'^privacity/$', TemplateView.as_view(template_name='flatpages/privacity.html'), name='privacity'),
+                       url(r'^returns/$', TemplateView.as_view(template_name='flatpages/returns.html'), name='returns'),
+                       url(r'^shopping/$', TemplateView.as_view(template_name='flatpages/shopping.html'), name='shopping'),
 
                        url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
                            {'document_root': settings.MEDIA_ROOT}),

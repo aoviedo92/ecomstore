@@ -6,7 +6,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="shortcut icon" href="{% static 'shop_template/images/cart.png' %}"/>
+    <link rel="shortcut icon" href="{% static 'shop_template/images/cart3.png' %}"/>
     <title>
         {% block title %}
             {% if page_title %}
@@ -122,7 +122,7 @@
                     </li>
                 </ul>
                 <ul class="last">
-                    <li><a href="{% url "show_cart" %}">carrito({% cart_num_items request %})</a></li>
+                    <li><a style="font-size: 14px;margin-left: -10px;" href="{% url "show_cart" %}">carrito({% cart_num_items request %})</a></li>
                 </ul>
             </div>
         </div>
@@ -315,12 +315,12 @@
                         <div class="col_1_of_f_2 span_1_of_f_2">
                             <h3>Información</h3>
                             <ul class="f-list1">
-                                <li><a href="#">Privacidad y términos legales</a></li>
-                                <li><a href="#">Devoluciones</a></li>
-                                <li><a href="#">Envíos y entregas</a></li>
-                                <li><a href="#">Pagos</a></li>
-                                <li><a href="#">Compras</a></li>
-                                <li><a href="#">Quiénes somos?</a></li>
+                                <li><a href="{% url 'privacity' %}">Privacidad y términos legales</a></li>
+                                <li><a href="{% url 'returns' %}">Devoluciones</a></li>
+                                <li><a href="{% url 'faq' %}">Faq</a></li>
+                                <li><a href="{% url 'payments' %}">Pagos</a></li>
+                                <li><a href="{% url 'shopping' %}">Compras</a></li>
+                                <li><a href="{% url 'about_us' %}">Quiénes somos?</a></li>
                             </ul>
                         </div>
                         <div class="col_1_of_f_2 span_1_of_f_2">
@@ -365,13 +365,13 @@
             </div>
             <div class="f-list2">
                 <ul>
-                    <li class="active"><a href="about.html">About Us</a></li>
+                    <li class="active"><a href="{% url 'about_us' %}">Quiénes somos</a></li>
                     |
-                    <li><a href="delivery.html">Delivery & Returns</a></li>
+{#                    <li><a href="{% url '' %}">Delivery & Returns</a></li>#}
+{#                    |#}
+                    <li><a href="{% url 'privacity' %}">Condiciones y términos</a></li>
                     |
-                    <li><a href="delivery.html">Terms & Conditions</a></li>
-                    |
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="{% url 'privacity' %}">Contáctanos</a></li>
                 </ul>
             </div>
             <div class="clear"></div>

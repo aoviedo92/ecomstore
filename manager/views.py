@@ -3,7 +3,7 @@ from decimal import Decimal
 import glob
 import json
 from random import randint
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db.models import Sum
 from django.http import HttpResponse
 from django.shortcuts import render, render_to_response
@@ -17,76 +17,18 @@ from manager.models import Promo3, Promo4
 from utils import generate_random_id
 
 
-@login_required
-def promo3(request):
-    if request.POST:
-        post_data = request.POST.copy()
-        users = post_data.getlist('user', [])
-        discount = post_data.get('discount', '10')
-        print('disc', discount)
-        print(users)
-        for user in users:
-            user_ = User.objects.get(username=user)
-            print('user_', user_)
-            # up = UserProfile.objects.get(user=user_)
-            # print('up',up)
-            code = generate_random_id()
-            print('code', code)
-            promo = Promo3.objects.create(user=user_, code=code, discount=discount)
-            print('promo', promo)
-            promo.save()
-            # print('promo save',promo)
-            # up.promo3 = promo
-            # up.save()
-            # print('up.promo3',up.promo3)
-    return render_to_response('manager/promo3.html', locals(), context_instance=RequestContext(request))
+def test_superuser(user):
+    return user.is_superuser
 
 
-@login_required
-def promo3_find_users(request):
-    post_data = request.POST.copy()
-    find_user = post_data.get('find_user', '')
-    template = "manager/include_checkbox.html"
-    if find_user:
-        users = User.objects.filter(username__icontains=find_user)
-        html = render_to_string(template, {'users': users})
-        response = json.dumps({'html': html})
-    else:
-        response = json.dumps({'html': ""})
-
-    return HttpResponse(response, content_type='application/javascript; charset=utf-8')
 
 
-@login_required
-def promo3_random_users(request):
-    post_data = request.POST.copy()
-    loyal_users = post_data.get('loyal_users')
-    # users = User.objects.all()
-    user_profiles = UserProfile.objects.all()
-    if loyal_users == 'true':
-        user_profiles = user_profiles.filter(loyal_user=True)
-    user_ids = [id['user'] for id in user_profiles.values('user')]
-    users = User.objects.filter(id__in=user_ids)
-    count = user_profiles.count()
-    template = "manager/include_checkbox.html"
-    taken_pos = []
-    take_users = []
-    cant_user_to_take = randint(1, 5)
-    if count <= cant_user_to_take:
-        cant_user_to_take = count
-    for i in range(cant_user_to_take):
-        while True:
-            pos = randint(0, count - 1)
-            if pos not in taken_pos:
-                taken_pos.append(pos)
-                take_users.append(users[pos])
-                break
-    html = render_to_string(template, {'users': take_users})
-    response = json.dumps({'html': html})
-    return HttpResponse(response, content_type='application/javascript; charset=utf-8')
 
-
+@user_passes_test(test_superuser)
 def create_group_categories(request):
+    """
+    autopopulate las categorias
+    """
     group = ["Hombres", "Mujeres", "Bodas", "Tejidos", "Uniformes"]
     for group_name in group:
         CategoryGroup.objects.create(group_name=group_name)
@@ -143,7 +85,7 @@ def create_group_categories(request):
     Category.objects.create(name='Uniformes para mujeres', slug='uniformes-para-mujeres',
                             group=CategoryGroup.objects.get(group_name='Uniformes'), sex=1)
 
-
+@user_passes_test(test_superuser)
 def create_products(request):
     category_list = Category.objects.all()
     for category in category_list:
@@ -168,72 +110,4 @@ def create_product_aux(category):
         product.save()
 
 
-def send_mail(request):
-
-    return HttpResponse()
-
-
-def add_user_rifas(request):
-    users_iscritos = 0
-    if request.POST:
-        promo_id = request.POST.get('promo_id')
-        promo = Promo4.objects.get(id=promo_id)
-        users_iscritos = promo.users.count()
-        if request.user not in promo.users.all():
-            promo.users.add(request.user)
-            promo.save()
-            users_iscritos = promo.users.count()
-
-    response = json.dumps({'success': 'true', 'users_inscritos': users_iscritos})
-    return HttpResponse(response, content_type='application/javascript; charset=utf-8')
-
-
-def remove_user_rifas(request):
-    users_inscritos = 0
-    if request.POST:
-        promo_id = request.POST.get('promo_id')
-        promo = Promo4.objects.get(id=promo_id)
-        users_inscritos = promo.users.count()
-        if request.user in promo.users.all():
-            promo.users.remove(request.user)
-            promo.save()
-            users_inscritos = promo.users.count()
-
-    response = json.dumps({'success': 'true', 'users_inscritos': users_inscritos})
-    return HttpResponse(response, content_type='application/javascript; charset=utf-8')
-
-
-def retrieve_info(request):
-    promo_id = request.POST.get('promoid')
-    promo = Promo4.objects.get(id=promo_id)
-    total = promo.products.aggregate(Sum('price'))['price__sum']
-    percent = promo.discount
-    discount = total * percent / 100
-    total_discount = total - discount
-    data = u"Con un total de $%.2f y un descuento del %d%%<br/>llévate estos productos sólo por: $%s" % (
-    total, percent, total_discount)
-    response = json.dumps({"data": data})
-
-    return HttpResponse(response, content_type='application/javascript; charset=utf-8')
-
-
-@login_required
-def rifas_results(request):
-    promos = Promo4.objects.all()
-    closed_promos = [promo for promo in promos if not promo.is_open]
-    return render_to_response('manager/promo4_results.html', locals(), context_instance=RequestContext(request))
-
-
-def get_winner_user(request):
-    promo_id = request.POST.get('selected_rifa_id')
-    promo = Promo4.objects.get(id=promo_id)
-    users = promo.users.all()
-    try:
-        winner_user = users[randint(0, len(users) - 1)]
-        promo.winner_user = winner_user
-        promo.save()
-        response = json.dumps({'result': 'el usuario ganador fue %s' % unicode(winner_user)})
-    except ValueError:
-        response = json.dumps({'result': 'No se inscribieron usuarios en esta rifa'})
-    return HttpResponse(response, content_type='application/javascript; charset=utf-8')
 
