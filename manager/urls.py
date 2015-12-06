@@ -19,7 +19,8 @@ promo3_pattern = patterns('manager.promo3',
                           )
 analytics_pattern = patterns('manager.web_analytics',
                              url(r'^chart/$', 'chart', name='chart'),
-                             url(r'^sex-chart/$', 'sex_summary', name='chart'),
+                             url(r'^sex-chart/$', 'sex_summary'),
+                             url(r'^buy-month-chart/$', 'buy_month'),
                              )
 
 urlpatterns += rifas_pattern + promo3_pattern + analytics_pattern

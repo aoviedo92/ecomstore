@@ -104,7 +104,11 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+
+# USE_TZ=True makes the dates and times timezone aware. This is usually required if users from different timezones need to use your app.
+# si lo ponemos sale esta exc: ImproperlyConfigured: This query requires pytz, but it isn't installed.
+# After continuing to search for django and pytz, I found the 1.6 Django release notes, which mention that you must now install pytz to work with Sqlite3 if USE_TZ=True in your settings.py.
+# USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)

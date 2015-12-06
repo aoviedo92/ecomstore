@@ -5,15 +5,14 @@
     <script src="{% static 'js/django_ajax_post.js' %}"></script>
     <script>
         $(document).ready(function () {
-            var ctx = $("#chart1").get(0).getContext("2d");
-{#            var info = [65, 59, 80, 81, 56, 55, 40];#}
-            var url = '/manager/sex-chart/';
-            var ajax_data = {};
-            var func = function (response) {
-                {#                console.log(response)#}
-                {#                var info = response#}
+            console.log('hi')
+            //chart ventas mensuales
+            var url_buy_month = '/manager/buy-month-chart/';
+            var func_buy_month = function (response) {
+                console.log(response)
+                var ctx = $("#chart2").get(0).getContext("2d");
                 var data = {
-                    labels: ["January", "February", "March", "April", "May", "June", "July"],
+                    labels: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
                     datasets: [
                         {
                             label: "My First dataset",
@@ -23,20 +22,84 @@
                             pointStrokeColor: "#fff",
                             pointHighlightFill: "#fff",
                             pointHighlightStroke: "rgba(220,220,220,1)",
-                            data: response
+                            data: [response.ene,
+                                response.feb,
+                                response.mar,
+                                response.abr,
+                                response.may,
+                                response.jun,
+                                response.jul,
+                                response.ago,
+                                response.sep,
+                                response.oct,
+                                response.nov,
+                                response.dic]
                         }
-
                     ]
                 };
-                var myLineChart = new Chart(ctx).Line(data);
+                new Chart(ctx).Line(data);
             };
-            ajax(url, ajax_data, func);
 
+            //chart genre
+            var url_genre = '/manager/sex-chart/';
+            var ajax_data = {};
+            var func_genre = function (response) {
+                var ctx = $("#chart1").get(0).getContext("2d");
+                var sex_dict_buy = response[0];
+                var sex_dict_all = response[1];
+                var data = {
+                    labels: ["Ambos", "Mujeres", "Hombres"],
+                    datasets: [
+                        {
+                            label: "My First dataset",
+                            fillColor: "rgba(220,220,220,0.5)",
+                            strokeColor: "rgba(220,220,220,0.8)",
+                            highlightFill: "rgba(220,220,220,0.75)",
+                            highlightStroke: "rgba(220,220,220,1)",
+                            data: sex_dict_all
+                        },
+                        {
+                            label: "My Second dataset",
+                            fillColor: "rgba(151,187,205,0.5)",
+                            strokeColor: "rgba(151,187,205,0.8)",
+                            highlightFill: "rgba(151,187,205,0.75)",
+                            highlightStroke: "rgba(151,187,205,1)",
+                            data: sex_dict_buy
+                        }
+                    ]
+                };
+                new Chart(ctx).Bar(data);
+            };
+            ajax(url_genre, ajax_data, func_genre);
+            ajax(url_buy_month, ajax_data, func_buy_month);
         })
 
     </script>
 {% endblock %}
 
 {% block content %}
+    <h3>Ventas mensuales</h3>
+    <canvas id="chart2" width="800" height="400"></canvas>
+    <h3>Prendas por género</h3>
+    <h4><span class="legend color1">En almacén</span><span class="legend color2">Ventas</span></h4>
     <canvas id="chart1" width="800" height="400"></canvas>
+    <style>
+
+        .legend {
+            padding: 5px;
+            margin: 5px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .color1 {
+            background-color: rgba(220, 220, 220, 0.5);
+            color: rgba(220, 220, 220, 1);
+        }
+
+        .color2 {
+            background-color: rgba(151, 187, 205, 0.5);
+            color: rgba(151, 187, 205, 1);
+        }
+    </style>
 {% endblock %}
