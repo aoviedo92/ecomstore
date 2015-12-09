@@ -12,7 +12,8 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.template.loader import render_to_string
 from accounts.models import UserProfile
-from catalog.models import CategoryGroup, CommonCategory, Category, Product
+from catalog.models import CategoryGroup, CommonCategory, Category, Product, ProductReview
+from checkout.models import Order
 from manager.models import Promo3, Promo4
 from utils import generate_random_id
 
@@ -20,9 +21,14 @@ from utils import generate_random_id
 def test_superuser(user):
     return user.is_superuser
 
+
 @user_passes_test(test_superuser, login_url='/admin/')
 def dashboard(request):
-    return render_to_response('manager/analytics.html', {}, context_instance=RequestContext(request))
+    count_products = Product.active.count()
+    count_users = User.objects.count()
+    count_orders = Order.objects.count()
+    count_reviews = ProductReview.objects.count()
+    return render_to_response('manager/analytics.html', locals(), context_instance=RequestContext(request))
 
 
 @user_passes_test(test_superuser)
@@ -86,6 +92,7 @@ def create_group_categories(request):
     Category.objects.create(name='Uniformes para mujeres', slug='uniformes-para-mujeres',
                             group=CategoryGroup.objects.get(group_name='Uniformes'), sex=1)
 
+
 @user_passes_test(test_superuser)
 def create_products(request):
     category_list = Category.objects.all()
@@ -109,6 +116,3 @@ def create_product_aux(category):
         product = Product.objects.create(name=name, slug=slugify(name), image=image, price=price)
         product.categories.add(category)
         product.save()
-
-
-

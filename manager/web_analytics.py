@@ -33,7 +33,9 @@ def sex_summary(request):
 
 @user_passes_test(test_superuser)
 def buy_month(request):
-    print('here')
+    """
+    resumen mensual por ventas
+    """
     months_dict = {}
     months = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"]
     months_nums = range(1, 13)
