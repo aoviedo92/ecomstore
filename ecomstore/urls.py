@@ -21,6 +21,7 @@ urlpatterns = patterns('',
                        url(r'^privacity/$', TemplateView.as_view(template_name='flatpages/privacity.html'), name='privacity'),
                        url(r'^returns/$', TemplateView.as_view(template_name='flatpages/returns.html'), name='returns'),
                        url(r'^shopping/$', TemplateView.as_view(template_name='flatpages/shopping.html'), name='shopping'),
+                       url(r'^contact/$', TemplateView.as_view(template_name='flatpages/contact.html'), name='contact'),
 
                        url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
                            {'document_root': settings.MEDIA_ROOT}),

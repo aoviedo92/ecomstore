@@ -1,15 +1,32 @@
-Derecho de devolución
+{% extends 'layout.html' %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/flatpages.css' %}"/>
+{% endblock %}
+{% block content %}
+    <div class="flatpage">
+        <h2 class="head">Derecho de devolución</h2>
 
-Usted siempre tiene derecho a anular un pedido en un plazo no superior a 30 días, sin tener que justificarse por ello.
+        <p>Usted siempre tiene derecho a anular un pedido en un plazo no superior a 30 días, sin tener que justificarse
+            por ello. El período de anulación se inicia el día en que recibe el último artículo (o artículos) de su
+            pedido. La manera más sencilla de ejercer su derecho de anulación es rellenando simplemente el formulario de
+            devolución adjunto en el paquete y devolvernos la mercancía, utilizando la etiqueta de devolución prepago
+            que le hemos facilitado. Encontrará las indicaciones sobre cómo proceder en la nota de entrega en su
+            paquete. No obstante, a fin de cumplir el período de anulación, es suficiente con que nos comunique la
+            decisión de anular el pedido antes de que venza dicho período.
+        </p>
 
-El período de anulación se inicia el día en que recibe el último artículo (o artículos) de su pedido. La manera más sencilla de ejercer su derecho de anulación es rellenando simplemente el formulario de devolución adjunto en el paquete y devolvernos la mercancía, utilizando la etiqueta de devolución prepago que le hemos facilitado. Encontrará las indicaciones sobre cómo proceder en la nota de entrega en su paquete.
+        <p>Efectos de la devolución:
+            Le reembolsaremos todos los pagos recibidos por su parte, incluyendo los costes de nuestra opción de entrega
+            estándar, sin retrasos indebidos y en ningún caso más tarde de 14 días desde el momento en que nos informe
+            de su decisión de anular el pedido. Seguiremos los mismos medios de pago utilizados por usted al realizar el
+            pedido sin que ello entrañe ningún coste adicional. Puede que retengamos el reembolso hasta que hayamos
+            recibido la mercancía o hasta que tengamos constancia de que ésta se ha devuelto; la condición que se cumpla
+            primero. Usted enviará la mercancía o nos la entregará sin retrasos indebidos y nunca más tarde de 30 días
+            desde el momento en que reciba el artículo (o artículos). Usted tendrá que asumir los gastos directos de la
+            devolución de la mercancía. Usted será el único responsable de la disminución de valor de la mercancía
+            resultante de una manipulación diferente a la necesaria para establecer la naturaleza, las características y
+            la funcionalidad de la mercancía.</p>
 
-No obstante, a fin de cumplir el período de anulación, es suficiente con que nos comunique la decisión de anular el pedido antes de que venza dicho período.
-
-Efectos de la devolución
-
-Le reembolsaremos todos los pagos recibidos por su parte, incluyendo los costes de nuestra opción de entrega estándar, sin retrasos indebidos y en ningún caso más tarde de 14 días desde el momento en que nos informe de su decisión de anular el pedido. Seguiremos los mismos medios de pago utilizados por usted al realizar el pedido sin que ello entrañe ningún coste adicional. Puede que retengamos el reembolso hasta que hayamos recibido la mercancía o hasta que tengamos constancia de que ésta se ha devuelto; la condición que se cumpla primero.
-
-Usted enviará la mercancía o nos la entregará sin retrasos indebidos y nunca más tarde de 30 días desde el momento en que reciba el artículo (o artículos). Todos nuestros paquetes contienen una etiqueta de devolución prepago para que utilice cuando nos envíe los artículos. Usted tendrá que asumir los gastos directos de la devolución de la mercancía: 1,95 €.
-
-Usted será el único responsable de la disminución de valor de la mercancía resultante de una manipulación diferente a la necesaria para establecer la naturaleza, las características y la funcionalidad de la mercancía.
+        </div>
+{% endblock %}

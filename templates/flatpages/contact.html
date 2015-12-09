@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/flatpages.css' %}"/>
+{% endblock %}
+{% block content %}
+    <div class="login">
+        <div class="wrap">
+            <div class="content-top">
+{#                <form method="post" action="">#}
+                    <div class="to">
+                        <input type="text" class="text" placeholder="Nombre">
+                        <input type="text" class="text" placeholder="Email">
+                    </div>
+                    <div class="to">
+                        <input type="text" class="text" placeholder="Sitio Web">
+                        <input type="text" class="text" placeholder="Asunto">
+                    </div>
+                    <div class="text">
+                        <textarea placeholder="Mensaje"></textarea>
+                    </div>
+                    <div class="submit">
+                        <input type="submit" value="Submit" onclick="window.location.replace('/')">
+                    </div>
+{#                </form>#}
+                <div class="map">
+                    <iframe width="100%" height="175" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                            src="https://maps.google.co.in/maps?f=q&amp;source=s_q&amp;hl=es&amp;geocode=&amp;q=Uci,+Ha,+Cuba&amp;aq=4&amp;oq=light&amp;sll=22.988339,-82.464771&amp;sspn=0.04941,0.104628&amp;ie=UTF8&amp;hq=&amp;hnear=uci,+Havana,+Cuba&amp;t=m&amp;z=14&amp;ll=22.988339,-82.464771&amp;output=embed"></iframe>
+                    <br>
+                    <small><a
+                            href="https://maps.google.co.in/maps?f=q&amp;source=s_q&amp;hl=es&amp;geocode=&amp;q=Uci,+Ha,+Cuba&amp;aq=4&amp;oq=light&amp;sll=22.988339,-82.464771&amp;sspn=0.04941,0.104628&amp;ie=UTF8&amp;hq=&amp;hnear=uci,+Havana,+Cuba&amp;t=m&amp;z=14&amp;ll=22.988339,-82.464771&amp;output=embed"
+                            style="color:#666;text-align:left;font-size:12px">View Larger Map</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{#22.988339, -82.464771#}
+{#https://www.google.com/maps/place/22%C2%B059'12.7%22N+82%C2%B027'18.6%22W/@22.9874944,-82.4672224,15.46z/data=!4m2!3m1!1s0x0:0x0#}

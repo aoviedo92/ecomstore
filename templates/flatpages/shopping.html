@@ -1,9 +1,28 @@
-Los pedidos se pueden realizar en nuestra página web o utilizando nuestra aplicación. Debes tener 18 años como mínimo y facilitar una dirección de envío y facturación en Cuba. Los artículos se guardarán en la bolsa de la compra durante 7 días, pero no esperes demasiado ya que no se reservan.
+{% extends 'layout.html' %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/flatpages.css' %}"/>
+{% endblock %}
+{% block content %}
+    <div class="flatpage">
+        <h2 class="head">compras</h2>
 
-Cuando finalices la compra, haz clic en "Bolsa de la compra" para realizar tu pedido. Entonces se mostrarán el precio y la disponibilidad. En ese momento también puedes editar tu pedido. Cuando estés satisfecho con tu pedido, podrás proceder al pago.
+        <p></p>
 
-Para ahorrar tiempo la próxima vez que compres, puedes guardar los datos de tu tarjeta de crédito en nuestro servidor seguro, para que no tengas que introducirlos cada vez que realices una compra. Para más información, consulta Pagos.
+        <p>Si usted desea realizar una compra en nuestra tienda y es su por primera vez, solo tiene que llenar el
+            formulario con los datos que se le exige, pero si es un cliente registrado no tendrá que llevar a cabo este
+            paso, puesto que sus datos ya se encuentran almacenados con el objetivo de ahorrarle tiempo.</p>
 
-Cuando hayas realizado tu pedido, recibirás un correo electrónico de confirmación. Además recibirás un correo electrónico adicional para informarte de que tu pedido se ha enviado, junto con un enlace de seguimiento para que puedas saber dónde se encuentra.
+        <p>Los artículos que usted elige para comprar son guardados en cookies, pero solo por dos semanas, así que no
+            pierda mucho tiempo porque de lo contrario se eliminaran.</p>
 
-Si necesitas asistencia, no dudes en llamar al teléfono 902 044 210; estaremos encantados de ayudarte.
+        <p>Luego de haber seleccionado todo lo que desea comprar solo tiene que dar clic en el botón ¨checkout¨.</p>
+
+        <p>Al finalizar la compra usted recibirá un correo de confirmación, además trataremos de que el producto le sea
+            entregado en el menor tiempo posible</p>
+
+        <p>Ante cualquier queja o sugerencia, solo tiene que acceder al formulario de contacto, allí están nuestros
+            datos, así que no dude en contactarnos, estaremos siempre a su disposición, porque para LeoShop el cliente
+            es lo primero, por lo que será un placer atenderlos.</p>
+    </div>
+{% endblock %}
