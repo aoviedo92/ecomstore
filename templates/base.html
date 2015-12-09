@@ -41,9 +41,10 @@
     <link rel="stylesheet" href="{% static 'tooltipster/css/tooltipster.css' %}"/>
     <link rel="stylesheet" href="{% static 'tooltipster/css/themes/tooltipster-shadow.css' %}"/>
     <script src="{% static 'tooltipster/js/jquery.tooltipster.min.js' %}"></script>
-
+    <script src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
     <script src="{% static 'js/base.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/base.css' %}"/>
+    <link rel="stylesheet" href="{% static 'cookielaw/css/cookielaw.css' %}"/>
     {% block styles %}
     {% endblock %}
     {% block scripts %}
@@ -51,6 +52,8 @@
 
 </head>
 <body>
+{% load cookielaw_tags %}
+{% cookielaw_banner %}
 <div class="header-top">
     <div class="wrap">
         <div class="header-top-left">
@@ -316,6 +319,7 @@
                             <h3>Información</h3>
                             <ul class="f-list1">
                                 <li><a href="{% url 'privacity' %}">Privacidad y términos legales</a></li>
+                                <li><a href="{% url 'cookies' %}">Política de cookies</a></li>
                                 <li><a href="{% url 'returns' %}">Devoluciones</a></li>
                                 <li><a href="{% url 'faq' %}">Faq</a></li>
                                 <li><a href="{% url 'payments' %}">Pagos</a></li>

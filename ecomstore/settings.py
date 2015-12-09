@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'tagging',
     'manager',
     'caching',
+    'cookielaw',
 )
 
 MIDDLEWARE_CLASSES = (

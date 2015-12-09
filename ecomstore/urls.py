@@ -15,6 +15,7 @@ urlpatterns = patterns('',
                        url(r'^manager/', include('manager.urls')),
 
                        url(r'^quienes-somos/$', TemplateView.as_view(template_name='flatpages/about_us.html'), name='about_us'),
+                       url(r'^cookies-policy/$', TemplateView.as_view(template_name='flatpages/cookies.html'), name='cookies'),
                        url(r'^faq/$', TemplateView.as_view(template_name='flatpages/faq.html'), name='faq'),
                        url(r'^payments/$', TemplateView.as_view(template_name='flatpages/payments.html'), name='payments'),
                        url(r'^privacity/$', TemplateView.as_view(template_name='flatpages/privacity.html'), name='privacity'),
