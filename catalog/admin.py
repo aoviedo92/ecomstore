@@ -8,7 +8,7 @@ from catalog.forms import ProductAdminForm
 
 class ProductAdmin(admin.ModelAdmin):
     form = ProductAdminForm
-    list_display = ('name', 'price', 'old_price', 'quantity', 'is_active', 'created_at', 'slug',)
+    list_display = ('name', 'price', 'old_price', 'quantity', 'is_active', 'created_at', 'slug', 'image')
     list_display_links = ('name',)
     list_per_page = 50
     ordering = ['-created_at']
