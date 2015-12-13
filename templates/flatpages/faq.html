@@ -1,93 +1,62 @@
-Compras Online
+{% extends 'layout.html' %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/flatpages.css' %}"/>
+{% endblock %}
+{% block content %}
+    <div class="flatpage">
+        <h2 class="head">FAQ</h2>
 
- 
-¿Cómo realizar compras online?
+        <p>¿Cómo realizar compras online? Los pedidos se pueden realizar en nuestra página web o utilizando nuestra
+            aplicación. Debes tener 18 años como mínimo y facilitar una dirección de envío y facturación en Cuba. Si has
+            visto un artículo en el catálogo, lo agregas al carrito de compras y asi con todos los artículos que quieres
+            comprar. Cuando estés satisfecho con tu pedido, podrás proceder al pago. Para ahorrar tiempo la próxima vez
+            que compres, puedes guardar los datos de tu tarjeta de crédito en nuestro servidor seguro, para que no
+            tengas que introducirlos cada vez que realices una compra. Si necesitas asistencia, no dudes en llamar al
+            teléfono 835-8531; estaremos encantados de ayudarte. Los artículos sólo se reservan una vez que se completa
+            la compra. Si un artículo es muy demandado, puede que esté disponible al añadirlo a la bolsa de la compra
+            pero que se haya agotado cuando vas a formalizar la compra. </p>
 
-Los pedidos se pueden realizar en nuestra página web o utilizando nuestra aplicación. Debes tener 18 años como mínimo y facilitar una dirección de envío y facturación en España. Si has visto un artículo en el catálogo, simplemente introduce el número de dicho artículo en "Pedir desde catálogo". Los artículos se guardarán en la bolsa de la compra durante 7 días, pero no esperes demasiado ya que no se reservan.
-Cuando finalices la compra, haz clic en "Bolsa de la compra" para realizar tu pedido. Entonces se mostrarán el precio y la disponibilidad. En ese momento también puedes editar tu pedido. Cuando estés satisfecho con tu pedido, podrás proceder al pago.
-Para ahorrar tiempo la próxima vez que compres, puedes guardar los datos de tu tarjeta de crédito en nuestro servidor seguro, para que no tengas que introducirlos cada vez que realices una compra. Para más información, consulta Pagos.
-Cuando hayas realizado tu pedido, recibirás un correo electrónico de confirmación. Además recibirás un correo electrónico adicional para informarte de que tu pedido se ha enviado, junto con un enlace de seguimiento para que puedas saber dónde se encuentra.
-Si necesitas asistencia, no dudes en llamar al teléfono 902 044 210; estaremos encantados de ayudarte.
+        <p>¿Qué tipo de tarjetas de crédito se aceptan? Leoshop acepta las siguientes tarjetas de crédito: GOVMBA</p>
 
-¿Cómo puedo añadir un descuento a mi pedido?
+        <p>¿Cuándo se deduce la cantidad de mi tarjeta de crédito? Cuando realizas un pedido, se procede a reservar la
+            cantidad en tu tarjeta de crédito. Aunque el importe no se deducirá de dicha tarjeta hasta que se envíe el
+            paquete</p>
 
-Si has recibido un código de descuento de Leoshop, podrás introducirlo en la página de pago. El campo para introducir el código de descuento está a la derecha, sobre los artículos adquiridos.
-Uno de los artículos de mi bolsa de la compra se ha agotado cuando iba a comprarlo. ¿Cómo puede ser posible?
-Los artículos sólo se reservan una vez que se completa la compra. Si un artículo es muy demandado, puede que esté disponible al añadirlo a la bolsa de la compra pero que se haya agotado cuando vas a formalizar la compra. Los artículos añadidos a la bolsa de la compra se guardan durante 7 días, aunque no se garantiza su disponibilidad.
+        <p>¿Qué ocurre en caso de devolución? Si devuelves algún artículo el importe en la mayoría de los casos se
+            abonará en tu tarjeta de crédito, menos la tarifa de envío de la devolución. ENVÍOS Y ENTREGAS </p>
 
- 
+        <p>¿Cuál es el plazo de entrega? Si todos los artículos están disponibles, recibirá el pedido dentro de 2-4 días
+            laborables desde la confirmación del pedido.</p>
 
+        <p>¿Cómo puedo hacer un seguimiento del paquete? Tan pronto como empecemos a preparar tu pedido, te enviaremos
+            un correo electrónico con la información de la entrega y un enlace para que puedas seguirlo online. También
+            podrás seguir tu pedido en Mis compras cuando inicies en el carrito de compras.</p>
 
-Pagos
+        <p>¿Cuáles son los costes de gestión y envío en las compras online? Todas las compras están sujetas a un gasto
+            de entrega. En las entregas a domicilio, el importe es de 3.00 cuc </p>
 
- 
-¿Qué tipo de tarjetas de crédito se aceptan?
+        <p>¿Qué pasos debo seguir en una devolución? Puedes devolver tu pedido en un período "de anulación de compra" de
+            30 días, a contar desde el momento en que recibes el/los artículo/s. Todos nuestros paquetes contienen una
+            etiqueta con la dirección de devolución para que la utilices cuando nos envíes los artículos. Las
+            devoluciones se pueden llevar a la Habana, Cuba.</p>
 
-Leoshop acepta las siguientes tarjetas de crédito: Visa y MasterCard.
+        <p>¿Debo pagar por la devolución? Las devoluciones tienen un coste de 1.00 cuc. Este importe se deducirá del
+            reembolso a percibir.</p>
 
-¿Cuándo se deduce la cantidad de mi tarjeta de crédito?
+        <p>. ¿Cómo sé que la devolución se ha procesado? Cuando recibamos el envío de devolución en nuestro almacén, te
+            enviaremos un aviso de cancelación a través del correo electrónico, confirmando la recepción del paquete. En
+            un plazo máximo de 14 días desde la recepción del aviso de cancelación, y siempre que hayamos recibido el
+            artículo o una evidencia de que nos lo has enviado, procesaremos el reembolso siguiendo el mismo método que
+            utilizaste al realizar el pago.</p>
 
-Cuando realizas un pedido, se procede a reservar la cantidad en tu tarjeta de crédito. Aunque el importe no se deducirá de dicha tarjeta hasta que se envíe el paquete.
+        <p>¿Puedo devolver ropa interior y bañadores comprados online? Como con el resto de artículos, puedes devolver
+            tanto la ropa interior como los bañadores asegurándote de que estén sin usar y en su estado original. He
+            perdido mi hoja de devolución, ¿qué debo hacer? Si has perdido tu hoja de devolución puedes imprimir una
+            nueva aquí o contactar a Atención al Cliente para recibir ayuda.</p>
 
-¿Qué ocurre en caso de devolución?
+        <p>¿Dónde envío mis devoluciones? Encontrarás la dirección en la nota de devolución previamente impresa que has
+            recibido con tu paquete.</p>
 
-Si devuelves algún artículo el importe en la mayoría de los casos se abonará en tu tarjeta de crédito, menos la tarifa de envío de la devolución.
-
- 
-
-ENVÍOS Y ENTREGAS
-
- 
-¿Cuál es el plazo de entrega?
-
-Si todos los artículos están disponibles, recibirá el pedido dentro de 2-4 días laborables desde la confirmación del pedido.
-
-¿Cómo puedo hacer un seguimiento del paquete?
-
-Tan pronto como empecemos a preparar tu pedido, te enviaremos un correo electrónico con la información de la entrega y un enlace para que puedas seguirlo online.
-También podrás seguir tu pedido en Mis compras cuando inicies sesión en "Mi Leoshop".
-
-¿Cuáles son los costes de gestión y envío en las compras online?
-
-Todas las compras están sujetas a un gasto de entrega. En las entregas a domicilio, el importe es de 3,95 €. En las entregas en Punto Pack, el importe es de 3,95 €.
-
-
-
-
-¿Qué pasos debo seguir en una devolución?
-
-Puedes devolver tu pedido en un período "de anulación de compra" de 30 días, a contar desde el momento en que recibes el/los artículo/s.
-
-Todos nuestros paquetes contienen una etiqueta con la dirección de devolución para que la utilices cuando nos envíes los artículos.
-
-Las devoluciones se pueden llevar a cualquier Punto Pack de España. Por favor, sigue los pasos citados a continuación:
-
-1) Utiliza el formulario de devolución que se adjunta, y rellena el código que mejor recoja el motivo de la devolución.
-
-2) Coloca el artículo (o artículos) que quieras devolver en la bolsa/caja donde recibiste el pedido. Recuerda que el formulario de devolución se debe adjuntar siempre con el producto.
-
-3) Pega la etiqueta auto-adhesiva con la dirección pre-impresa en el paquete. Ahora, el paquete ya está listo para entregárselo a la persona encargada en cualquier Punto Pack.
-
-4) Cuando recibamos el paquete en nuestro almacén, te enviaremos un correo electrónico de confirmación.
-
-¿Debo pagar por la devolución?
-
-Las devoluciones tienen un coste de 1,95 €. Este importe se deducirá del reembolso a percibir.
-
-¿Cómo sé que la devolución se ha procesado?
-
-Cuando recibamos el envío de devolución en nuestro almacén, te enviaremos un aviso de cancelación a través del correo electrónico, confirmando la recepción del paquete.
-
-En un plazo máximo de 14 días desde la recepción del aviso de cancelación, y siempre que hayamos recibido el artículo o una evidencia de que nos lo has enviado, procesaremos el reembolso siguiendo el mismo método que utilizaste al realizar el pago.
-
-¿Puedo devolver ropa interior y bañadores comprados online?
-
-Como con el resto de artículos, puedes devolver tanto la ropa interior como los bañadores asegurándote de que estén sin usar y en su estado original.
-
-He perdido mi hoja de devolución, ¿qué debo hacer?
-
-Si has perdido tu hoja de devolución puedes imprimir una nueva aquí o contactar a Atención al Cliente para recibir ayuda.
-
-¿Dónde envío mis devoluciones?
-
-Encontrarás la dirección en la nota de devolución previamente impresa que has recibido con tu paquete.
+    </div>
+{% endblock %}

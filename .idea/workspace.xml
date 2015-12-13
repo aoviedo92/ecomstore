@@ -12,14 +12,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c67dc18-dfcf-489c-8aea-89a3654a4f89" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/flatpages/contact.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/flatpages/privacity.html" afterPath="$PROJECT_DIR$/templates/flatpages/privacity.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/flatpages/returns.html" afterPath="$PROJECT_DIR$/templates/flatpages/returns.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/flatpages/shopping.html" afterPath="$PROJECT_DIR$/templates/flatpages/shopping.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ecomstore/urls.py" afterPath="$PROJECT_DIR$/ecomstore/urls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/ecomstore.iml" afterPath="$PROJECT_DIR$/.idea/ecomstore.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/flatpages/faq.html" afterPath="$PROJECT_DIR$/templates/flatpages/faq.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/flatpages/payments.html" afterPath="$PROJECT_DIR$/templates/flatpages/payments.html" />
     </list>
     <ignored path="ecomstore.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,12 +32,12 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/ecomstore$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1444646666275" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preview" />
-    <SUITE FILE_PATH="coverage/ecomstore$Test__catalog.coverage" NAME="Test: catalog Coverage Results" MODIFIED="1448904535815" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/ecomstore$tests.coverage" NAME="tests Coverage Results" MODIFIED="1445787332760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preview" />
+    <SUITE FILE_PATH="coverage/ecomstore$stats.coverage" NAME="stats Coverage Results" MODIFIED="1448448851678" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/stats" />
     <SUITE FILE_PATH="coverage/ecomstore$tests__1_.coverage" NAME="tests (1) Coverage Results" MODIFIED="1449072793432" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils_" />
     <SUITE FILE_PATH="coverage/ecomstore$test_goslate.coverage" NAME="test_goslate Coverage Results" MODIFIED="1444641419238" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preview" />
-    <SUITE FILE_PATH="coverage/ecomstore$stats.coverage" NAME="stats Coverage Results" MODIFIED="1448448851678" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/stats" />
+    <SUITE FILE_PATH="coverage/ecomstore$Test__catalog.coverage" NAME="Test: catalog Coverage Results" MODIFIED="1448904535815" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/ecomstore$tests.coverage" NAME="tests Coverage Results" MODIFIED="1445787332760" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preview" />
+    <SUITE FILE_PATH="coverage/ecomstore$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1444646666275" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/preview" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -71,32 +70,36 @@
     <favorites_list name="ecomstore" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.65384614">
+              <caret line="55" column="11" selection-start-line="55" selection-start-column="11" selection-end-line="55" selection-end-column="11" />
+              <folding>
+                <element signature="n#STYLE#0;n#a#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cookielaw_tags.py" pinned="false" current-in-tab="false">
+        <entry file="file://C:/virtualenv/django17/Lib/site-packages/cookielaw/templatetags/cookielaw_tags.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="24" column="48" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="cookies.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/flatpages/cookies.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.615385">
-              <caret line="30" column="53" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="returns.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/flatpages/returns.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8412969">
-              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="privacity.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/flatpages/privacity.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.576923">
-              <caret line="7" column="40" selection-start-line="7" selection-start-column="40" selection-end-line="7" selection-end-column="40" />
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="9" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -112,53 +115,61 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="faq.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/flatpages/faq.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.7965812">
+              <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="payments.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/flatpages/payments.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.576923">
+              <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="privacity.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/flatpages/privacity.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="7" column="40" selection-start-line="7" selection-start-column="40" selection-end-line="7" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="returns.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/flatpages/returns.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="shopping.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/flatpages/shopping.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.346153">
+            <state vertical-scroll-proportion="0.0">
               <caret line="25" column="64" selection-start-line="25" selection-start-column="64" selection-end-line="25" selection-end-column="64" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="banner.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/cookielaw/banner.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.5">
-              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.017857">
-              <caret line="331" column="80" selection-start-line="331" selection-start-column="80" selection-end-line="331" selection-end-column="80" />
-              <folding>
-                <element signature="n#STYLE#0;n#a#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cookielaw.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/cookielaw/js/cookielaw.js">
+      <file leaf-file-name="utils.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/home.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.5">
-              <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+              <caret line="45" column="6" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -183,8 +194,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/catalog/product_list.py" />
-        <option value="$PROJECT_DIR$/static/shop_template/css/style.css" />
         <option value="$PROJECT_DIR$/templates/checkout/receipt.html" />
         <option value="$PROJECT_DIR$/templates/tags/product_thumbnail.html" />
         <option value="$PROJECT_DIR$/stats/stats.py" />
@@ -230,19 +239,19 @@
         <option value="$PROJECT_DIR$/ecomstore/access.log" />
         <option value="$PROJECT_DIR$/ecomstore/urls.py" />
         <option value="$PROJECT_DIR$/templates/flatpages/shopping.html" />
-        <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/templates/flatpages/contact.html" />
         <option value="$PROJECT_DIR$/templates/flatpages/privacity.html" />
         <option value="$PROJECT_DIR$/templates/flatpages/returns.html" />
+        <option value="$PROJECT_DIR$/templates/base.html" />
+        <option value="$PROJECT_DIR$/templates/flatpages/payments.html" />
+        <option value="$PROJECT_DIR$/templates/flatpages/faq.html" />
       </list>
     </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" />
+  <component name="JsBuildToolPackageJson" detection-done="true" />
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
-  </component>
-  <component name="NamedScopeManager">
-    <order />
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
@@ -271,10 +280,12 @@
       <autoscrollToSource />
       <autoscrollFromSource />
       <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -390,6 +401,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="cookielaw" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ecomstore" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ecomstore" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="catalog" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -577,19 +606,51 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ecomstore" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ecomstore" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="catalog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ecomstore" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ecomstore" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="catalog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templatetags" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Python" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="D:/tools/Development/jetbrains/Plugins/sqlite-jdbc-3.7.6.3-20110609.081603-3.jar" />
+    <property name="last_opened_file_path" value="C:/virtualenv/django17/Scripts/python.exe" />
     <property name="recentsLimit" value="5" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="SearchEverywhereHistoryKey" value="base&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/base.html&#10;banner&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/cookielaw/banner.html&#10;url&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/ecomstore/urls.py&#10;sett&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/ecomstore/settings.py&#10;home&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/home.html&#10;checko&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/checkout/checkout.py&#10;dashbo&#9;null&#9;null&#10;char&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/manager/charts.html&#10;admin&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/static/admin_lte/css/AdminLTE.min.css&#10;Prod&#9;null&#9;null&#10;form&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/accounts/forms.py&#10;views&#9;null&#9;null&#10;layo&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/layout.html&#10;bas&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/base.html&#10;about&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/flatpages/about_us.html&#10;se&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/ecomstore/settings.py&#10;test&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/tests.py&#10;view&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/views.py&#10;product_th&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/tags/product_thumbnail.html&#10;style&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/static/shop_template/css/style.css&#10;chec&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/checkout/checkout.html&#10;mo&#9;null&#9;null&#10;stat&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/stats/stats.py&#10;catalog&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/templatetags/catalog_tags.py&#10;category&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/tags/category_list.html&#10;cartitem&#9;null&#9;null&#10;orderite&#9;null&#9;null&#10;forms&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/forms.py&#10;vie&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/accounts/views.py&#10;regis&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/registration/register.html&#10;Profile&#9;null&#9;null&#10;order_de&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/registration/order_details.html&#10;accou&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/registration/my_account.html&#10;receipt&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/checkout/receipt.html&#10;product&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/product_list.py&#10;cart&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/static/js/cart.js&#10;promoti&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/catalog/promotions.html&#10;util&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/utils.py&#10;promo3&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/manager/promo3.html&#10;stats&#9;null&#9;null&#10;sta&#9;RUN_CONFIGURATION&#9;stats&#10;list&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/tags/product_list.html&#10;model&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/models.py&#10;models&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/models.py&#10;promo4&#9;null&#9;null&#10;check&#9;null&#9;null&#10;hom&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/home.html&#10;produ&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/catalog/product.html&#10;utils&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/utils.py&#10;context&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="acc&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/ecomstore/access.log&#10;base&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/base.html&#10;banner&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/cookielaw/banner.html&#10;url&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/ecomstore/urls.py&#10;sett&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/ecomstore/settings.py&#10;home&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/home.html&#10;checko&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/checkout/checkout.py&#10;dashbo&#9;null&#9;null&#10;char&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/manager/charts.html&#10;admin&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/static/admin_lte/css/AdminLTE.min.css&#10;Prod&#9;null&#9;null&#10;form&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/accounts/forms.py&#10;views&#9;null&#9;null&#10;layo&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/layout.html&#10;bas&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/base.html&#10;about&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/flatpages/about_us.html&#10;se&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/ecomstore/settings.py&#10;test&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/tests.py&#10;view&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/views.py&#10;product_th&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/tags/product_thumbnail.html&#10;style&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/static/shop_template/css/style.css&#10;chec&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/checkout/checkout.html&#10;mo&#9;null&#9;null&#10;stat&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/stats/stats.py&#10;catalog&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/templatetags/catalog_tags.py&#10;category&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/tags/category_list.html&#10;cartitem&#9;null&#9;null&#10;orderite&#9;null&#9;null&#10;forms&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/forms.py&#10;vie&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/accounts/views.py&#10;regis&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/registration/register.html&#10;Profile&#9;null&#9;null&#10;order_de&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/registration/order_details.html&#10;accou&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/registration/my_account.html&#10;receipt&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/checkout/receipt.html&#10;product&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/product_list.py&#10;cart&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/static/js/cart.js&#10;promoti&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/catalog/promotions.html&#10;util&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/utils.py&#10;promo3&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/manager/promo3.html&#10;stats&#9;null&#9;null&#10;sta&#9;RUN_CONFIGURATION&#9;stats&#10;list&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/tags/product_list.html&#10;model&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/models.py&#10;models&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/catalog/models.py&#10;promo4&#9;null&#9;null&#10;check&#9;null&#9;null&#10;hom&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/home.html&#10;produ&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/templates/catalog/product.html&#10;utils&#9;FILE&#9;file://D:/adri/work/PycharmProjects/ecomstore/utils.py" />
     <property name="dynamic.classpath" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
@@ -803,6 +864,12 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <envs />
+      <method />
+    </configuration>
     <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -957,7 +1024,7 @@
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration">
-    <configuration />
+    <configuration>C:\Users\adrian\AppData\Roaming\Subversion</configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -1224,7 +1291,13 @@
       <option name="project" value="LOCAL" />
       <updated>1449653458894</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="add flatpages, falta carlito">
+      <created>1449658064394</created>
+      <option name="number" value="00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1449658064394</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1240,28 +1313,29 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.494705" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.505295" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3245083" sideWeight="0.4969743" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.51386625" sideWeight="0.49546143" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31770045" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17700455" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39561272" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3267974" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="manage.py@ecomstore" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35947713" sideWeight="0.4969743" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17700455" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.494705" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.505295" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3245083" sideWeight="0.4969743" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.512275" sideWeight="0.49546143" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31770045" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32733223" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Concurrent Activities Diagram" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.3289689" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39561272" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3267974" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="manage.py@ecomstore" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35947713" sideWeight="0.4969743" order="8" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1276,7 +1350,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="promo4: cuando se da incluirse en esta rifa, se deshabilita el boton para incluirse, no es hasta que se refresca la pag q se muestra el boton de excluirse.&#10;cuando te excluyes se deshabilita el boton hasta q refresques la pag, y es cuando se muestran nuevamente los botones de incluirse" />
     <MESSAGE value="-cuando cambias a mn no salen los centavos&#10;-css de tag_cloud puesto en styles.css&#10;-interfaz de rifas -- working on" />
     <MESSAGE value="-base.css+base.js&#10;-cart.css+cart.js&#10;-rifas.css&#10;eran codigos dentro de los html, ahora estan separados en distintos archivos, hubo codigo q se quedo en los html debido a q uso la sintaxis de las plantillas django como {% if ... y lo uso dentro del propio js o css" />
     <MESSAGE value="-msg add a los banner&#10;-footer con sus msg" />
@@ -1301,7 +1374,8 @@
     <MESSAGE value="--add chart" />
     <MESSAGE value="--admin page dinamica" />
     <MESSAGE value="add cookie law" />
-    <option name="LAST_COMMIT_MESSAGE" value="add cookie law" />
+    <MESSAGE value="add flatpages, falta carlito" />
+    <option name="LAST_COMMIT_MESSAGE" value="add flatpages, falta carlito" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1317,40 +1391,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://C:/virtualenv/django17/Lib/site-packages/django/contrib/auth/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="289" column="4" selection-start-line="289" selection-start-column="4" selection-end-line="289" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manager/promo3.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="69" column="8" selection-start-line="69" selection-start-column="8" selection-end-line="69" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/checkout/templatetags/checkout_tags.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="37" selection-start-line="5" selection-start-column="37" selection-end-line="5" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/checkout/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="28" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/tags/form_table_row.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-15.692307">
           <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1445,7 +1489,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1468,7 +1511,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.02905983">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1476,9 +1518,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="33" />
-          <folding>
-            <element signature="e#366#390#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1494,7 +1533,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="75" column="24" selection-start-line="75" selection-start-column="24" selection-end-line="75" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1510,7 +1548,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="397" column="6" selection-start-line="397" selection-start-column="6" selection-end-line="397" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1530,12 +1567,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="46" column="69" selection-start-line="46" selection-start-column="69" selection-end-line="46" selection-end-column="69" />
-          <folding>
-            <element signature="e#24#35#0" expanded="true" />
-            <element signature="e#346#370#0" expanded="false" />
-            <element signature="e#437#520#1" expanded="true" />
-            <element signature="e#1151#1193#1" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1553,7 +1584,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="31" column="31" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1566,7 +1596,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="309" column="4" selection-start-line="309" selection-start-column="4" selection-end-line="309" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1579,7 +1608,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="1" column="48" selection-start-line="1" selection-start-column="48" selection-end-line="1" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1587,7 +1615,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1595,15 +1622,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/virtualenv/django17/Lib/site-packages/cookielaw/templatetags/cookielaw_tags.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="9" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1631,7 +1649,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.5">
           <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1647,16 +1664,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
-      </provider>
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/cookielaw/banner.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.5">
+        <state vertical-scroll-proportion="0.0">
           <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
           <folding />
         </state>
@@ -1664,26 +1677,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/flatpages/shopping.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.346153">
-          <caret line="25" column="64" selection-start-line="25" selection-start-column="64" selection-end-line="25" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.017857">
-          <caret line="331" column="80" selection-start-line="331" selection-start-column="80" selection-end-line="331" selection-end-column="80" />
-          <folding>
-            <element signature="n#STYLE#0;n#a#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ecomstore/access.log">
-      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="25" column="64" selection-start-line="25" selection-start-column="64" selection-end-line="25" selection-end-column="64" />
           <folding />
         </state>
       </provider>
@@ -1692,8 +1687,65 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="5" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/flatpages/privacity.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="40" selection-start-line="7" selection-start-column="40" selection-end-line="7" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ecomstore/access.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/flatpages/returns.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="6" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.65384614">
+          <caret line="55" column="11" selection-start-line="55" selection-start-column="11" selection-end-line="55" selection-end-column="11" />
           <folding>
-            <element signature="n#style#0;n#a#0;n#small#0;n#div#4;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#STYLE#0;n#a#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/catalog/templatetags/catalog_tags.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5564648">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/virtualenv/django17/Lib/site-packages/cookielaw/templatetags/cookielaw_tags.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="48" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1708,24 +1760,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/flatpages/cookies.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.615385">
-          <caret line="30" column="53" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="9" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/flatpages/privacity.html">
+    <entry file="file://$PROJECT_DIR$/templates/flatpages/payments.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.576923">
-          <caret line="7" column="40" selection-start-line="7" selection-start-column="40" selection-end-line="7" selection-end-column="40" />
+          <caret line="7" column="30" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/flatpages/returns.html">
+    <entry file="file://$PROJECT_DIR$/templates/flatpages/faq.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8412969">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.7965812">
+          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
           <folding />
         </state>
       </provider>
