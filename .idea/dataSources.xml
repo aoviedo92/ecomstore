@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="1713944996">
+  <component name="DataSourceManagerImpl" format="xml" hash="3232314395">
     <data-source source="LOCAL" name="SQLite -" uuid="108e772b-0c49-4e4d-a80f-61193170831a">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
@@ -11,6 +11,17 @@
           <url>file://D:/tools/Development/jetbrains/Plugins/sqlite-jdbc-3.7.6.3-20110609.081603-3.jar</url>
         </library>
       </libraries>
+    </data-source>
+    <data-source source="LOCAL" name="Django default" uuid="bcf6749c-ca88-4e51-a8f3-383f01380bb2">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/ecomstore/settings.py</remarks>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:D:\adri\work\PycharmProjects\ecomstore\db.sqlite3</jdbc-url>
+      <explain-plan-config>
+        <provider>com.intellij.database.plan.ExplainPlanProvider.NullExplainPlanProvider</provider>
+      </explain-plan-config>
     </data-source>
   </component>
 </project>

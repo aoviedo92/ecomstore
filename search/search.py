@@ -28,22 +28,32 @@ def store(request, q, matching):
 def products(search_text):
     """
     get products matching the search text
+    :param search_text: lo q se quiere buscar
     """
     # search_perfomed_before = SearchTerm.objects.filter(q=search_text).order_by('-search_date')
     # if search_perfomed_before:
     #     found_products = search_perfomed_before[0].found_products.all()
     #     return found_products
-    words = _prepare_words(search_text)
     prod = Product.active.all()
-    results = set()
-    for word in words:
-        product = prod.filter(Q(name__icontains=word) |
-                              Q(description__icontains=word) |
-                              Q(sku__iexact=word) |
-                              Q(brand__icontains=word) |
-                              Q(meta_description__icontains=word) |
-                              Q(meta_keywords__icontains=word))
-        results = results.union(product)  # efectuar la operacion union de conjuntos
+    results = prod.filter(
+        Q(name__icontains=search_text) |
+        Q(description__icontains=search_text) |
+        Q(sku__iexact=search_text) |
+        Q(brand__icontains=search_text) |
+        Q(meta_description__icontains=search_text) |
+        Q(meta_keywords__icontains=search_text)
+    )
+    if not results:
+        words = _prepare_words(search_text)
+        results = set()
+        for word in words:
+            product = prod.filter(Q(name__icontains=word) |
+                                  Q(description__icontains=word) |
+                                  Q(sku__iexact=word) |
+                                  Q(brand__icontains=word) |
+                                  Q(meta_description__icontains=word) |
+                                  Q(meta_keywords__icontains=word))
+            results = results.union(product)  # efectuar la operacion union de conjuntos
     results = list(results)  # convertir un set() en list() para iterar
     ids = [res.id for res in results]  # sacar cada id de la list de results
     results = prod.filter(id__in=ids)  # crear un queryset()
